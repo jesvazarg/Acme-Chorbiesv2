@@ -93,7 +93,7 @@ public class ChirpService {
 		result.setAttachments(new ArrayList<String>());
 		result.setMoment(calendar.getTime());
 		result.setSender(chorbi);
-		final Collection<Person> recipientsAux = result.getRecipients();
+		final Collection<Person> recipientsAux = new HashSet<Person>();
 		recipientsAux.add(recipient);
 		result.setRecipients(recipientsAux);
 		result.setCopy(false);
