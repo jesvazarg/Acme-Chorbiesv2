@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.ChirpRepository;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Person;
 
 @Service
 @Transactional
@@ -67,6 +69,10 @@ public class ChirpService {
 		result.setAttachments(new ArrayList<String>());
 		result.setMoment(calendar.getTime());
 		result.setSender(chorbi);
+
+		final Collection<Person> recipients = new HashSet<Person>();
+		result.setRecipients(recipients);
+
 		result.setCopy(false);
 		return result;
 	}
@@ -87,7 +93,9 @@ public class ChirpService {
 		result.setAttachments(new ArrayList<String>());
 		result.setMoment(calendar.getTime());
 		result.setSender(chorbi);
-		//result.setRecipient(recipient);
+		final Collection<Person> recipientsAux = result.getRecipients();
+		recipientsAux.add(recipient);
+		result.setRecipients(recipientsAux);
 		result.setCopy(false);
 		return result;
 	}
@@ -110,9 +118,12 @@ public class ChirpService {
 
 	public Chirp reply(final Chirp chirp) {
 		Assert.notNull(chirp);
-		//Assert.isTrue(chirp.getRecipient().equals(this.chorbiService.findByPrincipal()));
+		Assert.isTrue(chirp.getRecipients().contains(this.chorbiService.findByPrincipal()));
 		final Chirp result = this.create();
-		//result.setRecipient(chirp.getSender());
+		final Collection<Person> recipientsAux = result.getRecipients();
+		recipientsAux.add(chirp.getSender());
+		result.setRecipients(recipientsAux);
+		//result.setRecipients(chirp.getSender());
 		result.setSubject(chirp.getSubject());
 		//result.setText(message.getText());
 		//result.setAttachments(message.getAttachments());
@@ -123,7 +134,7 @@ public class ChirpService {
 	public void delete(final Chirp chirp) {
 		Assert.notNull(chirp);
 		final Chorbi chorbi = this.chorbiService.findByPrincipal();
-		//Assert.isTrue(chirp.getSender().equals(chorbi) || chirp.getRecipient().equals(chorbi));
+		Assert.isTrue(chirp.getSender().equals(chorbi) || chirp.getRecipients().contains(chorbi));
 
 		this.chirpRepository.delete(chirp);
 	}
@@ -138,7 +149,7 @@ public class ChirpService {
 		copy.setCopy(true);
 		copy.setAttachments(chirp.getAttachments());
 		copy.setMoment(chirp.getMoment());
-		//copy.setRecipient(chirp.getRecipient());
+		copy.setRecipients(chirp.getRecipients());
 		copy.setSender(chirp.getSender());
 		copy.setSubject(chirp.getSubject());
 		copy.setText(chirp.getText());
