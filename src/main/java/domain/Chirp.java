@@ -9,6 +9,7 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -89,30 +90,30 @@ public class Chirp extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Chorbi	sender;
-	private Chorbi	recipient;
+	private Person				sender;
+	private Collection<Person>	recipients;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Chorbi getSender() {
+	public Person getSender() {
 		return this.sender;
 	}
 
-	public void setSender(final Chorbi sender) {
+	public void setSender(final Person sender) {
 		this.sender = sender;
 	}
 
 	@NotNull
 	@Valid
-	@ManyToOne(optional = false)
-	public Chorbi getRecipient() {
-		return this.recipient;
+	@ManyToMany()
+	public Collection<Person> getRecipients() {
+		return this.recipients;
 	}
 
-	public void setRecipient(final Chorbi recipient) {
-		this.recipient = recipient;
+	public void setRecipients(final Collection<Person> recipients) {
+		this.recipients = recipients;
 	}
 
 }

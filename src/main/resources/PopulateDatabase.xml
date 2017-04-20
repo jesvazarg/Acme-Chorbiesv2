@@ -538,7 +538,11 @@
 		</property>
 		<property name="moment" value="02/10/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp2" class="domain.Chirp">
@@ -552,7 +556,11 @@
 		</property>
 		<property name="moment" value="02/11/2017 00:00" />
 		<property name="sender" ref="chorbi2" />
-		<property name="recipient" ref="chorbi1" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp3" class="domain.Chirp">
@@ -566,7 +574,11 @@
 		</property>
 		<property name="moment" value="02/12/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp4" class="domain.Chirp">
@@ -580,7 +592,11 @@
 		</property>
 		<property name="moment" value="02/13/2017 00:00" />
 		<property name="sender" ref="chorbi2" />
-		<property name="recipient" ref="chorbi1" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp5" class="domain.Chirp">
@@ -594,7 +610,11 @@
 		</property>
 		<property name="moment" value="02/14/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp6" class="domain.Chirp">
@@ -608,7 +628,11 @@
 		</property>
 		<property name="moment" value="02/15/2017 00:00" />
 		<property name="sender" ref="chorbi2" />
-		<property name="recipient" ref="chorbi1" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp7" class="domain.Chirp">
@@ -622,7 +646,11 @@
 		</property>
 		<property name="moment" value="02/16/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp8" class="domain.Chirp">
@@ -636,7 +664,11 @@
 		</property>
 		<property name="moment" value="02/10/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp9" class="domain.Chirp">
@@ -650,7 +682,11 @@
 		</property>
 		<property name="moment" value="02/11/2017 00:00" />
 		<property name="sender" ref="chorbi2" />
-		<property name="recipient" ref="chorbi1" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp10" class="domain.Chirp">
@@ -664,7 +700,11 @@
 		</property>
 		<property name="moment" value="02/12/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp11" class="domain.Chirp">
@@ -678,7 +718,11 @@
 		</property>
 		<property name="moment" value="02/13/2017 00:00" />
 		<property name="sender" ref="chorbi2" />
-		<property name="recipient" ref="chorbi1" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp12" class="domain.Chirp">
@@ -692,7 +736,11 @@
 		</property>
 		<property name="moment" value="02/14/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp13" class="domain.Chirp">
@@ -706,7 +754,11 @@
 		</property>
 		<property name="moment" value="02/15/2017 00:00" />
 		<property name="sender" ref="chorbi2" />
-		<property name="recipient" ref="chorbi1" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chirp14" class="domain.Chirp">
@@ -720,7 +772,11 @@
 		</property>
 		<property name="moment" value="02/16/2017 00:00" />
 		<property name="sender" ref="chorbi1" />
-		<property name="recipient" ref="chorbi2" />
+		<property name="recipients">
+			<list>
+				<ref bean="chorbi2"/>
+			</list>
+		</property>
 	</bean>
 	
 </beans>

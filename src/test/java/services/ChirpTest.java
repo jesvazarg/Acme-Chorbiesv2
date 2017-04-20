@@ -160,7 +160,7 @@ public class ChirpTest extends AbstractTest {
 
 			aux2.setSubject(subject);
 			aux2.setText(text);
-			aux2.setRecipient(recipient);
+			//aux2.setRecipient(recipient);
 
 			this.chirpService.save(aux2);
 

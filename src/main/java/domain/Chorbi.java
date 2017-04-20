@@ -26,7 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(indexes = {
 	@Index(columnList = "birthDate")
 })
-public class Chorbi extends Actor {
+public class Chorbi extends Person {
 
 	// Constructors -----------------------------------------------------------
 	public Chorbi() {
@@ -100,8 +100,6 @@ public class Chorbi extends Actor {
 	// Relationships ----------------------------------------------------------
 	private Collection<Sense>	giveSenses;
 	private Collection<Sense>	reciveSenses;
-	private Collection<Chirp>	sentChirps;
-	private Collection<Chirp>	reciveChirps;
 	private SearchTemplate		searchTemplate;
 	private CreditCard			creditCard;
 
@@ -124,26 +122,6 @@ public class Chorbi extends Actor {
 	}
 	public void setReciveSenses(final Collection<Sense> reciveSenses) {
 		this.reciveSenses = reciveSenses;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "sender")
-	public Collection<Chirp> getSentChirps() {
-		return this.sentChirps;
-	}
-	public void setSentChirps(final Collection<Chirp> sentChirps) {
-		this.sentChirps = sentChirps;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "recipient")
-	public Collection<Chirp> getReciveChirps() {
-		return this.reciveChirps;
-	}
-	public void setReciveChirps(final Collection<Chirp> reciveChirps) {
-		this.reciveChirps = reciveChirps;
 	}
 
 	@Valid
