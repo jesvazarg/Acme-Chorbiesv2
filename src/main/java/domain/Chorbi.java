@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -102,6 +103,7 @@ public class Chorbi extends Person {
 	private Collection<Sense>	reciveSenses;
 	private SearchTemplate		searchTemplate;
 	private CreditCard			creditCard;
+	private Collection<Event>	events;
 
 
 	@Valid
@@ -140,6 +142,16 @@ public class Chorbi extends Person {
 	}
 	public void setCreditCard(final CreditCard creditCard) {
 		this.creditCard = creditCard;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToMany()
+	public Collection<Event> getEvents() {
+		return this.events;
+	}
+	public void setEvents(final Collection<Event> events) {
+		this.events = events;
 	}
 
 }

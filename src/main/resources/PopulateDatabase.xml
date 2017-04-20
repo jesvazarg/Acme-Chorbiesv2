@@ -352,6 +352,54 @@
 		</property>
 	</bean>
 	
+	<!-- Event -->
+	
+	<bean id="event1" class="domain.Event">
+		<property name="title" value="Fiesta universitaria" />
+		<property name="moment" value="04/12/2018" />
+		<property name="description" value="No te pierdes esta fantastica fiesta universitaria donde la reina de la noche es una vaca." />
+		<property name="picture" value="http://www.promicsa.com/uploads/78525eba8a1beed.jpg" />
+		<property name="seats" value="100" />
+		<property name="manager" ref="manager1" />
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1"/>
+				<ref bean="chorbi2"/>
+				<ref bean="chorbi3"/>
+				<ref bean="chorbi5"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="event2" class="domain.Event">
+		<property name="title" value="Maraton de Sevilla" />
+		<property name="moment" value="02/25/2018" />
+		<property name="description" value="Este año todos correran con tacones o zancos." />
+		<property name="picture" value="https://www.clubrunning.es/cartel/cartel_b86cfff512.png" />
+		<property name="seats" value="250" />
+		<property name="manager" ref="manager1" />
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1"/>
+				<ref bean="chorbi4"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="event3" class="domain.Event">
+		<property name="title" value="Se busca novia" />
+		<property name="moment" value="08/10/2017" />
+		<property name="description" value="¡Te invito a un té para que nos conozcamos!" />
+		<property name="picture" value="http://www.quelapaseslindo.com.ar/wp-content/uploads/busco-novia.jpg" />
+		<property name="seats" value="2" />
+		<property name="manager" ref="manager2" />
+		<property name="chorbies">
+			<list>
+				
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Administrator -->
 	
 	<bean id="administrator" class="domain.Administrator">
@@ -383,6 +431,12 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount9" />
+		<property name="events">
+			<list>
+				<ref bean="event1"/>
+				<ref bean="event2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="manager2" class="domain.Manager">
@@ -404,6 +458,11 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount10" />
+		<property name="events">
+			<list>
+				<ref bean="event3"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="manager3" class="domain.Manager">
@@ -425,6 +484,11 @@
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount11" />
+		<property name="events">
+			<list>
+				
+			</list>
+		</property>
 	</bean>
 	
 	<!-- Chorbie -->
@@ -475,6 +539,12 @@
 				
 			</list>
 		</property>
+		<property name="events">
+			<list>
+				<ref bean="event1"/>
+				<ref bean="event2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chorbi2" class="domain.Chorbi">
@@ -523,6 +593,11 @@
 				<ref bean="chirp14"/>
 			</list>
 		</property>
+		<property name="events">
+			<list>
+				<ref bean="event1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chorbi3" class="domain.Chorbi">
@@ -554,6 +629,11 @@
 		</property>
 		<property name="reciveChirps">
 			<list>
+			</list>
+		</property>
+		<property name="events">
+			<list>
+				<ref bean="event1"/>
 			</list>
 		</property>
 	</bean>
@@ -588,6 +668,11 @@
 			<list>
 			</list>
 		</property>
+		<property name="events">
+			<list>
+				<ref bean="event2"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chorbi5" class="domain.Chorbi">
@@ -620,6 +705,11 @@
 			<list>
 			</list>
 		</property>
+		<property name="events">
+			<list>
+				<ref bean="event1"/>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="chorbi6" class="domain.Chorbi">
@@ -649,6 +739,11 @@
 		</property>
 		<property name="reciveChirps">
 			<list>
+			</list>
+		</property>
+		<property name="events">
+			<list>
+				
 			</list>
 		</property>
 	</bean>
