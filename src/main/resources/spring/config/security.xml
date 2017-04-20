@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * security.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+    ">
+
+	<!-- Security infrastructure -->
+
+	<bean id="loginService" class="security.LoginService" />
+
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- Access control -->
+
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" /> 
+
+		<security:intercept-url pattern="/favicon.ico" access="permitAll" /> 
+		<security:intercept-url pattern="/images/**" access="permitAll" /> 
+		<security:intercept-url pattern="/scripts/**" access="permitAll" /> 
+		<security:intercept-url pattern="/styles/**" access="permitAll" /> 
+
+		<security:intercept-url pattern="/views/misc/index.jsp" access="permitAll" /> 
+		<security:intercept-url pattern="/misc/conditions.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/security/login.do" access="permitAll" /> 
+		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
+
+		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
+		
+		<security:intercept-url pattern="/chorbi/create.do" access="permitAll" /> 
+		
+		<!-- CHORBI -->
+		
+		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" />
+		
+		<security:intercept-url pattern="/creditCard/chorbi/display.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/creditCard/chorbi/create.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/creditCard/chorbi/edit.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/creditCard/chorbi/delete.do" access="hasRole('CHORBI')" />
+		
+		<security:intercept-url pattern="/searchTemplate/chorbi/create.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/searchTemplate/chorbi/display.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/searchTemplate/chorbi/edit.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/searchTemplate/chorbi/findBySearchTemplate.do" access="hasRole('CHORBI')" /> 
+		
+		<security:intercept-url pattern="/chirp/chorbi/create.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/chorbi/listIn.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/chorbi/listOut.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/chorbi/display.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/chorbi/reply.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/chorbi/forward.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/chorbi/delete.do" access="hasRole('CHORBI')" /> 
+		
+		<security:intercept-url pattern="/sense/chorbi/like.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/sense/chorbi/dislike.do" access="hasRole('CHORBI')" />  
+		<security:intercept-url pattern="/sense/chorbi/comment.do" access="hasRole('CHORBI')" /> 
+
+		<!-- ADMINISTRATOR -->
+		
+		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/banner/administrator/list.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/banner/administrator/create.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/banner/administrator/edit.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/banner/administrator/delete.do" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/configuration/administrator/list.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/chorbi/ban.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/chorbi/unban.do" access="hasRole('ADMIN')" />  
+		
+		<!-- CHORBI and ADMINISTRATOR -->
+		
+		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('ADMIN','CHORBI')" />
+		
+		<security:intercept-url pattern="/profile/myProfile.do" access="hasAnyRole('ADMIN','CHORBI')" />
+		<security:intercept-url pattern="/profile/display.do" access="hasAnyRole('ADMIN','CHORBI')" />
+		
+		<!-- isAuthenticated -->   
+	
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
+
+		<security:form-login 
+			login-page="/security/login.do"
+			password-parameter="password" 
+			username-parameter="username"
+			authentication-failure-url="/security/loginFailure.do" />
+
+		<security:logout 
+			logout-success-url="/" 
+			invalidate-session="true" />
+	</security:http>
+
+</beans>

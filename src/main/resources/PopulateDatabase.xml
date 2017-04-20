@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * PopulateDatabase.xml
+ *
+ * Copyright (C) 2017 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+	
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="chorbi1" />
+		<property name="password" value="3daa859a294cdefb20a84840240a76f5" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="chorbi2" />
+		<property name="password" value="0c8746de81268518ff83490301db8652" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="chorbi3" />
+		<property name="password" value="a2da05a88eead7e64593826cafc6a7a7" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="chorbi4" />
+		<property name="password" value="a09dd233386632e297a7f4f461989563" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="chorbi5" />
+		<property name="password" value="7e062f6f2a4c0f7ec5abacef2917e033" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BANNED" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="chorbi6" />
+		<property name="password" value="0b41c51bd4b755c5b639498f55058fd3" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="BANNED" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="super" />
+		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+				<bean class="security.Authority">
+					<property name="authority" value="CHORBI" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Other domain beans come here -->	
+	
+	<!-- Configuration -->
+	
+	<bean id="configuration1" class="domain.Configuration">
+		<property name="time" value="12:00:00" /> 
+		<!-- <property name="banners">
+			<list>
+				<value>"http://f.tqn.com/y/thaifood/1/T/i/k/padthai640.jpg"</value>
+				<value>"http://oi66.tinypic.com/ci8h3.jpg"</value>
+				<value>"http://www.muypymes.com/wp-content/uploads/2011/09/coche_alquiler.jpg"</value>
+			</list>
+		</property> -->
+	</bean>
+	
+	<!-- Banners -->
+	<bean id="banner1" class="domain.Banner">
+		<property name="picture" value="http://www.muypymes.com/wp-content/uploads/2011/09/coche_alquiler.jpg"/>
+	</bean>
+	
+	<bean id="banner2" class="domain.Banner">
+		<property name="picture" value="http://f.tqn.com/y/thaifood/1/T/i/k/padthai640.jpg"/>
+	</bean>
+	
+	<bean id="banner3" class="domain.Banner">
+		<property name="picture" value="https://s-media-cache-ak0.pinimg.com/originals/02/f6/21/02f6212576ebafe86058c80e94c12f3c.jpg"/>
+	</bean>
+
+	<!-- Coordinate -->
+	
+	<bean id="coordinate1" class="domain.Coordinate">
+		<property name="city" value="Madrid" /> 
+		<property name="country" value="España" />
+		<property name="state" value="" />
+		<property name="province" value="" />
+	</bean>
+	
+	<bean id="coordinate2" class="domain.Coordinate">
+		<property name="city" value="Madrid" /> 
+		<property name="country" value="" />
+		<property name="state" value="" />
+		<property name="province" value="" />
+		
+	</bean>
+	
+	<bean id="coordinate3" class="domain.Coordinate">
+		<property name="city" value="Malaga" /> 
+		<property name="state" value="Andalucia" /> 
+		<property name="province" value="" />
+		<property name="country" value="" />
+	</bean>
+	
+	<bean id="coordinate4" class="domain.Coordinate">
+		<property name="city" value="Madrid" /> 
+		<property name="country" value="España" /> 
+		<property name="province" value="" />
+		<property name="state" value="" />
+	</bean>
+	
+	<bean id="coordinate5" class="domain.Coordinate">
+		<property name="city" value="Dos Hermanas" />
+		<property name="province" value="Sevilla" /> 
+		<property name="country" value="España" /> 
+		<property name="state" value="" />
+	</bean>
+	
+	<bean id="coordinate6" class="domain.Coordinate">
+		<property name="city" value="Cádiz" /> 
+		<property name="state" value="Andalucia" /> 
+		<property name="country" value="" /> 
+		<property name="province" value="" /> 
+	</bean>
+	
+	<!-- CreditCard -->
+	
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Francisca Pacheco" /> 
+		<property name="brandName" value="VISA" /> 
+		<property name="number" value="5760651824445570" /> 
+		<property name="expirationMonth" value="8" /> 
+		<property name="expirationYear" value="2019" /> 
+		<property name="cvv" value="356" /> 
+	</bean>
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Enrique Pastor" /> 
+		<property name="brandName" value="MASTERCARD" /> 
+		<property name="number" value="5732718459670965" /> 
+		<property name="expirationMonth" value="3" /> 
+		<property name="expirationYear" value="2020" /> 
+		<property name="cvv" value="425" /> 
+	</bean>
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="Antonio Recio" /> 
+		<property name="brandName" value="DISCOVER" /> 
+		<property name="number" value="4539144561950377" /> 
+		<property name="expirationMonth" value="8" /> 
+		<property name="expirationYear" value="2030" /> 
+		<property name="cvv" value="678" /> 
+	</bean>
+	
+	<!-- Sense -->
+	
+	<bean id="sense1" class="domain.Sense">
+		<property name="moment" value="03/29/2017 12:13" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi4" />
+	</bean>
+	
+	<bean id="sense2" class="domain.Sense">
+		<property name="moment" value="04/01/2017 16:37" />
+		<property name="comment" value="¡Merengue, merengue!" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi3" />
+	</bean>
+	
+	<bean id="sense3" class="domain.Sense">
+		<property name="moment" value="04/01/2017 16:45" />
+		<property name="comment" value="Yo te quiero mucho Cuqui, vuelve conmigo." />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="sense4" class="domain.Sense">
+		<property name="moment" value="04/02/2017 10:56" />
+		<property name="sender" ref="chorbi5" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<!-- SearchTemplate -->
+	
+	<bean id="searchTemplate1" class="domain.SearchTemplate">
+		<property name="relationship" value="Activities" />
+	  	<property name="coordinate" ref="coordinate1" />
+	  	<property name="age" value="" />
+		<property name="genre" value="" />
+		<property name="keyword" value="" />
+		<property name="updateMoment" value="04/04/2017 12:00"/>
+		<property name="results">
+			<list>
+				<ref bean="chorbi3"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="searchTemplate2" class="domain.SearchTemplate">
+		<property name="relationship" value="Activities" />
+		<property name="age" value="30" />
+		<property name="genre" value="man" />
+		<property name="coordinate" ref="coordinate2" />
+		<property name="keyword" value="rubio" />
+		<property name="updateMoment" value="02/26/2017 14:00"/>
+		<property name="results">
+			<list>
+				<ref bean="chorbi1"/>
+				<ref bean="chorbi3"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="searchTemplate3" class="domain.SearchTemplate">
+		<property name="relationship" value="Friendship" />
+		<property name="age" value="24" />
+		<property name="genre" value="man" />
+		<property name="coordinate" ref="coordinate3" />
+		<property name="keyword" value="dinero" />
+		<property name="updateMoment" value="02/26/2017 16:00"/>
+		<property name="results">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Administrator -->
+	
+	<bean id="administrator" class="domain.Administrator">
+		<property name="name" value="administrator" />
+		<property name="surname" value="-" />
+		<property name="email" value="admin@gmail.com" />
+		<property name="phone" value="0000" />
+		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<!-- Chorbie -->
+	
+	<bean id="chorbi1" class="domain.Chorbi">
+		<property name="name" value="Amador" />
+		<property name="surname" value="Rivas" />
+		<property name="email" value="amador@gmail.com" />
+		<property name="phone" value="1234" />
+		<property name="picture" value="https://laqueseavecinafiu.files.wordpress.com/2012/04/105445.jpg" />
+		<property name="description" value="¡Tengo el salami en oferta!" />
+		<property name="relationship" value="Love" />
+		<property name="birthDate" value="06/10/1980" />
+		<property name="genre" value="Man" />
+		<property name="coordinate" ref="coordinate1" />
+		<property name="userAccount" ref="userAccount2" />
+		<property name="searchTemplate" ref="searchTemplate1" />
+		<property name="giveSenses">
+			<list>
+				<ref bean = "sense2"/>
+				<ref bean = "sense3"/>
+			</list>
+		</property>
+		<property name="reciveSenses">
+			<list>
+			</list>
+		</property>
+		<property name="sentChirps">
+			<list>
+				<ref bean="chirp1"/>
+				<ref bean="chirp3"/>
+				<ref bean="chirp5"/>
+				<ref bean="chirp7"/>
+				<ref bean="chirp8"/>
+				<ref bean="chirp10"/>
+				<ref bean="chirp12"/>
+				<ref bean="chirp14"/>
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+				<ref bean="chirp2"/>
+				<ref bean="chirp4"/>
+				<ref bean="chirp6"/>
+				<ref bean="chirp9"/>
+				<ref bean="chirp11"/>
+				<ref bean="chirp13"/>
+				
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="chorbi2" class="domain.Chorbi">
+		<property name="name" value="Maite" />
+		<property name="surname" value="Figueroa" />
+		<property name="email" value="maite@gmail.com" />
+		<property name="phone" value="2345" />
+		<property name="picture" value="http://s04.s3c.es/imag/_v0/250x200/a/5/e/eva-isanta.jpg" />
+		<property name="description" value="Hola, hola, hola. Soy Maite Figueroa, deja tu mensaje y te llamo en media hora" />
+		<property name="relationship" value="Friendship" />
+		<property name="birthDate" value="02/17/1978" />
+		<property name="genre" value="Woman" />
+		<property name="coordinate" ref="coordinate2" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="giveSenses">
+			<list>
+				<ref bean = "sense1"/>
+			</list>
+		</property>
+		<property name="reciveSenses">
+			<list>
+				<ref bean = "sense3"/>
+				<ref bean = "sense4"/>
+			</list>
+		</property>
+		<property name="sentChirps">
+			<list>
+				<ref bean="chirp2"/>
+				<ref bean="chirp4"/>
+				<ref bean="chirp6"/>
+				<ref bean="chirp9"/>
+				<ref bean="chirp11"/>
+				<ref bean="chirp13"/>
+				
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+				<ref bean="chirp1"/>
+				<ref bean="chirp3"/>
+				<ref bean="chirp5"/>
+				<ref bean="chirp7"/>
+				<ref bean="chirp8"/>
+				<ref bean="chirp10"/>
+				<ref bean="chirp12"/>
+				<ref bean="chirp14"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="chorbi3" class="domain.Chorbi">
+		<property name="name" value="Francisca" />
+		<property name="surname" value="Pacheco" />
+		<property name="email" value="estelaReynolds@gmail.com" />
+		<property name="phone" value="3456" />
+		<property name="picture" value="http://www.formulatv.com/images/noticias/38000/38083/1_db269c5dbd.jpg" />
+		<property name="description" value="¡Yo soy Estela Reynolds!, a mí Fernando Esteso me chupó un pezón" />
+		<property name="relationship" value="Love" />
+		<property name="birthDate" value="11/28/1967" />
+		<property name="genre" value="Woman" />
+		<property name="coordinate" ref="coordinate3" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="searchTemplate" ref="searchTemplate3" />
+		<property name="giveSenses">
+			<list>
+			</list>
+		</property>
+		<property name="reciveSenses">
+			<list>
+				<ref bean = "sense2"/>
+			</list>
+		</property>
+		<property name="sentChirps">
+			<list>
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="chorbi4" class="domain.Chorbi">
+		<property name="name" value="Enrique" />
+		<property name="surname" value="Pastor" />
+		<property name="email" value="enriquePastor@gmail.com" />
+		<property name="phone" value="4567" />
+		<property name="picture" value="http://3.bp.blogspot.com/-I_M4LJ8RXSs/UWJs45emcUI/AAAAAAAAACw/sfoEJl0w9_w/s1600/enrique2.jpg" />
+		<property name="description" value="Enrique Pastor, concejal de juventud y tiempo libre" />
+		<property name="relationship" value="Activities" />
+		<property name="birthDate" value="01/02/1957" />
+		<property name="genre" value="Man" />
+		<property name="coordinate" ref="coordinate4" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="giveSenses">
+			<list>
+			</list>
+		</property>
+		<property name="reciveSenses">
+			<list>
+				<ref bean = "sense1"/>
+			</list>
+		</property>
+		<property name="sentChirps">
+			<list>
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="chorbi5" class="domain.Chorbi">
+		<property name="name" value="Antonio" />
+		<property name="surname" value="Recio" />
+		<property name="email" value="antonioRecio@gmail.com" />
+		<property name="phone" value="5678" />
+		<property name="picture" value="http://listas.eleconomista.es/system/items/000/012/141/medium/antoniore.jpg?1447028500" />
+		<property name="description" value="¡Mayorista, no limpio pescado!" />
+		<property name="relationship" value="Love" />
+		<property name="birthDate" value="04/08/1954" />
+		<property name="genre" value="Man" />
+		<property name="coordinate" ref="coordinate5" />
+		<property name="creditCard" ref="creditCard3" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="giveSenses">
+			<list>
+				<ref bean = "sense4"/>
+			</list>
+		</property>
+		<property name="reciveSenses">
+			<list>
+			</list>
+		</property>
+		<property name="sentChirps">
+			<list>
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="chorbi6" class="domain.Chorbi">
+		<property name="name" value="La chusa" />
+		<property name="surname" value="La chusa" />
+		<property name="email" value="chusa@gmail.com" />
+		<property name="phone" value="6789" />
+		<property name="picture" value="http://www.namespedia.com/image/Chusa_4.jpg" />
+		<property name="description" value="¡Te pinsho como no me llames ¿eh?!" />
+		<property name="relationship" value="Activities" />
+		<property name="birthDate" value="06/10/1983" />
+		<property name="genre" value="Woman" />
+		<property name="coordinate" ref="coordinate6" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="searchTemplate" ref="searchTemplate2" />
+		<property name="giveSenses">
+			<list>
+			</list>
+		</property>
+		<property name="reciveSenses">
+			<list>
+			</list>
+		</property>
+		<property name="sentChirps">
+			<list>
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Chirp -->
+	
+	<bean id="chirp1" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Me gustan los pitisues..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/10/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp2" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Y las milhojas de crema..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/11/2017 00:00" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp3" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Los cuernos y las  canastillas..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/12/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp4" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Y las palmeras de yema..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/13/2017 00:00" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp5" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Esos palitos de nata..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/14/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp6" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Me como 10 y no me harto..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/15/2017 00:00" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp7" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Y esas merengas que tienen..." />
+		<property name="copy" value="false"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/16/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp8" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="1Me gustan los pitisues..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/10/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp9" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Y las milhojas de crema..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/11/2017 00:00" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp10" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Los cuernos y las  canastillas..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/12/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp11" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Y las palmeras de yema..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/13/2017 00:00" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp12" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Esos palitos de nata..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/14/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+	<bean id="chirp13" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Me como 10 y no me harto..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/15/2017 00:00" />
+		<property name="sender" ref="chorbi2" />
+		<property name="recipient" ref="chorbi1" />
+	</bean>
+	
+	<bean id="chirp14" class="domain.Chirp">
+		<property name="subject" value="Chirigota1" />
+		<property name="text" value="Y esas merengas que tienen..." />
+		<property name="copy" value="true"/>
+		<property name="attachments">
+			<list>
+			
+			</list>
+		</property>
+		<property name="moment" value="02/16/2017 00:00" />
+		<property name="sender" ref="chorbi1" />
+		<property name="recipient" ref="chorbi2" />
+	</bean>
+	
+</beans>
