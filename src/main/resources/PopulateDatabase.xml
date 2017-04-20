@@ -117,6 +117,42 @@
 		</property>
 	</bean>
 	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="manager1" />
+		<property name="password" value="c240642ddef994358c96da82c0361a58" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- Other domain beans come here -->	
 	
 	<!-- Configuration -->
@@ -217,6 +253,33 @@
 		<property name="cvv" value="678" /> 
 	</bean>
 	
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="Manager1" /> 
+		<property name="brandName" value="DISCOVER" /> 
+		<property name="number" value="4539144561950377" /> 
+		<property name="expirationMonth" value="8" /> 
+		<property name="expirationYear" value="2030" /> 
+		<property name="cvv" value="678" /> 
+	</bean>
+	
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Manager2" /> 
+		<property name="brandName" value="DISCOVER" /> 
+		<property name="number" value="4539144561950377" /> 
+		<property name="expirationMonth" value="8" /> 
+		<property name="expirationYear" value="2030" /> 
+		<property name="cvv" value="678" /> 
+	</bean>
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="Manager3" /> 
+		<property name="brandName" value="DISCOVER" /> 
+		<property name="number" value="4539144561950377" /> 
+		<property name="expirationMonth" value="8" /> 
+		<property name="expirationYear" value="2030" /> 
+		<property name="cvv" value="678" /> 
+	</bean>
+	
 	<!-- Sense -->
 	
 	<bean id="sense1" class="domain.Sense">
@@ -297,6 +360,71 @@
 		<property name="email" value="admin@gmail.com" />
 		<property name="phone" value="0000" />
 		<property name="userAccount" ref="userAccount1" />
+	</bean>
+	
+	<!-- Manager -->
+	
+	<bean id="manager1" class="domain.Manager">
+		<property name="name" value="manager1" />
+		<property name="surname" value="surnameManager1" />
+		<property name="email" value="manager1@gmail.com" />
+		<property name="phone" value="0000" />
+		<property name="company" value="Company1" />
+		<property name="vat" value="25" />
+		<property name="creditCard" ref="creditCard4" />
+		<property name="sentChirps">
+			<list>
+
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount9" />
+	</bean>
+	
+	<bean id="manager2" class="domain.Manager">
+		<property name="name" value="manager2" />
+		<property name="surname" value="surnameManager2" />
+		<property name="email" value="manager2@gmail.com" />
+		<property name="phone" value="0002" />
+		<property name="company" value="Company2" />
+		<property name="vat" value="35" />
+		<property name="creditCard" ref="creditCard5" />
+		<property name="sentChirps">
+			<list>
+
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount10" />
+	</bean>
+	
+	<bean id="manager3" class="domain.Manager">
+		<property name="name" value="manager3" />
+		<property name="surname" value="surnameManager3" />
+		<property name="email" value="manager3@gmail.com" />
+		<property name="phone" value="0003" />
+		<property name="company" value="Company3" />
+		<property name="vat" value="45" />
+		<property name="creditCard" ref="creditCard6" />
+		<property name="sentChirps">
+			<list>
+
+			</list>
+		</property>
+		<property name="reciveChirps">
+			<list>
+
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount11" />
 	</bean>
 	
 	<!-- Chorbie -->
