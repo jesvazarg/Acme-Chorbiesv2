@@ -30,8 +30,8 @@
 		</li>
 		
 		<li>
-			<b><spring:message code="chirp.recipient" />:</b>
-			<jstl:out value="${chirp.recipient.name}" />
+			<b><spring:message code="chirp.recipients" />:</b>
+			<jstl:out value="${chirp.recipients}" />
 		</li>
 		
 		<li>
@@ -64,7 +64,7 @@
 	<form:hidden path="moment" />
 	<form:hidden path="copy" />
 	<form:hidden path="sender" />
-	<form:hidden path="recipient" />
+	<form:hidden path="recipients" />
 	<form:hidden path="attachments" />
 	
 	

@@ -63,6 +63,7 @@ public class ChirpChorbiController extends AbstractController {
 
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);
+		//result.addObject("recipients", chorbi);
 
 		return result;
 	}
@@ -76,10 +77,10 @@ public class ChirpChorbiController extends AbstractController {
 		final Chorbi chorbi = this.chorbiService.findByPrincipal();
 
 		chirp = this.chirpService.findOne(chirpId);
-		if (chirp.getRecipients().equals(chorbi))
+		if (chirp.getRecipients().contains(chorbi))
 			isRecipient = true;
 		/* Seguridad */
-		if (!chirp.getRecipients().equals(chorbi) && !chirp.getSender().equals(chorbi))
+		if (!chirp.getRecipients().contains(chorbi) && !chirp.getSender().equals(chorbi))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
@@ -130,7 +131,7 @@ public class ChirpChorbiController extends AbstractController {
 		final Chirp chirpRequest = this.chirpService.findOne(chirpId);
 
 		/* Seguridad */
-		if (!chirpRequest.getRecipients().equals(chorbi) && !chirpRequest.getSender().equals(chorbi))
+		if (!chirpRequest.getRecipients().contains(chorbi) && !chirpRequest.getSender().equals(chorbi))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
@@ -149,7 +150,7 @@ public class ChirpChorbiController extends AbstractController {
 		final Chirp chirpRequest = this.chirpService.findOne(chirpId);
 
 		/* Seguridad */
-		if (!chirpRequest.getRecipients().equals(chorbi) && !chirpRequest.getSender().equals(chorbi))
+		if (!chirpRequest.getRecipients().contains(chorbi) && !chirpRequest.getSender().equals(chorbi))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
@@ -184,7 +185,7 @@ public class ChirpChorbiController extends AbstractController {
 		ModelAndView result;
 		final Chorbi chorbi = this.chorbiService.findByPrincipal();
 		/* Seguridad */
-		if (!chirp.getRecipients().equals(chorbi) && !chirp.getSender().equals(chorbi))
+		if (!chirp.getRecipients().contains(chorbi) && !chirp.getSender().equals(chorbi))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		else
 			try {

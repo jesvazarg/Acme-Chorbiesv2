@@ -16,7 +16,7 @@
 	<form:hidden path="sender" />
 	<form:hidden path="copy" />
 
-	<acme:select items="${recipients}" itemLabel="name" code="chirp.recipient" path="recipient" />
+	<acme:select items="${recipients}" itemLabel="name" code="chirp.recipients" path="recipients" />
 	
 	<acme:input code="chirp.subject" path="subject" />
 	
