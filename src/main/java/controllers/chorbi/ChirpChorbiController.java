@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ChirpService;
 import services.ChorbiService;
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
 
@@ -31,6 +33,9 @@ public class ChirpChorbiController extends AbstractController {
 	@Autowired
 	private ChorbiService	chorbiService;
 
+	@Autowired
+	private ActorService	actorService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -43,9 +48,9 @@ public class ChirpChorbiController extends AbstractController {
 	public ModelAndView listIn() {
 		ModelAndView result;
 		Collection<Chirp> chirps;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
-
-		chirps = this.chirpService.findChirpsSentByChorbiId(chorbi.getId());
+		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
+		chirps = this.chirpService.findChirpsSentByActorId(actor.getId());
 
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);
@@ -57,9 +62,9 @@ public class ChirpChorbiController extends AbstractController {
 	public ModelAndView listOut() {
 		ModelAndView result;
 		Collection<Chirp> chirps;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
-
-		chirps = this.chirpService.findChirpsReceivedByChorbiId(chorbi.getId());
+		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
+		chirps = this.chirpService.findChirpsReceivedByActorId(actor.getId());
 
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);

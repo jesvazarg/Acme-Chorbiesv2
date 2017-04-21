@@ -27,6 +27,9 @@ public class ChirpService {
 	@Autowired
 	private ChorbiService	chorbiService;
 
+	@Autowired
+	private ActorService	actorService;
+
 
 	// Supporting services ----------------------------------------------------
 
@@ -55,20 +58,22 @@ public class ChirpService {
 
 	public Chirp create() {
 		Chirp result;
-		Chorbi chorbi;
+		final Chorbi chorbi;
 
 		Calendar calendar;
 
 		result = new Chirp();
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi);
+		final Actor actor = this.actorService.findByPrincipal();
+		//chorbi = this.chorbiService.findByPrincipal();
+
+		Assert.notNull(actor);
 
 		calendar = Calendar.getInstance();
 		calendar.set(Calendar.MILLISECOND, -10);
 
 		result.setAttachments(new ArrayList<String>());
 		result.setMoment(calendar.getTime());
-		result.setSender(chorbi);
+		result.setSender(actor);
 
 		final Collection<Actor> recipients = new HashSet<Actor>();
 		result.setRecipients(recipients);
@@ -79,20 +84,21 @@ public class ChirpService {
 
 	public Chirp create(final Chorbi recipient) {
 		Chirp result;
-		Chorbi chorbi;
+		final Chorbi chorbi;
 
 		Calendar calendar;
 
 		result = new Chirp();
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi);
+		//chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
 
 		calendar = Calendar.getInstance();
 		calendar.set(Calendar.MILLISECOND, -10);
 
 		result.setAttachments(new ArrayList<String>());
 		result.setMoment(calendar.getTime());
-		result.setSender(chorbi);
+		result.setSender(actor);
 		final Collection<Actor> recipientsAux = new HashSet<Actor>();
 		recipientsAux.add(recipient);
 		result.setRecipients(recipientsAux);
@@ -103,22 +109,23 @@ public class ChirpService {
 	public Chirp forward(final Chirp chirp) {
 		Assert.notNull(chirp);
 		Chirp result;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
-		Assert.notNull(chorbi);
-		Assert.isTrue(chirp.getSender().equals(chorbi));
+		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.notNull(actor);
+		Assert.isTrue(chirp.getSender().equals(actor));
 		result = new Chirp();
 		result.setSubject(chirp.getSubject());
 		result.setText(chirp.getText());
 		result.setMoment(chirp.getMoment());
 		result.setAttachments(chirp.getAttachments());
-		result.setSender(chorbi);
+		result.setSender(actor);
 		result.setCopy(false);
 		return result;
 	}
 
 	public Chirp reply(final Chirp chirp) {
 		Assert.notNull(chirp);
-		Assert.isTrue(chirp.getRecipients().contains(this.chorbiService.findByPrincipal()));
+		Assert.isTrue(chirp.getRecipients().contains(this.actorService.findByPrincipal()));
 		final Chirp result = this.create();
 		final Collection<Actor> recipientsAux = result.getRecipients();
 		recipientsAux.add(chirp.getSender());
@@ -133,8 +140,9 @@ public class ChirpService {
 
 	public void delete(final Chirp chirp) {
 		Assert.notNull(chirp);
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
-		Assert.isTrue(chirp.getSender().equals(chorbi) || chirp.getRecipients().contains(chorbi));
+		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
+		Assert.isTrue(chirp.getSender().equals(actor) || chirp.getRecipients().contains(actor));
 
 		this.chirpRepository.delete(chirp);
 	}
@@ -162,21 +170,21 @@ public class ChirpService {
 
 	// Other business methods -------------------------------------------------
 
-	public Collection<Chirp> findChirpsSentByChorbiId(final int chorbiId) {
+	public Collection<Chirp> findChirpsSentByActorId(final int actorId) {
 
 		Collection<Chirp> result;
 
-		result = this.chirpRepository.findChirpsSentByChorbiId(chorbiId);
+		result = this.chirpRepository.findChirpsSentByActorId(actorId);
 
 		return result;
 
 	}
 
-	public Collection<Chirp> findChirpsReceivedByChorbiId(final int chorbiId) {
+	public Collection<Chirp> findChirpsReceivedByActorId(final int actorId) {
 
 		Collection<Chirp> result;
 
-		result = this.chirpRepository.findChirpsReceivedByChorbiId(chorbiId);
+		result = this.chirpRepository.findChirpsReceivedByActorId(actorId);
 
 		return result;
 

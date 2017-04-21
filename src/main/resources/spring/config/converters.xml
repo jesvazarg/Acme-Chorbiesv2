@@ -30,7 +30,6 @@
 		<bean class="converters.ChorbiToStringConverter" />  
 		<bean class="converters.ConfigurationToStringConverter" /> 
 		<bean class="converters.CreditCardToStringConverter" /> 
-		<bean class="converters.PersonToStringConverter" /> 
 		<bean class="converters.SenseToStringConverter" />
 		
 		<bean class="converters.StringToActorConverter" /> 
@@ -40,7 +39,6 @@
 		<bean class="converters.StringToChorbiConverter" /> 
 		<bean class="converters.StringToConfigurationConverter" /> 
 		<bean class="converters.StringToCreditCardConverter" />
-		<bean class="converters.StringToPersonConverter" />
 		<bean class="converters.StringToSenseConverter" /> 
 	</util:list>
 	
