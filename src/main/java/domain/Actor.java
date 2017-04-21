@@ -1,10 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -73,8 +77,31 @@ public class Actor extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private UserAccount	userAccount;
+	private UserAccount			userAccount;
+	private Collection<Chirp>	sentChirps;
+	private Collection<Chirp>	reciveChirps;
+	private CreditCard			creditCard;
 
+
+	@Valid
+	@NotNull
+	@OneToMany(mappedBy = "sender")
+	public Collection<Chirp> getSentChirps() {
+		return this.sentChirps;
+	}
+	public void setSentChirps(final Collection<Chirp> sentChirps) {
+		this.sentChirps = sentChirps;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToMany(mappedBy = "recipients")
+	public Collection<Chirp> getReciveChirps() {
+		return this.reciveChirps;
+	}
+	public void setReciveChirps(final Collection<Chirp> reciveChirps) {
+		this.reciveChirps = reciveChirps;
+	}
 
 	@NotNull
 	@Valid
@@ -93,6 +120,15 @@ public class Actor extends DomainEntity {
 		final String masked2 = masked.replaceAll("(\\+\\d{1,3})?(\\(\\d{1,3}\\) )?(\\d{3,})", "***");
 
 		return masked2;
+	}
+
+	@Valid
+	@OneToOne(optional = true)
+	public CreditCard getCreditCard() {
+		return this.creditCard;
+	}
+	public void setCreditCard(final CreditCard creditCard) {
+		this.creditCard = creditCard;
 	}
 
 }

@@ -7,7 +7,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -15,7 +14,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Manager extends Person {
+public class Manager extends Actor {
 
 	// Constructors ----------------------------------------------------------
 	public Manager() {
@@ -49,7 +48,6 @@ public class Manager extends Person {
 
 	// Relationships ----------------------------------------------------------
 	private Collection<Event>	events;
-	private CreditCard			creditCard;
 
 
 	@Valid
@@ -60,16 +58,6 @@ public class Manager extends Person {
 	}
 	public void setEvents(final Collection<Event> events) {
 		this.events = events;
-	}
-
-	@Valid
-	@OneToOne(optional = false)
-	public CreditCard getCreditCard() {
-		return this.creditCard;
-	}
-
-	public void setCreditCard(final CreditCard creditCard) {
-		this.creditCard = creditCard;
 	}
 
 }

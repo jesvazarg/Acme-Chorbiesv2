@@ -90,29 +90,29 @@ public class Chirp extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Person				sender;
-	private Collection<Person>	recipients;
+	private Actor				sender;
+	private Collection<Actor>	recipients;
 
 
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Person getSender() {
+	public Actor getSender() {
 		return this.sender;
 	}
 
-	public void setSender(final Person sender) {
+	public void setSender(final Actor sender) {
 		this.sender = sender;
 	}
 
 	@NotNull
 	@Valid
 	@ManyToMany()
-	public Collection<Person> getRecipients() {
+	public Collection<Actor> getRecipients() {
 		return this.recipients;
 	}
 
-	public void setRecipients(final Collection<Person> recipients) {
+	public void setRecipients(final Collection<Actor> recipients) {
 		this.recipients = recipients;
 	}
 

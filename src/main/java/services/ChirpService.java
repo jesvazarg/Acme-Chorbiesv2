@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ChirpRepository;
+import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
-import domain.Person;
 
 @Service
 @Transactional
@@ -70,7 +70,7 @@ public class ChirpService {
 		result.setMoment(calendar.getTime());
 		result.setSender(chorbi);
 
-		final Collection<Person> recipients = new HashSet<Person>();
+		final Collection<Actor> recipients = new HashSet<Actor>();
 		result.setRecipients(recipients);
 
 		result.setCopy(false);
@@ -93,7 +93,7 @@ public class ChirpService {
 		result.setAttachments(new ArrayList<String>());
 		result.setMoment(calendar.getTime());
 		result.setSender(chorbi);
-		final Collection<Person> recipientsAux = new HashSet<Person>();
+		final Collection<Actor> recipientsAux = new HashSet<Actor>();
 		recipientsAux.add(recipient);
 		result.setRecipients(recipientsAux);
 		result.setCopy(false);
@@ -120,7 +120,7 @@ public class ChirpService {
 		Assert.notNull(chirp);
 		Assert.isTrue(chirp.getRecipients().contains(this.chorbiService.findByPrincipal()));
 		final Chirp result = this.create();
-		final Collection<Person> recipientsAux = result.getRecipients();
+		final Collection<Actor> recipientsAux = result.getRecipients();
 		recipientsAux.add(chirp.getSender());
 		result.setRecipients(recipientsAux);
 		//result.setRecipients(chirp.getSender());
