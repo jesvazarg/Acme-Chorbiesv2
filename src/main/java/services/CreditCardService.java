@@ -62,8 +62,14 @@ public class CreditCardService {
 		Assert.notNull(creditCard);
 		CreditCard result;
 		Chorbi principal;
+		Calendar calendar;
 
 		this.checkCreditCard(creditCard);
+
+		calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+		creditCard.setMoment(calendar.getTime());
+
 		result = this.creditCardRepository.save(creditCard);
 
 		principal = this.chorbiService.findByPrincipal();
