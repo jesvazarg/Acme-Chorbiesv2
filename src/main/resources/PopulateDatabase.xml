@@ -159,13 +159,8 @@
 	
 	<bean id="configuration1" class="domain.Configuration">
 		<property name="time" value="12:00:00" /> 
-		<!-- <property name="banners">
-			<list>
-				<value>"http://f.tqn.com/y/thaifood/1/T/i/k/padthai640.jpg"</value>
-				<value>"http://oi66.tinypic.com/ci8h3.jpg"</value>
-				<value>"http://www.muypymes.com/wp-content/uploads/2011/09/coche_alquiler.jpg"</value>
-			</list>
-		</property> -->
+		<property name="feeManager" value="1.0" /> 
+		<property name="feeChorbi" value="2.0" /> 
 	</bean>
 	
 	<!-- Banners -->
@@ -235,6 +230,7 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2019" /> 
 		<property name="cvv" value="356" /> 
+		<property name="moment" value="02/04/2017 12:00" />
 	</bean>
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holderName" value="Enrique Pastor" /> 
@@ -243,6 +239,7 @@
 		<property name="expirationMonth" value="3" /> 
 		<property name="expirationYear" value="2020" /> 
 		<property name="cvv" value="425" /> 
+		<property name="moment" value="01/10/2017 12:00" />
 	</bean>
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holderName" value="Antonio Recio" /> 
@@ -251,6 +248,7 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
+		<property name="moment" value="04/16/2017 12:00" />
 	</bean>
 	
 	<bean id="creditCard4" class="domain.CreditCard">
@@ -260,6 +258,7 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
+		<property name="moment" value="04/17/2017 12:00" />
 	</bean>
 	
 	<bean id="creditCard5" class="domain.CreditCard">
@@ -269,6 +268,7 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
+		<property name="moment" value="04/18/2017 12:00" />
 	</bean>
 	
 	<bean id="creditCard6" class="domain.CreditCard">
@@ -278,6 +278,7 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
+		<property name="moment" value="02/21/2017 12:00" />
 	</bean>
 	
 	<!-- Sense -->
@@ -517,6 +518,7 @@
 		<property name="relationship" value="Love" />
 		<property name="birthDate" value="06/10/1980" />
 		<property name="genre" value="Man" />
+		<property name="amount" value="0.0" />
 		<property name="coordinate" ref="coordinate1" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="searchTemplate" ref="searchTemplate1" />
@@ -571,6 +573,7 @@
 		<property name="relationship" value="Friendship" />
 		<property name="birthDate" value="02/17/1978" />
 		<property name="genre" value="Woman" />
+		<property name="amount" value="0.0" />
 		<property name="coordinate" ref="coordinate2" />
 		<property name="userAccount" ref="userAccount3" />
 		<property name="giveSenses">
@@ -624,6 +627,7 @@
 		<property name="relationship" value="Love" />
 		<property name="birthDate" value="11/28/1967" />
 		<property name="genre" value="Woman" />
+		<property name="amount" value="2.0" />
 		<property name="coordinate" ref="coordinate3" />
 		<property name="creditCard" ref="creditCard1" />
 		<property name="userAccount" ref="userAccount4" />
@@ -662,6 +666,7 @@
 		<property name="relationship" value="Activities" />
 		<property name="birthDate" value="01/02/1957" />
 		<property name="genre" value="Man" />
+		<property name="amount" value="6.0" />
 		<property name="coordinate" ref="coordinate4" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="userAccount" ref="userAccount5" />
@@ -699,6 +704,7 @@
 		<property name="relationship" value="Love" />
 		<property name="birthDate" value="04/08/1954" />
 		<property name="genre" value="Man" />
+		<property name="amount" value="0.0" />
 		<property name="coordinate" ref="coordinate5" />
 		<property name="creditCard" ref="creditCard3" />
 		<property name="userAccount" ref="userAccount6" />
@@ -736,6 +742,7 @@
 		<property name="relationship" value="Activities" />
 		<property name="birthDate" value="06/10/1983" />
 		<property name="genre" value="Woman" />
+		<property name="amount" value="0.0" />
 		<property name="coordinate" ref="coordinate6" />
 		<property name="userAccount" ref="userAccount7" />
 		<property name="searchTemplate" ref="searchTemplate2" />

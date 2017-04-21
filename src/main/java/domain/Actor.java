@@ -122,6 +122,8 @@ public class Actor extends DomainEntity {
 		return masked2;
 	}
 
+	// Relationships ----------------------------------------------------------
+
 	@Valid
 	@OneToOne(optional = true)
 	public CreditCard getCreditCard() {

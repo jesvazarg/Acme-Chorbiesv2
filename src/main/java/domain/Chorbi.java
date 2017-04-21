@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -42,8 +43,20 @@ public class Chorbi extends Actor {
 	private Date		birthDate;
 	private String		genre;
 	private Coordinate	coordinate;
+	private Double amount;
+	
+	
 
 
+	@Min(0)
+	@NotNull
+	public Double getAmount() {
+		return amount;
+	}
+	
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 	@NotBlank
 	@URL
 	public String getPicture() {
