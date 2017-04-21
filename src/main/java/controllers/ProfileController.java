@@ -88,7 +88,7 @@ public class ProfileController extends AbstractController {
 		Boolean sameActor = false;
 		Collection<Sense> likeThem;
 
-		actor = this.actorService.findById(actorId);
+		actor = this.actorService.findOne(actorId);
 
 		final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
 		likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());

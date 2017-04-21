@@ -83,6 +83,7 @@ public class ChorbiService {
 		result.setReciveSenses(reciveSenses);
 		result.setSentChirps(sentChirps);
 		result.setReciveChirps(reciveChirps);
+		result.setAmount(0.0);
 
 		return result;
 	}
