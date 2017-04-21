@@ -32,10 +32,13 @@ public class ActorService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+	//No funciona siempre al existir una herencia de 3 niveles
+	//Para ello use la función findById(int actorId)
 	public Actor findOne(final int actorId) {
 		Actor actor;
 
 		actor = this.actorRepository.findOne(actorId);
+
 		Assert.notNull(actor);
 
 		return actor;
@@ -61,7 +64,7 @@ public class ActorService {
 		Assert.notNull(userAccount.getUsername());
 		Assert.notNull(userAccount.getPassword());
 
-		aux = this.findOne(actor.getId());
+		aux = this.findById(actor.getId());
 
 		if (!(aux.getUserAccount().getPassword().equals(userAccount.getPassword()))) {
 			encoder = new Md5PasswordEncoder();
@@ -95,6 +98,16 @@ public class ActorService {
 		Actor result;
 
 		result = this.actorRepository.findByUserAccountId(userAccountId);
+
+		return result;
+	}
+
+	public Actor findById(final int actorId) {
+		Assert.isTrue(actorId != 0);
+		Actor result;
+
+		result = this.actorRepository.findById(actorId);
+		Assert.notNull(result);
 
 		return result;
 	}

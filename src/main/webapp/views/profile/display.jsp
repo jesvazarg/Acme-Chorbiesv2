@@ -105,7 +105,7 @@
 	</display:column>
 	<spring:message code="profile.profile" var="profileHeader" />
 	<display:column title="${profileHeader}">
-		<a href="profile/display.do?actorId=${chorbi.id}"><spring:message code="profile.display"/></a>
+		<a href="profile/display.do?actorId=${sense.sender.id}"><spring:message code="profile.display"/></a>
 	</display:column>
 </display:table>
 
