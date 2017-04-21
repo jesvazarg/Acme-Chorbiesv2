@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -28,6 +29,7 @@ public class Sense extends DomainEntity {
 	// Attributes -------------------------------------------------------------
 	private Date	moment;
 	private String	comment;
+	private Integer	stars;
 
 
 	@NotNull
@@ -46,6 +48,15 @@ public class Sense extends DomainEntity {
 	}
 	public void setComment(final String comment) {
 		this.comment = comment;
+	}
+
+	@NotNull
+	@Range(min = 0, max = 3)
+	public Integer getStars() {
+		return this.stars;
+	}
+	public void setStars(final Integer stars) {
+		this.stars = stars;
 	}
 
 

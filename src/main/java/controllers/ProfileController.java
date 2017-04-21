@@ -24,6 +24,7 @@ import services.ChorbiService;
 import services.SenseService;
 import domain.Actor;
 import domain.Chorbi;
+import domain.Sense;
 
 @Controller
 @RequestMapping("/profile")
@@ -54,7 +55,7 @@ public class ProfileController extends AbstractController {
 		Actor actor;
 		Boolean isAdmin = false;
 		final Boolean sameActor = true;
-		Collection<Chorbi> likeThem;
+		Collection<Sense> likeThem;
 
 		actor = this.actorService.findByPrincipal();
 
@@ -65,7 +66,7 @@ public class ProfileController extends AbstractController {
 
 		if (isAdmin == false) {
 			final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
-			likeThem = this.chorbiService.filterNotBanned(this.senseService.findChorbiesSender(chorbi.getReciveSenses()), chorbi);
+			likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
 			result.addObject("description", chorbi.getDescription());
 			result.addObject("likeThem", likeThem);
 		}
@@ -85,12 +86,12 @@ public class ProfileController extends AbstractController {
 		Actor actor;
 		final Boolean isAdmin = false;
 		Boolean sameActor = false;
-		Collection<Chorbi> likeThem;
+		Collection<Sense> likeThem;
 
 		actor = this.actorService.findOne(actorId);
 
 		final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
-		likeThem = this.chorbiService.filterNotBanned(this.senseService.findChorbiesSender(chorbi.getReciveSenses()), chorbi);
+		likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
 
 		if (actor.equals(this.actorService.findByPrincipal()))
 			sameActor = true;

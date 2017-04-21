@@ -16,9 +16,9 @@
       
 <tiles-definitions>
 
-	<definition name="sense/comment" extends="master.page">	
-		<put-attribute name="title" value="Crear comentario" />
-		<put-attribute name="body" value="/views/sense/comment.jsp" />
+	<definition name="sense/edit" extends="master.page">	
+		<put-attribute name="title" value="Comentario" />
+		<put-attribute name="body" value="/views/sense/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

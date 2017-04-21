@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SenseRepository;
+import security.Authority;
 import domain.Chorbi;
 import domain.Sense;
 
@@ -25,6 +26,9 @@ public class SenseService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private ChorbiService	chorbiService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	// Constructors------------------------------------------------------------
@@ -68,6 +72,7 @@ public class SenseService {
 		result.setSender(principal);
 		result.setRecipient(chorbi);
 		result.setMoment(today.getTime());
+		result.setStars(0);
 
 		for (final Sense s : chorbi.getReciveSenses())
 			Assert.isTrue(s.getSender().getId() != principal.getId());
@@ -111,22 +116,31 @@ public class SenseService {
 		return result;
 	}
 
-	public Collection<Chorbi> findChorbiesSender(final Collection<Sense> senses) {
-		final Collection<Chorbi> result = new ArrayList<Chorbi>();
+	public Collection<Sense> filterSensesNotBanned(final Collection<Sense> senses) {
+		final Collection<Sense> result = new ArrayList<Sense>();
 
-		for (final Sense s : senses)
-			result.add(s.getSender());
+		for (final Sense e : senses)
+			if (this.actorService.checkAuthority(e.getSender(), Authority.CHORBI))
+				result.add(e);
 		return result;
 	}
-
-	public Collection<Chorbi> findChorbiesRecipient(final Collection<Sense> senses) {
-		final Collection<Chorbi> result = new ArrayList<Chorbi>();
-
-		for (final Sense s : senses)
-			result.add(s.getRecipient());
-		return result;
-	}
-
+	/*
+	 * public Collection<Chorbi> findChorbiesSender(final Collection<Sense> senses) {
+	 * final Collection<Chorbi> result = new ArrayList<Chorbi>();
+	 * 
+	 * for (final Sense s : senses)
+	 * result.add(s.getSender());
+	 * return result;
+	 * }
+	 * 
+	 * public Collection<Chorbi> findChorbiesRecipient(final Collection<Sense> senses) {
+	 * final Collection<Chorbi> result = new ArrayList<Chorbi>();
+	 * 
+	 * for (final Sense s : senses)
+	 * result.add(s.getRecipient());
+	 * return result;
+	 * }
+	 */
 	public Double[] minAvgMaxOfSenses() {
 		final Double[] result = this.senseRepository.minAvgMaxOfSenses();
 		return result;

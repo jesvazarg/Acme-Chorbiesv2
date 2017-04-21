@@ -68,7 +68,7 @@
 		
 		<security:intercept-url pattern="/sense/chorbi/like.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/sense/chorbi/dislike.do" access="hasRole('CHORBI')" />  
-		<security:intercept-url pattern="/sense/chorbi/comment.do" access="hasRole('CHORBI')" /> 
+		<security:intercept-url pattern="/sense/chorbi/edit.do" access="hasRole('CHORBI')" /> 
 
 		<!-- ADMINISTRATOR -->
 		

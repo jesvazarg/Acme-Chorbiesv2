@@ -284,6 +284,7 @@
 	
 	<bean id="sense1" class="domain.Sense">
 		<property name="moment" value="03/29/2017 12:13" />
+		<property name="stars" value="2" />
 		<property name="sender" ref="chorbi2" />
 		<property name="recipient" ref="chorbi4" />
 	</bean>
@@ -291,6 +292,7 @@
 	<bean id="sense2" class="domain.Sense">
 		<property name="moment" value="04/01/2017 16:37" />
 		<property name="comment" value="¡Merengue, merengue!" />
+		<property name="stars" value="1" />
 		<property name="sender" ref="chorbi1" />
 		<property name="recipient" ref="chorbi3" />
 	</bean>
@@ -298,12 +300,14 @@
 	<bean id="sense3" class="domain.Sense">
 		<property name="moment" value="04/01/2017 16:45" />
 		<property name="comment" value="Yo te quiero mucho Cuqui, vuelve conmigo." />
+		<property name="stars" value="3" />
 		<property name="sender" ref="chorbi1" />
 		<property name="recipient" ref="chorbi2" />
 	</bean>
 	
 	<bean id="sense4" class="domain.Sense">
 		<property name="moment" value="04/02/2017 10:56" />
+		<property name="stars" value="2" />
 		<property name="sender" ref="chorbi5" />
 		<property name="recipient" ref="chorbi2" />
 	</bean>

@@ -17,13 +17,25 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form method="post" action="sense/chorbi/comment.do" modelAttribute="sense" >
+<form:form method="post" action="sense/chorbi/edit.do" modelAttribute="sense" >
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="moment" />
 	<form:hidden path="recipient" />
 	<form:hidden path="sender" />
+	
+	<form:label path="stars">
+		<spring:message code="sense.stars" />
+	</form:label>
+	<form:select path="stars" >
+		<form:option value="0" label="0" />
+		<form:option value="1" label="1" />
+		<form:option value="2" label="2" />
+		<form:option value="3" label="3" />
+	</form:select>
+	<form:errors path="stars" cssClass="error" />
+	<br/>
 	
 	<acme:textarea code="sense.comment" path="comment" />
 	

@@ -91,20 +91,17 @@
 </security:authorize>
 
 <h2><spring:message code="profile.likeThem"/></h2>
-<display:table name="${likeThem}" id="chorbi" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
-	<acme:column code="profile.name" property="name" sortable="true"/>
-	<acme:column code="profile.surname" property="surname" sortable="true"/>
-	<acme:column code="profile.relationship" property="relationship" sortable="true"/>
-	<acme:column code="profile.birthDate" property="birthDate" format="{0,date,dd-MM-yyyy}" sortable="true"/>
-	<spring:message code="profile.comment" var="commentHeader" />
+<display:table name="${likeThem}" id="sense" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
+	<acme:column code="profile.name" property="sender.name" sortable="true"/>
+	<acme:column code="profile.surname" property="sender.surname" sortable="true"/>
+	<acme:column code="profile.relationship" property="sender.relationship" sortable="true"/>
+	<acme:column code="profile.birthDate" property="sender.birthDate" format="{0,date,dd-MM-yyyy}" sortable="true"/>
+	<acme:column code="profile.sense.stars" property="stars" sortable="true"/>
+	<spring:message code="profile.sense.comment" var="commentHeader" />
 	<display:column title="${commentHeader}">
-		<jstl:forEach var="sense" items="${profile.reciveSenses}">
-			<jstl:if test="${sense.sender.id == chorbi.id}">
-				<jstl:if test="${sense.comment != null}">
-					<jstl:out value="${sense.comment}"/>
-				</jstl:if>
-			</jstl:if>
-		</jstl:forEach>
+		<jstl:if test="${sense.comment != null}">
+			<jstl:out value="${sense.comment}"/>
+		</jstl:if>
 	</display:column>
 	<spring:message code="profile.profile" var="profileHeader" />
 	<display:column title="${profileHeader}">

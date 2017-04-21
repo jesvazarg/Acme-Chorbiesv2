@@ -45,9 +45,10 @@ public class SenseChorbiController extends AbstractController {
 
 		chorbi = this.chorbiService.findOne(chorbiId);
 		sense = this.senseService.create(chorbi);
-		sense = this.senseService.save(sense);
+		//sense = this.senseService.save(sense);
 
-		result = new ModelAndView("redirect:../../chorbi/list.do");
+		//result = new ModelAndView("redirect:../../chorbi/list.do");
+		result = this.createEditModelAndView(sense);
 
 		return result;
 	}
@@ -74,7 +75,7 @@ public class SenseChorbiController extends AbstractController {
 
 	// Comment ---------------------------------------------------------------		
 
-	@RequestMapping(value = "/comment", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView comment(@RequestParam final int chorbiId) {
 		ModelAndView result;
 		Chorbi chorbi;
@@ -91,9 +92,12 @@ public class SenseChorbiController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/comment", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView comment(@Valid final Sense sense) {
 		ModelAndView result;
+
+		if (sense.getComment().equals(""))
+			sense.setComment(null);
 
 		this.senseService.save(sense);
 
@@ -111,7 +115,7 @@ public class SenseChorbiController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Sense sense, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("sense/comment");
+		result = new ModelAndView("sense/edit");
 		result.addObject("sense", sense);
 		result.addObject("message", message);
 		return result;
