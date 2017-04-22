@@ -80,6 +80,22 @@ public class CreditCardService {
 		return result;
 	}
 
+	public CreditCard saveRegister(final CreditCard creditCard) {
+		Assert.notNull(creditCard);
+		CreditCard result;
+		Calendar calendar;
+
+		this.checkCreditCard(creditCard);
+
+		calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+		creditCard.setMoment(calendar.getTime());
+
+		result = this.creditCardRepository.save(creditCard);
+
+		return result;
+	}
+
 	public void delete(final CreditCard creditCard) {
 		Assert.notNull(creditCard);
 		Chorbi principal;

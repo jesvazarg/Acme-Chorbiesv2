@@ -71,14 +71,14 @@ public class ManagerController extends AbstractController {
 
 		ModelAndView result;
 		Manager manager;
-		final CreditCard creditCard;
+		CreditCard creditCard;
 
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(createManagerForm);
 		else
 			try {
 				creditCard = (CreditCard) this.managerService.reconstructProfile(createManagerForm, "create")[0];
-				this.creditCardService.save(creditCard);
+				creditCard = this.creditCardService.saveRegister(creditCard);
 				manager = (Manager) this.managerService.reconstructProfile(createManagerForm, "create")[1];
 				manager.setCreditCard(creditCard);
 				this.managerService.save(manager);
