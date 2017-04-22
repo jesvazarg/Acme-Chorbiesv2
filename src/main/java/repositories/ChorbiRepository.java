@@ -86,6 +86,10 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select c from Chorbi c order by c.events.size desc")
 	Collection<Chorbi> chorbiesOrderByEventRegistered();
 
+	//C4: A listing of chorbies that includes the amount that they due in fees.
+	@Query("select c, c.amount from Chorbi c")
+	Collection<Object[]> chorbiesAmountDueFee();
+
 	//B1: The minimum, the maximum, and the average number of stars per chorbi.
 	@Query("select sum(s.stars) from Sense s group by s.recipient order by sum(s.stars) ASC")
 	Double[] minStarsPerChorbi();

@@ -21,4 +21,8 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 	@Query("select m from Manager m order by m.events.size DESC")
 	Collection<Manager> managesSortedEvents();
 
+	//C2: A listing of managers that includes the amount that they due in fees.
+	@Query("select m, m.amount from Manager m")
+	Collection<Object[]> managersAmountDueFee();
+
 }
