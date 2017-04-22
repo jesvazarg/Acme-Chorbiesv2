@@ -66,8 +66,8 @@
 		<security:intercept-url pattern="/sense/chorbi/edit.do" access="hasRole('CHORBI')" /> 
 		
 		<security:intercept-url pattern="/event/chorbi/list.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/event/manager/register.do" access="hasRole('CHORBI')" />
-		<security:intercept-url pattern="/event/manager/unregister.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/event/chorbi/register.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/event/chorbi/unregister.do" access="hasRole('CHORBI')" />
 
 		<!-- ADMINISTRATOR -->
 		
