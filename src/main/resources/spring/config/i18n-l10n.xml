@@ -33,6 +33,7 @@
 		<value>/views/profile/messages</value>
 		<value>/views/sense/messages</value>
 		<value>/views/searchTemplate/messages</value>
+		<value>/views/manager/messages</value>
 	</util:list>
 
 </beans>

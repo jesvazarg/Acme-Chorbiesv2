@@ -32,6 +32,7 @@
 		<bean class="converters.CreditCardToStringConverter" /> 
 		<bean class="converters.EventToStringConverter" />
 		<bean class="converters.SenseToStringConverter" />
+		<bean class="converters.ManagerToStringConverter" />
 		
 		<bean class="converters.StringToActorConverter" /> 
 		<bean class="converters.StringToSearchTemplateConverter" /> 
@@ -42,6 +43,7 @@
 		<bean class="converters.StringToCreditCardConverter" />
 		<bean class="converters.StringToEventConverter" /> 
 		<bean class="converters.StringToSenseConverter" /> 
+		<bean class="converters.StringToManagerConverter" /> 
 	</util:list>
 	
 </beans>

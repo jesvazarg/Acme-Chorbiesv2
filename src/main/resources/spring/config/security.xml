@@ -43,6 +43,7 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/chorbi/create.do" access="permitAll" /> 
+		<security:intercept-url pattern="/manager/create.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/event/list.do" access="permitAll" />
 		<security:intercept-url pattern="/event/listRecently.do" access="permitAll" />

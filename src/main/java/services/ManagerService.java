@@ -66,12 +66,14 @@ public class ManagerService {
 		Collection<Chirp> sentChirps;
 		Collection<Chirp> reciveChirps;
 		Collection<Event> events;
+		Double amount;
 
 		userAccount = new UserAccount();
 		authority = new Authority();
 		sentChirps = new ArrayList<Chirp>();
 		reciveChirps = new ArrayList<Chirp>();
 		events = new ArrayList<Event>();
+		amount = 0.0;
 
 		authority.setAuthority(Authority.MANAGER);
 		userAccount.addAuthority(authority);
@@ -81,6 +83,7 @@ public class ManagerService {
 		result.setSentChirps(sentChirps);
 		result.setReciveChirps(reciveChirps);
 		result.setEvents(events);
+		result.setAmount(amount);
 
 		return result;
 	}
