@@ -88,14 +88,4 @@ public class ConfigurationService {
 
 	}
 
-	//	public String RandomBanner() {
-	//		Configuration aux;
-	//		aux = this.findConfiguration();
-	//		final List<String> banners = new ArrayList<String>(aux.getBanners());
-	//		final Random randomNumber = new Random();
-	//		final Integer i = randomNumber.nextInt(banners.size());
-	//		//System.out.print(banners.get(i));
-	//		return banners.get(i);
-	//	}
-
 }

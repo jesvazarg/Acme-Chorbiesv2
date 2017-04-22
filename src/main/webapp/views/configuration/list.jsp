@@ -16,20 +16,15 @@
 	<display:column property="time" title="${timeHeader}" sortable="true" /> --%>
 	
 	<acme:column code="configuration.time" property="time"/>
-	<%-- <b><spring:message code="configuration.banners"/>:</b>
-	<display:table name="${configuration.banners}" id="banner" class="displaytag" pagesize="5" keepStatus="true">
-		<spring:message code="configuration.url" var="urlHeader"/>
-		 <display:column title="${ulrHeader}">
-			<a href="${banner}"></a>
-		</display:column> 
-	</display:table> --%>
 	
+	<acme:column code="configuration.feeManager" property="feeManager"/>
 	
-	
+	<acme:column code="configuration.feeChorbi" property="feeChorbi"/>
+
 </display:table>
 
 
 <a href="configuration/administrator/edit.do"><spring:message
-	code="configuration.editTime"/>
+	code="configuration.editConfiguration"/>
 </a>
 

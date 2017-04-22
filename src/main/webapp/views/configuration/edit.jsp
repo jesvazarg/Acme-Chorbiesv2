@@ -20,6 +20,20 @@
 	<form:input path="time" />
 		<form:errors cssClass="error" path="time"/>
 	<br/>
+	
+	<form:label path="feeManager">
+		<spring:message code="configuration.feeManager"/>
+	</form:label>
+	<form:input path="feeManager" />
+		<form:errors cssClass="error" path="feeManager"/>
+	<br/>
+	
+	<form:label path="feeChorbi">
+		<spring:message code="configuration.feeChorbi"/>
+	</form:label>
+	<form:input path="feeChorbi" />
+		<form:errors cssClass="error" path="feeManager"/>
+	<br/>
 
 	<input type="submit" name="save"
 		value="<spring:message code="configuration.save" />" />
