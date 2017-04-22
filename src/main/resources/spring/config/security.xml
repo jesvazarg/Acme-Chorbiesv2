@@ -58,11 +58,12 @@
 		<security:intercept-url pattern="/searchTemplate/chorbi/edit.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/searchTemplate/chorbi/findBySearchTemplate.do" access="hasRole('CHORBI')" /> 
 		
-	
-		
 		<security:intercept-url pattern="/sense/chorbi/like.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/sense/chorbi/dislike.do" access="hasRole('CHORBI')" />  
 		<security:intercept-url pattern="/sense/chorbi/edit.do" access="hasRole('CHORBI')" /> 
+		
+		<security:intercept-url pattern="/event/manager/register.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/event/manager/unregister.do" access="hasRole('CHORBI')" />
 
 		<!-- ADMINISTRATOR -->
 		
@@ -83,10 +84,16 @@
 		
 		<!-- CHORBI and ADMINISTRATOR -->
 		
-		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('ADMIN','CHORBI')" />
-		
 		<security:intercept-url pattern="/profile/myProfile.do" access="hasAnyRole('ADMIN','CHORBI')" />
 		<security:intercept-url pattern="/profile/display.do" access="hasAnyRole('ADMIN','CHORBI')" />
+		
+		<!-- MANAGER -->
+		
+		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" /> 
+		
+		<!-- CHORBI, MANAGER and ADMINISTRATOR -->
+		
+		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('ADMIN','CHORBI','MANAGER')" />
 		
 		<!-- isAuthenticated -->   
 	
@@ -97,6 +104,8 @@
 		<security:intercept-url pattern="/chirp/reply.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chirp/forward.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chirp/delete.do" access="isAuthenticated()" /> 
+		
+		<security:intercept-url pattern="/event/actor/display.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
