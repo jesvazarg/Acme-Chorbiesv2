@@ -185,4 +185,9 @@ public class ManagerService {
 		return createManagerForm;
 	}
 
+	//----------------- Dashboard 2.0 -----------------------------------
+	public Collection<Manager> managesSortedEvents() {
+		return this.managerRepository.managesSortedEvents();
+	}
+
 }

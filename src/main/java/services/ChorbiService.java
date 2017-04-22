@@ -269,4 +269,16 @@ public class ChorbiService {
 		final Double[] result = this.chorbiRepository.minMaxAvgAgeOfChorbi2();
 		return result;
 	}
+
+	//----------------- Dashboard 2.0 -----------------------------------
+	public Double[] minMaxAvgStarsPerChorbi() {
+		final Double[] arrayMin = this.chorbiRepository.minStarsPerChorbi();
+		final Double[] arrayMax = this.chorbiRepository.maxStarsPerChorbi();
+		final Double avg = this.chorbiRepository.avgStarsPerChorbi();
+		final Double[] result = {
+			arrayMin[0], arrayMax[0], avg
+		};
+		return result;
+	}
+
 }
