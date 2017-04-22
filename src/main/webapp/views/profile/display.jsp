@@ -30,6 +30,7 @@
 		</li>
 		
 		<jstl:if test="${isAdmin==false}">
+			<jstl:if test="${account=='chorbi'}">
 		
 		
 		<li>
@@ -67,14 +68,28 @@
 			
 			<jstl:out value="${profile.coordinate.province}" />
 		</li>
-			
+			</jstl:if>
+		</jstl:if>
+		
+		<jstl:if test="${account=='manager'}">
+		<li>
+			<b><spring:message code="profile.company" />:</b>
+			<jstl:out value="${profile.company}" />
+		</li>
+		
+		<li>
+			<b><spring:message code="profile.vat" />:</b>
+			<jstl:out value="${profile.vat}" />
+		</li>
+		
+		
 		</jstl:if>
 		
 	</ul>
 	
 </div>
 
-<security:authorize access="hasRole('CHORBI')">
+<security:authorize access="hasAnyRole('CHORBI', 'MANAGER')">
 	<jstl:if test="${sameActor==false}">
 	<div>
 		<acme:button code="chirp.create" url="chirp/create.do?chorbieId=${profile.id}"/>
@@ -82,38 +97,34 @@
 	</jstl:if>
 	<jstl:if test="${sameActor==true}">
 		<jstl:if test="${profile.creditCard != null}">
-			<acme:button code="profile.creditCard.display" url="creditCard/chorbi/display.do"/>
+			<acme:button code="profile.creditCard.display" url="creditCard/actor/display.do"/>
 		</jstl:if>
 		<jstl:if test="${profile.creditCard == null}">
-			<acme:button code="profile.creditCard.create" url="creditCard/chorbi/create.do"/>
+			<acme:button code="profile.creditCard.create" url="creditCard/actor/create.do"/>
 		</jstl:if>
 	</jstl:if>
 </security:authorize>
 
-<h2><spring:message code="profile.likeThem"/></h2>
-<display:table name="${likeThem}" id="sense" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
-	<acme:column code="profile.name" property="sender.name" sortable="true"/>
-	<acme:column code="profile.surname" property="sender.surname" sortable="true"/>
-	<acme:column code="profile.relationship" property="sender.relationship" sortable="true"/>
-	<acme:column code="profile.birthDate" property="sender.birthDate" format="{0,date,dd-MM-yyyy}" sortable="true"/>
-	<acme:column code="profile.sense.stars" property="stars" sortable="true"/>
-	<spring:message code="profile.sense.comment" var="commentHeader" />
-	<display:column title="${commentHeader}">
-		<jstl:if test="${sense.comment != null}">
-			<jstl:out value="${sense.comment}"/>
-		</jstl:if>
-	</display:column>
-	<spring:message code="profile.profile" var="profileHeader" />
-	<display:column title="${profileHeader}">
-		<a href="profile/display.do?actorId=${sense.sender.id}"><spring:message code="profile.display"/></a>
-	</display:column>
-</display:table>
+<security:authorize access="hasRole('CHORBI')">
+	<h2><spring:message code="profile.likeThem"/></h2>
+	<display:table name="${likeThem}" id="sense" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
+		<acme:column code="profile.name" property="sender.name" sortable="true"/>
+		<acme:column code="profile.surname" property="sender.surname" sortable="true"/>
+		<acme:column code="profile.relationship" property="sender.relationship" sortable="true"/>
+		<acme:column code="profile.birthDate" property="sender.birthDate" format="{0,date,dd-MM-yyyy}" sortable="true"/>
+		<acme:column code="profile.sense.stars" property="stars" sortable="true"/>
+		<spring:message code="profile.sense.comment" var="commentHeader" />
+		<display:column title="${commentHeader}">
+			<jstl:if test="${sense.comment != null}">
+				<jstl:out value="${sense.comment}"/>
+			</jstl:if>
+		</display:column>
+		<spring:message code="profile.profile" var="profileHeader" />
+		<display:column title="${profileHeader}">
+			<a href="profile/display.do?actorId=${sense.sender.id}"><spring:message code="profile.display"/></a>
+		</display:column>
+	</display:table>
+</security:authorize>
 
 
-<%-- 
-	<div>
-		<a href="chirp/chorbi/forward.do?chirpId=${chirp.id}"><spring:message
-				code="chirp.reply" /></a>
-	</div>
- --%>
 

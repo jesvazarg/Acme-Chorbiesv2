@@ -91,6 +91,46 @@ public class ManagerController extends AbstractController {
 		return result;
 	}
 
+	// Edition ---------------------------------------------------------------
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit() {
+		ModelAndView result;
+		CreateManagerForm createManagerForm;
+		Manager manager;
+
+		manager = this.managerService.findByPrincipal();
+		createManagerForm = this.managerService.constructProfile(manager);
+		result = this.editionEditModelAndView(createManagerForm);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final CreateManagerForm createManagerForm, final BindingResult binding) {
+
+		ModelAndView result;
+		Manager manager;
+		CreditCard creditCard;
+
+		if (binding.hasErrors())
+			result = this.editionEditModelAndView(createManagerForm);
+		else
+			try {
+				creditCard = (CreditCard) this.managerService.reconstructProfile(createManagerForm, "edit")[0];
+				creditCard = this.creditCardService.saveRegister(creditCard);
+				manager = (Manager) this.managerService.reconstructProfile(createManagerForm, "edit")[1];
+				manager.setCreditCard(creditCard);
+				this.managerService.save(manager);
+				result = new ModelAndView("redirect:/welcome/index.do");
+
+			} catch (final Throwable oops) {
+				result = this.editionEditModelAndView(createManagerForm, "manager.commit.error");
+
+			}
+		return result;
+	}
+
 	// Ancillary methods ------------------------------------------------------
 	protected ModelAndView createEditModelAndView(final CreateManagerForm createManagerForm) {
 		ModelAndView result;
@@ -106,6 +146,25 @@ public class ManagerController extends AbstractController {
 		result = new ModelAndView("manager/create");
 		result.addObject("createManagerForm", createManagerForm);
 		result.addObject("requestURI", "manager/create.do");
+		result.addObject("message", message);
+
+		return result;
+	}
+
+	protected ModelAndView editionEditModelAndView(final CreateManagerForm createManagerForm) {
+		ModelAndView result;
+
+		result = this.editionEditModelAndView(createManagerForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView editionEditModelAndView(final CreateManagerForm createManagerForm, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("manager/edit");
+		result.addObject("createManagerForm", createManagerForm);
+		result.addObject("requestURI", "manager/edit.do");
 		result.addObject("message", message);
 
 		return result;

@@ -44,8 +44,11 @@
 			<jstl:out value="${creditCard.cvv}"/>
 		</li>
 		
-		<acme:button url="creditCard/chorbi/edit.do" code="creditCard.edit"/>
-		<acme:button url="creditCard/chorbi/delete.do" code="creditCard.delete"/>
+		<acme:button url="creditCard/actor/edit.do" code="creditCard.edit"/>
+		
+		<security:authorize access="hasRole('CHORBI')">
+		<acme:button url="creditCard/actor/delete.do" code="creditCard.delete"/>
+		</security:authorize>
 		
 	</ul>
 </div>

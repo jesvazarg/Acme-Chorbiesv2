@@ -1,5 +1,5 @@
 
-package controllers.chorbi;
+package controllers.actor;
 
 import javax.validation.Valid;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.ChorbiService;
 import services.CreditCardService;
 import controllers.AbstractController;
@@ -19,12 +20,15 @@ import domain.CreditCard;
 import forms.CreateCreditCardForm;
 
 @Controller
-@RequestMapping("/creditCard/chorbi")
+@RequestMapping("/creditCard/actor")
 public class CreditCardChorbiController extends AbstractController {
 
 	// Service ---------------------------------------------------------------		
 	@Autowired
 	private CreditCardService	creditCardService;
+
+	@Autowired
+	private ActorService		actorService;
 
 	@Autowired
 	private ChorbiService		chorbiService;
@@ -43,7 +47,7 @@ public class CreditCardChorbiController extends AbstractController {
 		ModelAndView result;
 		CreditCard creditCard;
 
-		creditCard = this.chorbiService.findByPrincipal().getCreditCard();
+		creditCard = this.actorService.findByPrincipal().getCreditCard();
 
 		result = new ModelAndView("creditCard/display");
 		result.addObject("creditCard", creditCard);
@@ -77,7 +81,7 @@ public class CreditCardChorbiController extends AbstractController {
 			try {
 				creditCard = this.creditCardService.reconstructCreditCard(createCreditCardForm, "create");
 				this.creditCardService.save(creditCard);
-				result = new ModelAndView("redirect:/creditCard/chorbi/display.do");
+				result = new ModelAndView("redirect:/creditCard/actor/display.do");
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(createCreditCardForm, "creditCard.commit.error");
@@ -94,7 +98,7 @@ public class CreditCardChorbiController extends AbstractController {
 		CreateCreditCardForm createCreditCardForm;
 		CreditCard creditCard;
 
-		creditCard = this.chorbiService.findByPrincipal().getCreditCard();
+		creditCard = this.actorService.findByPrincipal().getCreditCard();
 		Assert.notNull(creditCard);
 		createCreditCardForm = this.creditCardService.constructCreditCard(creditCard);
 		result = this.editionEditModelAndView(createCreditCardForm);
@@ -113,7 +117,7 @@ public class CreditCardChorbiController extends AbstractController {
 			try {
 				creditCard = this.creditCardService.reconstructCreditCard(createCreditCardForm, "edit");
 				this.creditCardService.save(creditCard);
-				result = new ModelAndView("redirect:/creditCard/chorbi/display.do");
+				result = new ModelAndView("redirect:/creditCard/actor/display.do");
 
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(createCreditCardForm, "creditCard.commit.error");
@@ -155,7 +159,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 		result = new ModelAndView("creditCard/create");
 		result.addObject("createCreditCardForm", createCreditCardForm);
-		result.addObject("requestURI", "creditCard/chorbi/create.do");
+		result.addObject("requestURI", "creditCard/actor/create.do");
 		result.addObject("message", message);
 
 		return result;
@@ -174,7 +178,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 		result = new ModelAndView("creditCard/edit");
 		result.addObject("createCreditCardForm", createCreditCardForm);
-		result.addObject("requestURI", "creditCard/chorbi/edit.do");
+		result.addObject("requestURI", "creditCard/actor/edit.do");
 		result.addObject("message", message);
 
 		return result;

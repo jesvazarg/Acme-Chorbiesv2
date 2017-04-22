@@ -29,12 +29,13 @@
 	<acme:input code="manager.company" path="company" />
 	<acme:input code="manager.vat" path="vat" />
 	
-	<acme:input code="creditCard.holderName" path="holderName" />
-	<acme:input code="creditCard.brandName" path="brandName" />
-	<acme:input code="creditCard.number" path="number" />
-	<acme:input code="creditCard.expirationMonth" path="expirationMonth" type="number" min="1" max="12" />
-	<acme:input code="creditCard.expirationYear" path="expirationYear" type="number" min="2017" />
-	<acme:input code="creditCard.cvv" path="cvv" type="number" min="100" max="999" />
+	
+		<acme:input code="creditCard.holderName" path="holderName" />
+		<acme:input code="creditCard.brandName" path="brandName" />
+		<acme:input code="creditCard.number" path="number" />
+		<acme:input code="creditCard.expirationMonth" path="expirationMonth" type="number" min="1" max="12" />
+		<acme:input code="creditCard.expirationYear" path="expirationYear" type="number" min="2017" />
+		<acme:input code="creditCard.cvv" path="cvv" type="number" min="100" max="999" />
 	
 	
 	<jstl:if test="${requestURI == 'manager/create.do'}">

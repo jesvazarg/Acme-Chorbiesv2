@@ -10,6 +10,7 @@
 
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,11 @@ public class ProfileController extends AbstractController {
 		ModelAndView result;
 		Actor actor;
 		Boolean isAdmin = false;
+		Boolean isManager = false;
+		Boolean isChorbi = false;
 		final Boolean sameActor = true;
 		Collection<Sense> likeThem;
+		String account = "";
 
 		actor = this.actorService.findByPrincipal();
 
@@ -63,16 +67,25 @@ public class ProfileController extends AbstractController {
 		result.addObject("profile", actor);
 
 		isAdmin = this.actorService.checkAuthority(actor, Authority.ADMIN);
+		if (isAdmin)
+			account = "admin";
+		isManager = this.actorService.checkAuthority(actor, Authority.MANAGER);
+		if (isManager)
+			account = "manager";
+		isChorbi = this.actorService.checkAuthority(actor, Authority.CHORBI);
+		if (isChorbi)
+			account = "chorbi";
 
-		if (isAdmin == false) {
+		if (isChorbi == true) {
 			final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
 			likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
 			result.addObject("description", chorbi.getDescription());
 			result.addObject("likeThem", likeThem);
 		}
+
 		result.addObject("phone", actor.getPhone());
 		result.addObject("email", actor.getEmail());
-
+		result.addObject("account", account);
 		result.addObject("isAdmin", isAdmin);
 		result.addObject("sameActor", sameActor);
 		result.addObject("requestURI", "profile/display");
@@ -86,21 +99,37 @@ public class ProfileController extends AbstractController {
 		Actor actor;
 		final Boolean isAdmin = false;
 		Boolean sameActor = false;
-		Collection<Sense> likeThem;
+		Collection<Sense> likeThem = new ArrayList<Sense>();
+		String maskPhone = null;
+		String maskEmail = null;
+		String maskDescription = null;
+		String account = "";
 
 		actor = this.actorService.findOne(actorId);
 
-		final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
-		likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
+		if (this.actorService.checkAuthority(actor, Authority.CHORBI)) {
+			final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
+			likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
+			maskPhone = actor.maskEmailAndPhone(chorbi.getPhone());
+			maskEmail = actor.maskEmailAndPhone(chorbi.getEmail());
+			maskDescription = actor.maskEmailAndPhone(chorbi.getDescription());
+			account = "chorbi";
+		} else if (this.actorService.checkAuthority(actor, Authority.MANAGER)) {
+			maskPhone = actor.maskEmailAndPhone(actor.getPhone());
+			maskEmail = actor.maskEmailAndPhone(actor.getEmail());
+			maskDescription = "";
+			account = "manager";
+		}
 
 		if (actor.equals(this.actorService.findByPrincipal()))
 			sameActor = true;
 
 		result = new ModelAndView("profile/display");
+		result.addObject("account", account);
 		result.addObject("profile", actor);
-		result.addObject("phone", actor.maskEmailAndPhone(chorbi.getPhone()));
-		result.addObject("email", actor.maskEmailAndPhone(chorbi.getEmail()));
-		result.addObject("description", actor.maskEmailAndPhone(chorbi.getDescription()));
+		result.addObject("phone", maskPhone);
+		result.addObject("email", maskEmail);
+		result.addObject("description", maskDescription);
 		result.addObject("isAdmin", isAdmin);
 		result.addObject("sameActor", sameActor);
 		result.addObject("likeThem", likeThem);

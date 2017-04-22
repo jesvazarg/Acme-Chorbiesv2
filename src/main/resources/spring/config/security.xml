@@ -53,10 +53,7 @@
 		
 		<security:intercept-url pattern="/chorbi/edit.do" access="hasRole('CHORBI')" />
 		
-		<security:intercept-url pattern="/creditCard/chorbi/display.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/creditCard/chorbi/create.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/creditCard/chorbi/edit.do" access="hasRole('CHORBI')" />
-		<security:intercept-url pattern="/creditCard/chorbi/delete.do" access="hasRole('CHORBI')" />
+		
 		
 		<security:intercept-url pattern="/searchTemplate/chorbi/create.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/searchTemplate/chorbi/display.do" access="hasRole('CHORBI')" /> 
@@ -88,21 +85,27 @@
 		<security:intercept-url pattern="/chorbi/ban.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/chorbi/unban.do" access="hasRole('ADMIN')" />  
 		
-		<!-- CHORBI and ADMINISTRATOR -->
+		<!-- CHORBI and MANAGER -->
+		<security:intercept-url pattern="/creditCard/actor/display.do" access="hasAnyRole('CHORBI','MANAGER')" /> 
+		<security:intercept-url pattern="/creditCard/actor/create.do" access="hasAnyRole('CHORBI','MANAGER')" /> 
+		<security:intercept-url pattern="/creditCard/actor/edit.do" access="hasAnyRole('CHORBI','MANAGER')" />
+		<security:intercept-url pattern="/creditCard/actor/delete.do" access="hasAnyRole('CHORBI','MANAGER')" />
 		
-		<security:intercept-url pattern="/profile/myProfile.do" access="hasAnyRole('ADMIN','CHORBI')" />
-		<security:intercept-url pattern="/profile/display.do" access="hasAnyRole('ADMIN','CHORBI')" />
+		
 		
 		<!-- MANAGER -->
 		
 		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/manager/delete.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 
 		
 		<!-- CHORBI, MANAGER and ADMINISTRATOR -->
 		
 		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('ADMIN','CHORBI','MANAGER')" />
+		<security:intercept-url pattern="/profile/myProfile.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" />
+		<security:intercept-url pattern="/profile/display.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" />
 		
 		<!-- isAuthenticated -->   
 	

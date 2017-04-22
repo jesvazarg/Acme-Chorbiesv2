@@ -86,10 +86,13 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<security:authorize access="hasAnyRole('CHORBI', 'ADMIN')">
+					<security:authorize access="hasAnyRole('CHORBI', 'ADMIN', 'MANAGER')">
 						<li><a href="profile/myProfile.do"><spring:message code="master.page.profile.myProfile" /></a></li>
 						<security:authorize access="hasRole('CHORBI')">
 							<li><a href="chorbi/edit.do"><spring:message code="master.page.chorbi.edit" /></a></li>
+						</security:authorize>
+						<security:authorize access="hasRole('MANAGER')">
+							<li><a href="manager/edit.do"><spring:message code="master.page.chorbi.edit" /></a></li>
 						</security:authorize>				
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

@@ -146,7 +146,7 @@ public class ChorbiController extends AbstractController {
 				result = new ModelAndView("redirect:/welcome/index.do");
 
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(createChorbiForm, "chorbi.commit.error");
+				result = this.editionEditModelAndView(createChorbiForm, "chorbi.commit.error");
 
 			}
 		return result;

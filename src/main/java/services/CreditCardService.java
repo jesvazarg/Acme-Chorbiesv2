@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
+import domain.Actor;
 import domain.Chorbi;
 import domain.CreditCard;
 import forms.CreateCreditCardForm;
@@ -25,6 +26,9 @@ public class CreditCardService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private ChorbiService			chorbiService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	// Constructors------------------------------------------------------------
@@ -61,7 +65,7 @@ public class CreditCardService {
 	public CreditCard save(final CreditCard creditCard) {
 		Assert.notNull(creditCard);
 		CreditCard result;
-		Chorbi principal;
+		Actor principal;
 		Calendar calendar;
 
 		this.checkCreditCard(creditCard);
@@ -72,10 +76,10 @@ public class CreditCardService {
 
 		result = this.creditCardRepository.save(creditCard);
 
-		principal = this.chorbiService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 		Assert.notNull(principal);
 		principal.setCreditCard(result);
-		this.chorbiService.save(principal);
+		this.actorService.save(principal);
 
 		return result;
 	}
@@ -142,14 +146,14 @@ public class CreditCardService {
 	public CreditCard reconstructCreditCard(final CreateCreditCardForm createCreditCardForm, final String type) {
 		Assert.notNull(createCreditCardForm);
 		CreditCard creditCard = null;
-		Chorbi chorbi;
+		Actor principal;
 
-		chorbi = this.chorbiService.findByPrincipal();
+		principal = this.actorService.findByPrincipal();
 
 		if (type.equals("create"))
 			creditCard = this.create();
 		else if (type.equals("edit"))
-			creditCard = chorbi.getCreditCard();
+			creditCard = principal.getCreditCard();
 
 		creditCard.setHolderName(createCreditCardForm.getHolderName());
 		creditCard.setBrandName(createCreditCardForm.getBrandName());
