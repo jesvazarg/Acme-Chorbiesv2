@@ -111,7 +111,7 @@ public class EventService {
 
 	// Other business methods -------------------------------------------------
 
-	public void addChorbiToEvent(final Event event) {
+	public Event registerChorbiToEvent(final Event event) {
 		Assert.notNull(event);
 		Assert.isTrue(event.getSeats() - event.getChorbies().size() > 0);
 		Chorbi principal;
@@ -121,28 +121,57 @@ public class EventService {
 		principal = this.chorbiService.findByPrincipal();
 		Assert.notNull(principal);
 		events = principal.getEvents();
+		Assert.isTrue(!events.contains(event));
 		events.add(event);
 		principal.setEvents(events);
 		this.chorbiService.save(principal);
 
 		chorbies = event.getChorbies();
+		Assert.isTrue(!chorbies.contains(principal));
 		chorbies.add(principal);
 		event.setChorbies(chorbies);
 		this.eventRepository.save(event);
+
+		return event;
+	}
+
+	public Event unregisterChorbiToEvent(final Event event) {
+		Assert.notNull(event);
+		Chorbi principal;
+		Collection<Event> events;
+		Collection<Chorbi> chorbies;
+
+		principal = this.chorbiService.findByPrincipal();
+		Assert.notNull(principal);
+		events = principal.getEvents();
+		Assert.isTrue(events.contains(event));
+		events.remove(event);
+		principal.setEvents(events);
+		this.chorbiService.save(principal);
+
+		chorbies = event.getChorbies();
+		Assert.isTrue(chorbies.contains(principal));
+		chorbies.remove(principal);
+		event.setChorbies(chorbies);
+		this.eventRepository.save(event);
+
+		return event;
 	}
 
 	@SuppressWarnings("deprecation")
 	public Collection<Event> findEventsLessOneMonth() {
 		final Collection<Event> result = new ArrayList<Event>();
 		Collection<Event> events;
+		Date hoy;
 		Date limite;
 
 		events = this.eventRepository.findAll();
+		hoy = Calendar.getInstance().getTime();
 		limite = Calendar.getInstance().getTime();
 		limite.setMonth(limite.getMonth() - 1);
 
 		for (final Event e : events)
-			if ((e.getMoment().after(limite)) && (e.getSeats() - e.getChorbies().size() > 0))
+			if ((e.getMoment().before(limite)) && (e.getMoment().after(hoy)) && (e.getSeats() - e.getChorbies().size() > 0))
 				result.add(e);
 
 		return result;

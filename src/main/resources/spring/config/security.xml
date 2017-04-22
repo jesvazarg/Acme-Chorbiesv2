@@ -47,6 +47,7 @@
 		
 		<security:intercept-url pattern="/event/list.do" access="permitAll" />
 		<security:intercept-url pattern="/event/listRecently.do" access="permitAll" />
+		<security:intercept-url pattern="/event/display.do" access="permitAll" /> 
 		
 		<!-- CHORBI -->
 		
@@ -96,6 +97,7 @@
 		
 		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/manager/delete.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')" /> 
 		
 		<!-- CHORBI, MANAGER and ADMINISTRATOR -->
@@ -111,8 +113,6 @@
 		<security:intercept-url pattern="/chirp/reply.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chirp/forward.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chirp/delete.do" access="isAuthenticated()" /> 
-		
-		<security:intercept-url pattern="/event/actor/display.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

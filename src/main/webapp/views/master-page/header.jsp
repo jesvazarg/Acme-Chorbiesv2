@@ -49,6 +49,20 @@
 				</ul>
 			</li>
 		<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv"><spring:message	code="master.page.events" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="event/list.do"><spring:message code="master.page.events.list" /></a></li>
+					<li><a href="event/listRecently.do"><spring:message code="master.page.events.listRecently" /></a></li>
+					<security:authorize access="hasRole('CHORBI')">
+						<li><a href="event/chorbi/list.do"><spring:message code="master.page.events.listChorbi" /></a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="event/manager/list.do"><spring:message code="master.page.events.listManager" /></a></li>
+						<li><a href="event/manager/create.do"><spring:message code="master.page.events.create" /></a></li>
+					</security:authorize>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">

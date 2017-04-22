@@ -1,5 +1,5 @@
 
-package controllers.manager;
+package controllers;
 
 import java.util.Collection;
 
@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.CreditCardService;
 import services.ManagerService;
-import controllers.AbstractController;
 import domain.CreditCard;
 import domain.Manager;
 import forms.CreateManagerForm;
