@@ -24,6 +24,11 @@
 		</li>
 		
 		<li>
+			<b><spring:message code="event.description" />:</b>
+			<jstl:out value="${event.description}" />
+		</li>
+		
+		<li>
 			<b><spring:message code="event.seats" />:</b>
 			<jstl:out value="${event.seats}" />
 		</li>

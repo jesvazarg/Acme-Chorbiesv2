@@ -25,23 +25,23 @@
 	<spring:message code="event.seatsAvailable" var="seatsAvailableHeader" />
 	<display:column title="${seatsAvailableHeader}" sortable="true">
 		<jstl:set var="available" value="${false}"/>
-		<jstl:if test="${event.seats > chorbies.size}">
+		<jstl:if test="${event.seats > event.chorbies.size()}">
 			<jstl:set var="available" value="${true}"/>
 		</jstl:if>
 		<jstl:if test="${available}">
-			<jstl:out value="${event.seats - chorbies.size}"/>
+			<jstl:out value="${event.seats - event.chorbies.size()}"/>
 		</jstl:if>
 		<jstl:if test="${!available}">
 			<spring:message code="event.soldOut" />
 		</jstl:if>
 	</display:column>
 	
-	<security:authorize access="isAuthenticated()">
+	<spring:message code="event.display" var="displayHeader" />
+	<display:column title="${displayHeader}">
+		<a href="event/display.do?eventId=${event.id}"><spring:message code="event.display"/></a>
+	</display:column>
 	
-		<spring:message code="event.display" var="displayHeader" />
-		<display:column title="${displayHeader}">
-			<a href="event/display.do?eventId=${event.id}"><spring:message code="event.display"/></a>
-		</display:column>
+	<security:authorize access="isAuthenticated()">
 		
 		<security:authorize access="hasRole('MANAGER')">
 			<spring:message code="event.edit" var="editHeader" />
