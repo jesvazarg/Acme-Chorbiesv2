@@ -58,13 +58,7 @@
 		<security:intercept-url pattern="/searchTemplate/chorbi/edit.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/searchTemplate/chorbi/findBySearchTemplate.do" access="hasRole('CHORBI')" /> 
 		
-		<security:intercept-url pattern="/chirp/chorbi/create.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/listIn.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/listOut.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/display.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/reply.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/forward.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/delete.do" access="hasRole('CHORBI')" /> 
+	
 		
 		<security:intercept-url pattern="/sense/chorbi/like.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/sense/chorbi/dislike.do" access="hasRole('CHORBI')" />  
@@ -96,6 +90,14 @@
 		
 		<!-- isAuthenticated -->   
 	
+		<security:intercept-url pattern="/chirp/create.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/listIn.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/listOut.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/display.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/reply.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/forward.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/delete.do" access="isAuthenticated()" /> 
+		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login 

@@ -35,13 +35,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CHORBI')">
-			<li><a class="fNiv"><spring:message	code="master.page.chirps" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="chirp/chorbi/listIn.do"><spring:message code="master.page.chirps.received" /></a></li>
-					<li><a href="chirp/chorbi/listOut.do"><spring:message code="master.page.chirps.sent" /></a></li>
-				</ul>
-			</li>
+			
 			<li><a href="searchTemplate/chorbi/display.do"><spring:message code="master.page.searchTemplate.display" /></a></li>	
 					
 		</security:authorize>
@@ -55,6 +49,13 @@
 			<security:authorize access="hasAnyRole('CHORBI', 'ADMIN')">
 				<li><a href="chorbi/list.do"><spring:message code="master.page.chorbi.list" /></a></li>
 			</security:authorize>		
+			<li><a class="fNiv"><spring:message	code="master.page.chirps" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="chirp/listIn.do"><spring:message code="master.page.chirps.received" /></a></li>
+					<li><a href="chirp/listOut.do"><spring:message code="master.page.chirps.sent" /></a></li>
+				</ul>
+			</li>
 			<li>
 				<a class="fNiv"> 
 					<spring:message code="master.page.profile" /> 

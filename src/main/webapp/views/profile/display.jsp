@@ -77,7 +77,7 @@
 <security:authorize access="hasRole('CHORBI')">
 	<jstl:if test="${sameActor==false}">
 	<div>
-		<acme:button code="chirp.create" url="chirp/chorbi/create.do?chorbieId=${profile.id}"/>
+		<acme:button code="chirp.create" url="chirp/create.do?chorbieId=${profile.id}"/>
 	</div>
 	</jstl:if>
 	<jstl:if test="${sameActor==true}">

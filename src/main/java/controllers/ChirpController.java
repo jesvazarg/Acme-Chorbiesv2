@@ -1,5 +1,5 @@
 
-package controllers.chorbi;
+package controllers;
 
 import java.util.Collection;
 
@@ -16,14 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ChirpService;
 import services.ChorbiService;
-import controllers.AbstractController;
 import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
 
 @Controller
-@RequestMapping("/chirp/chorbi")
-public class ChirpChorbiController extends AbstractController {
+@RequestMapping("/chirp")
+public class ChirpController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
@@ -39,7 +38,7 @@ public class ChirpChorbiController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public ChirpChorbiController() {
+	public ChirpController() {
 		super();
 	}
 
@@ -120,7 +119,7 @@ public class ChirpChorbiController extends AbstractController {
 		else
 			try {
 				this.chirpService.save(Chirp);
-				result = new ModelAndView("redirect:../chorbi/listOut.do");
+				result = new ModelAndView("redirect:../chirp/listOut.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(Chirp, "chirp.commit.error");
 			}
@@ -176,7 +175,7 @@ public class ChirpChorbiController extends AbstractController {
 		else
 			try {
 				this.chirpService.save(chirp);
-				result = new ModelAndView("redirect:../chorbi/listOut.do");
+				result = new ModelAndView("redirect:../chirp/listOut.do");
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(chirp, "chirp.commit.error");
 			}
@@ -195,9 +194,9 @@ public class ChirpChorbiController extends AbstractController {
 		else
 			try {
 				this.chirpService.delete(chirp);
-				result = new ModelAndView("redirect:../chorbi/listIn.do");
+				result = new ModelAndView("redirect:../chirp/listIn.do");
 			} catch (final Throwable oops) {
-				result = new ModelAndView("redirect:../chorbi/listIn.do");
+				result = new ModelAndView("redirect:../chirp/listIn.do");
 			}
 		return result;
 	}

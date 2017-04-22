@@ -45,19 +45,19 @@
 
 <jstl:if test="${isRecipient==true}">
 	<div>
-		<a href="chirp/chorbi/reply.do?chirpId=${chirp.id}"><spring:message
+		<a href="chirp/reply.do?chirpId=${chirp.id}"><spring:message
 				code="chirp.reply" /></a>
 	</div>
 </jstl:if>
 
 <jstl:if test="${isRecipient==false}">
 	<div>
-		<a href="chirp/chorbi/forward.do?chirpId=${chirp.id}"><spring:message
+		<a href="chirp/forward.do?chirpId=${chirp.id}"><spring:message
 				code="chirp.forward" /></a>
 	</div>
 </jstl:if>
 
-<form:form method="post" action="chirp/chorbi/delete.do" modelAttribute="chirp" >
+<form:form method="post" action="chirp/delete.do" modelAttribute="chirp" >
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />

@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
-<form:form method="post" action="chirp/chorbi/forward.do" modelAttribute="chirp" >
+<form:form method="post" action="chirp/forward.do" modelAttribute="chirp" >
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />

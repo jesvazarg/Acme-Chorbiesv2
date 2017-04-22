@@ -20,7 +20,7 @@
 	<acme:column code="chirp.sender" property="sender.name"/>
 	<acme:column code="chirp.recipients" property="recipients"/>
 	<display:column>
-		<a href="chirp/chorbi/display.do?chirpId=${chirp.id}"><spring:message
+		<a href="chirp/display.do?chirpId=${chirp.id}"><spring:message
 		code="chirp.display"/>
 		</a>
 	</display:column>
