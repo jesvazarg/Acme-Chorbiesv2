@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -24,8 +25,28 @@ public class Manager extends Actor {
 
 	// Attributes -------------------------------------------------------------
 	private String	company;
-	private Integer	vat;
+	private String	vat;
+	private Double	amount;
 
+
+	@NotBlank
+	public String getVat() {
+		return this.vat;
+	}
+
+	public void setVat(final String vat) {
+		this.vat = vat;
+	}
+
+	@Min(0)
+	@NotNull
+	public Double getAmount() {
+		return this.amount;
+	}
+
+	public void setAmount(final Double amount) {
+		this.amount = amount;
+	}
 
 	@NotBlank
 	public String getCompany() {
@@ -34,15 +55,6 @@ public class Manager extends Actor {
 
 	public void setCompany(final String company) {
 		this.company = company;
-	}
-
-	@NotNull
-	public Integer getVat() {
-		return this.vat;
-	}
-
-	public void setVat(final Integer vat) {
-		this.vat = vat;
 	}
 
 

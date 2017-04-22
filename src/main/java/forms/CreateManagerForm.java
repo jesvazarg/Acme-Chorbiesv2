@@ -21,7 +21,7 @@ public class CreateManagerForm {
 	private String	email;
 	private String	phone;
 	private String	company;
-	private Integer	vat;
+	private String	vat;
 	private String	holderName;
 	private String	brandName;
 	private String	number;
@@ -92,12 +92,12 @@ public class CreateManagerForm {
 		this.company = company;
 	}
 
-	@NotNull
-	public Integer getVat() {
+	@NotBlank
+	public String getVat() {
 		return this.vat;
 	}
 
-	public void setVat(final Integer vat) {
+	public void setVat(final String vat) {
 		this.vat = vat;
 	}
 
