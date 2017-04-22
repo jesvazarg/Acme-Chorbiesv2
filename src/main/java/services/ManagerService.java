@@ -123,22 +123,22 @@ public class ManagerService {
 	public Object[] reconstructProfile(final CreateManagerForm createManagerForm, final String type) {
 		Assert.notNull(createManagerForm);
 		Manager manager = null;
+		CreditCard creditCard = null;
 		Md5PasswordEncoder encoder;
 		String password;
 		final Object[] result = new Object[2];
 
 		Assert.isTrue(createManagerForm.getPassword().equals(createManagerForm.getConfirmPassword()));
 
-		manager = this.create();
-		Assert.isTrue(createManagerForm.getIsAgree());
-		final CreditCard creditCard = this.creditCardService.create();
-		//		//Creo uno nuevo vacio para meterle los datos del formulario a dicho chorbi
-		//		if (type.equals("create")) {
-		//			manager = this.create();
-		//			Assert.isTrue(createManagerForm.getIsAgree());
-		//		} else if (type.equals("edit"))
-		//			manager = this.findByPrincipal();
-
+		//Creo uno nuevo vacio para meterle los datos del formulario a dicho chorbi
+		if (type.equals("create")) {
+			manager = this.create();
+			creditCard = this.creditCardService.create();
+			Assert.isTrue(createManagerForm.getIsAgree());
+		} else if (type.equals("edit")) {
+			manager = this.findByPrincipal();
+			creditCard = manager.getCreditCard();
+		}
 		password = createManagerForm.getPassword();
 
 		encoder = new Md5PasswordEncoder();
