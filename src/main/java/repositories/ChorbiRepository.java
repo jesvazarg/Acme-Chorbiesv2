@@ -81,6 +81,11 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Collection<Chorbi> findChorbiMoreSentChirps();
 
 	//----------------- Dashboard 2.0 -----------------------------------
+
+	//C3: A listing of chorbies sorted by the number of events to which they have registered.
+	@Query("select c from Chorbi c order by c.events.size desc")
+	Collection<Chorbi> chorbiesOrderByEventRegistered();
+
 	//B1: The minimum, the maximum, and the average number of stars per chorbi.
 	@Query("select sum(s.stars) from Sense s group by s.recipient order by sum(s.stars) ASC")
 	Double[] minStarsPerChorbi();
@@ -90,5 +95,9 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select sum(s.stars)/(select count(c1) from Chorbi c1)*1.0 from Sense s")
 	Double avgStarsPerChorbi();
+
+	//B2: The list of chorbies, sorted by the average number of stars that they've got.
+	@Query("select c from Chorbi c join c.reciveSenses s group by c order by sum(s.stars)/c.reciveSenses.size *1.0 desc")
+	Collection<Chorbi> chorbiesSortedByAvgNumberOfStars();
 
 }

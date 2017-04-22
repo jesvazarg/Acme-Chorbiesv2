@@ -15,6 +15,7 @@ import repositories.ChirpRepository;
 import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Event;
 
 @Service
 @Transactional
@@ -29,6 +30,9 @@ public class ChirpService {
 
 	@Autowired
 	private ActorService	actorService;
+
+	@Autowired
+	private ManagerService	managerService;
 
 
 	// Supporting services ----------------------------------------------------
@@ -58,7 +62,7 @@ public class ChirpService {
 
 	public Chirp create() {
 		Chirp result;
-		final Chorbi chorbi;
+		//final Chorbi chorbi;
 
 		Calendar calendar;
 
@@ -84,7 +88,7 @@ public class ChirpService {
 
 	public Chirp create(final Chorbi recipient) {
 		Chirp result;
-		final Chorbi chorbi;
+		//final Chorbi chorbi;
 
 		Calendar calendar;
 
@@ -138,6 +142,16 @@ public class ChirpService {
 		return result;
 	}
 
+	public Chirp broadcast(final Event event) {
+		Assert.notNull(event);
+		Assert.isTrue(event.getManager().equals(this.managerService.findByPrincipal()));
+		final Chirp result = this.create();
+		final Collection<Actor> recipientsAux = result.getRecipients();
+		recipientsAux.addAll(event.getChorbies());
+		result.setRecipients(recipientsAux);
+		return result;
+	}
+
 	public void delete(final Chirp chirp) {
 		Assert.notNull(chirp);
 		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
@@ -164,6 +178,33 @@ public class ChirpService {
 
 		chirp = this.chirpRepository.save(chirp);
 		this.chirpRepository.save(copy);
+
+		return chirp;
+	}
+
+	public Chirp saveBroadcast(Chirp chirp) {
+		Assert.notNull(chirp);
+		Assert.isTrue(this.validatorURL(chirp.getAttachments()));
+		Assert.notNull(chirp.getId() != 0);
+
+		chirp = this.chirpRepository.save(chirp);
+
+		for (final Actor a : chirp.getRecipients()) {
+
+			Chirp copy;
+			copy = new Chirp();
+			copy.setCopy(true);
+			copy.setAttachments(chirp.getAttachments());
+			copy.setMoment(chirp.getMoment());
+			final Collection<Actor> recipientsAux = copy.getRecipients();
+			recipientsAux.add(a);
+			copy.setRecipients(recipientsAux);
+			copy.setSender(chirp.getSender());
+			copy.setSubject(chirp.getSubject());
+			copy.setText(chirp.getText());
+			this.chirpRepository.save(copy);
+
+		}
 
 		return chirp;
 	}
