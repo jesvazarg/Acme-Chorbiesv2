@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.EventService;
+import domain.Actor;
 import domain.Event;
 
 @Controller
@@ -19,6 +21,9 @@ public class EventController extends AbstractController {
 	// Service ---------------------------------------------------------------		
 	@Autowired
 	private EventService	eventService;
+
+	@Autowired
+	private ActorService	actorService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -32,26 +37,39 @@ public class EventController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Event> events;
+		Actor principal = null;
+
+		try {
+			principal = this.actorService.findByPrincipal();
+		} catch (final Throwable oops) {
+		}
 
 		events = this.eventService.findAll();
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
+		result.addObject("principal", principal);
 		result.addObject("requestURI", "event/list.do");
 
 		return result;
 	}
-
 	// List Recently ---------------------------------------------------------------
 	@RequestMapping(value = "/listRecently", method = RequestMethod.GET)
 	public ModelAndView listRecently() {
 		ModelAndView result;
 		Collection<Event> events;
+		Actor principal = null;
+
+		try {
+			principal = this.actorService.findByPrincipal();
+		} catch (final Throwable oops) {
+		}
 
 		events = this.eventService.findEventsLessOneMonth();
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
+		result.addObject("principal", principal);
 		result.addObject("requestURI", "event/listRecently.do");
 
 		return result;

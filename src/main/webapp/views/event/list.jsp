@@ -55,10 +55,16 @@
 		<security:authorize access="hasRole('CHORBI')">
 			<spring:message code="event.register" var="registerHeader" />
 			<display:column title="${registerHeader}">
-				<jstl:if test="${event.chorbies.contains(principal)}">
+				<jstl:set var="isRegisted" value="${false}"/>
+				<jstl:forEach var="chorbi" items="${event.chorbies}">
+					<jstl:if test="${chorbi.id == principal.id}">
+						<jstl:set var="isRegisted" value="${true}"/>
+					</jstl:if>
+				</jstl:forEach>
+				<jstl:if test="${isRegisted}">
 					<a href="event/chorbi/unregister.do?eventId=${event.id}"><spring:message code="event.unregister"/></a>
 				</jstl:if>
-				<jstl:if test="${!event.chorbies.contains(principal)}">
+				<jstl:if test="${!isRegisted}">
 					<jstl:if test="${available}">
 						<a href="event/chorbi/register.do?eventId=${event.id}"><spring:message code="event.register"/></a>
 					</jstl:if>

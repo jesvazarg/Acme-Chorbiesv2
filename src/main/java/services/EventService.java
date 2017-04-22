@@ -168,7 +168,7 @@ public class EventService {
 		events = this.eventRepository.findAll();
 		hoy = Calendar.getInstance().getTime();
 		limite = Calendar.getInstance().getTime();
-		limite.setMonth(limite.getMonth() - 1);
+		limite.setMonth(limite.getMonth() + 1);
 
 		for (final Event e : events)
 			if ((e.getMoment().before(limite)) && (e.getMoment().after(hoy)) && (e.getSeats() - e.getChorbies().size() > 0))
@@ -177,7 +177,6 @@ public class EventService {
 		return result;
 	}
 
-	@SuppressWarnings("deprecation")
 	public Collection<Event> findEventsPassed() {
 		final Collection<Event> result = new ArrayList<Event>();
 		Collection<Event> events;

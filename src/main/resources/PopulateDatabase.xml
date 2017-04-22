@@ -361,7 +361,7 @@
 	
 	<bean id="event1" class="domain.Event">
 		<property name="title" value="Fiesta universitaria" />
-		<property name="moment" value="04/12/2018  23:00" />
+		<property name="moment" value="05/21/2017  23:00" />
 		<property name="description" value="No te pierdes esta fantastica fiesta universitaria donde la reina de la noche es una vaca." />
 		<property name="picture" value="http://www.promicsa.com/uploads/78525eba8a1beed.jpg" />
 		<property name="seats" value="100" />
@@ -392,6 +392,21 @@
 	</bean>
 	
 	<bean id="event3" class="domain.Event">
+		<property name="title" value="Escapada romántica" />
+		<property name="moment" value="05/23/2017 09:00" />
+		<property name="description" value="Regalamos una escapada romántica a los dos primeros que acepten." />
+		<property name="picture" value="https://reservas.zenithoteles.com/Content/images/001/Productos/Prod_27_10_solocontrato.jpg" />
+		<property name="seats" value="2" />
+		<property name="manager" ref="manager1" />
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1"/>
+				<ref bean="chorbi5"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="event4" class="domain.Event">
 		<property name="title" value="Se busca novia" />
 		<property name="moment" value="08/10/2017  17:00" />
 		<property name="description" value="¡Te invito a un té para que nos conozcamos!" />
@@ -562,6 +577,7 @@
 			<list>
 				<ref bean="event1"/>
 				<ref bean="event2"/>
+				<ref bean="event3"/>
 			</list>
 		</property>
 	</bean>
@@ -731,6 +747,7 @@
 		<property name="events">
 			<list>
 				<ref bean="event1"/>
+				<ref bean="event3"/>
 			</list>
 		</property>
 	</bean>
