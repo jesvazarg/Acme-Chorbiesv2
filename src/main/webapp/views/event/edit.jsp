@@ -24,12 +24,15 @@
 	<form:hidden path="manager" />
 	<form:hidden path="chorbies" />
 	
-	<acme:input code="event.holderName" path="title" />
-	<acme:input code="event.holderName" path="moment" />
-	<acme:textarea code="event.holderName" path="description" />
-	<acme:input code="event.holderName" path="picture" />
-	<acme:input code="event.holderName" path="seats" />
+	<acme:input code="event.title" path="title" />
+	<acme:input code="event.moment" path="moment" />
+	<acme:textarea code="event.description" path="description" />
+	<acme:input code="event.picture" path="picture" />
+	<acme:input code="event.seats" path="seats" />
 	
 	<acme:submit name="save" code="event.save" />
+	<jstl:if test="${event.id != 0}">
+		<acme:submit name="delete" code="event.delete" />
+	</jstl:if>
 	<acme:cancel url="event/manager/list.do" code="event.cancel" />
 </form:form>

@@ -62,18 +62,14 @@ public class EventService {
 	public Event create() {
 		Event result;
 		Manager principal;
-		Calendar today;
 		Collection<Chorbi> chorbies;
 
 		principal = this.managerService.findByPrincipal();
 		Assert.notNull(principal);
-		today = Calendar.getInstance();
-		today.set(Calendar.MILLISECOND, -10);
 		chorbies = new ArrayList<Chorbi>();
 
 		result = new Event();
 		result.setManager(principal);
-		result.setMoment(today.getTime());
 		result.setChorbies(chorbies);
 
 		return result;
