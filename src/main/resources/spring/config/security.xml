@@ -72,7 +72,8 @@
 		
 		<security:intercept-url pattern="/administrator/action-1.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/administrator/action-2.do" access="hasRole('ADMIN')" />
-		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/dashboard/administrator/list.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/dashboard/administrator/list2.do" access="hasRole('ADMIN')" /> 
 		
 		<security:intercept-url pattern="/banner/administrator/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/banner/administrator/create.do" access="hasRole('ADMIN')" /> 

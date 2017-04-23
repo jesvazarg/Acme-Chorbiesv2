@@ -281,4 +281,16 @@ public class ChorbiService {
 		return result;
 	}
 
+	public Collection<Chorbi> chorbiesOrderByEventRegistered() {
+		return this.chorbiRepository.chorbiesOrderByEventRegistered();
+	}
+
+	public Collection<Object[]> chorbiesAmountDueFee() {
+		return this.chorbiRepository.chorbiesAmountDueFee();
+	}
+
+	public Collection<Chorbi> chorbiesSortedByAvgNumberOfStars() {
+		return this.chorbiRepository.chorbiesSortedByAvgNumberOfStars();
+	}
+
 }

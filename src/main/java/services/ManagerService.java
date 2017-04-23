@@ -193,4 +193,8 @@ public class ManagerService {
 		return this.managerRepository.managesSortedEvents();
 	}
 
+	public Collection<Object[]> managersAmountDueFee() {
+		return this.managerRepository.managersAmountDueFee();
+	}
+
 }

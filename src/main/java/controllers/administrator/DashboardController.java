@@ -11,9 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ChirpService;
 import services.ChorbiService;
+import services.ManagerService;
 import services.SenseService;
 import controllers.AbstractController;
 import domain.Chorbi;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/dashboard/administrator")
@@ -28,6 +30,9 @@ public class DashboardController extends AbstractController {
 
 	@Autowired
 	private ChirpService	chirpService;
+
+	@Autowired
+	private ManagerService	managerService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -87,6 +92,47 @@ public class DashboardController extends AbstractController {
 		final Collection<Chorbi> findChorbiMoreSentChirps = this.chorbiService.findChorbiMoreSentChirps();
 		result.addObject("findChorbiMoreSentChirps", findChorbiMoreSentChirps);
 		result.addObject("requestURIfindChorbiMoreSentChirps", "dashboard/administrator/list.do");
+
+		return result;
+
+	}
+
+	// Dashboard 2.0---------------------------------------------------------------
+	@RequestMapping(value = "/list2", method = RequestMethod.GET)
+	public ModelAndView dashboard2() {
+		ModelAndView result;
+		result = new ModelAndView("administrator/dashboard2");
+		//Level C -------------------------------------------------
+		//C1
+		final Collection<Manager> managesSortedEvents = this.managerService.managesSortedEvents();
+		result.addObject("managesSortedEvents", managesSortedEvents);
+		result.addObject("requestURImanagesSortedEvents", "dashboard/administrator/list2.do");
+
+		//C2
+		final Collection<Object[]> managersAmountDueFee = this.managerService.managersAmountDueFee();
+		result.addObject("managersAmountDueFee", managersAmountDueFee);
+		result.addObject("requestURImanagersAmountDueFee", "dashboard/administrator/list2.do");
+
+		//C3
+		final Collection<Chorbi> chorbiesOrderByEventRegistered = this.chorbiService.chorbiesOrderByEventRegistered();
+		result.addObject("chorbiesOrderByEventRegistered", chorbiesOrderByEventRegistered);
+		result.addObject("requestURIchorbiesOrderByEventRegistered", "dashboard/administrator/list2.do");
+
+		//C4
+		final Collection<Object[]> chorbiesAmountDueFee = this.chorbiService.chorbiesAmountDueFee();
+		result.addObject("chorbiesAmountDueFee", chorbiesAmountDueFee);
+		result.addObject("requestURIchorbiesAmountDueFee", "dashboard/administrator/list2.do");
+
+		//Level B ----------------------------------------------------
+		//B1
+		//		final Double[] minMaxAvgStarsPerChorbi = this.chorbiService.minMaxAvgStarsPerChorbi();
+		//		result.addObject("minMaxAvgStarsPerChorbi", minMaxAvgStarsPerChorbi);
+		//		result.addObject("requestURIminMaxAvgStarsPerChorbi", "dashboard/administrator/list2.do");
+
+		//B2
+		final Collection<Chorbi> chorbiesSortedByAvgNumberOfStars = this.chorbiService.chorbiesSortedByAvgNumberOfStars();
+		result.addObject("chorbiesSortedByAvgNumberOfStars", chorbiesSortedByAvgNumberOfStars);
+		result.addObject("requestURIchorbiesSortedByAvgNumberOfStars", "dashboard/administrator/list2.do");
 
 		return result;
 
