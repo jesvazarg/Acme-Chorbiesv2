@@ -1,7 +1,9 @@
 
 package controllers.chorbi;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,18 +37,28 @@ public class EventChorbiController extends AbstractController {
 	}
 
 	// List ---------------------------------------------------------------
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Event> events;
 		Chorbi principal;
+		Long hoy;
+		Long mes;
+		Date mesAux;
 
 		principal = this.chorbiService.findByPrincipal();
 		events = principal.getEvents();
+		hoy = Calendar.getInstance().getTime().getTime();
+		mesAux = Calendar.getInstance().getTime();
+		mesAux.setMonth(mesAux.getMonth() + 1);
+		mes = mesAux.getTime();
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
 		result.addObject("principal", principal);
+		result.addObject("hoy", hoy);
+		result.addObject("mes", mes);
 		result.addObject("requestURI", "event/chorbi/list.do");
 
 		return result;

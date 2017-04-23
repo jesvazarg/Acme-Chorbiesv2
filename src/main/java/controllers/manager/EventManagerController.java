@@ -1,7 +1,9 @@
 
 package controllers.manager;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -38,18 +40,28 @@ public class EventManagerController extends AbstractController {
 	}
 
 	// List ---------------------------------------------------------------
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Event> events;
 		Manager principal;
+		Long hoy;
+		Long mes;
+		Date mesAux;
 
 		principal = this.managerService.findByPrincipal();
 		events = principal.getEvents();
+		hoy = Calendar.getInstance().getTime().getTime();
+		mesAux = Calendar.getInstance().getTime();
+		mesAux.setMonth(mesAux.getMonth() + 1);
+		mes = mesAux.getTime();
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
 		result.addObject("principal", principal);
+		result.addObject("hoy", hoy);
+		result.addObject("mes", mes);
 		result.addObject("requestURI", "event/manager/list.do");
 
 		return result;

@@ -113,6 +113,10 @@ public class EventService {
 		Chorbi principal;
 		Collection<Event> events;
 		Collection<Chorbi> chorbies;
+		Date hoy;
+
+		hoy = Calendar.getInstance().getTime();
+		Assert.isTrue(event.getMoment().after(hoy));
 
 		principal = this.chorbiService.findByPrincipal();
 		Assert.notNull(principal);
@@ -136,6 +140,10 @@ public class EventService {
 		Chorbi principal;
 		Collection<Event> events;
 		Collection<Chorbi> chorbies;
+		Date hoy;
+
+		hoy = Calendar.getInstance().getTime();
+		Assert.isTrue(event.getMoment().after(hoy));
 
 		principal = this.chorbiService.findByPrincipal();
 		Assert.notNull(principal);

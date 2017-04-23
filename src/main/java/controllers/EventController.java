@@ -1,7 +1,9 @@
 
 package controllers;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,11 +35,15 @@ public class EventController extends AbstractController {
 	}
 
 	// List ---------------------------------------------------------------
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
 		Collection<Event> events;
 		Actor principal = null;
+		Long hoy;
+		Long mes;
+		Date mesAux;
 
 		try {
 			principal = this.actorService.findByPrincipal();
@@ -45,20 +51,31 @@ public class EventController extends AbstractController {
 		}
 
 		events = this.eventService.findAll();
+		hoy = Calendar.getInstance().getTime().getTime();
+		mesAux = Calendar.getInstance().getTime();
+		mesAux.setMonth(mesAux.getMonth() + 1);
+		mes = mesAux.getTime();
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
 		result.addObject("principal", principal);
+		result.addObject("hoy", hoy);
+		result.addObject("mes", mes);
 		result.addObject("requestURI", "event/list.do");
 
 		return result;
 	}
+
 	// List Recently ---------------------------------------------------------------
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/listRecently", method = RequestMethod.GET)
 	public ModelAndView listRecently() {
 		ModelAndView result;
 		Collection<Event> events;
 		Actor principal = null;
+		Long hoy;
+		Long mes;
+		Date mesAux;
 
 		try {
 			principal = this.actorService.findByPrincipal();
@@ -66,10 +83,16 @@ public class EventController extends AbstractController {
 		}
 
 		events = this.eventService.findEventsLessOneMonth();
+		hoy = Calendar.getInstance().getTime().getTime();
+		mesAux = Calendar.getInstance().getTime();
+		mesAux.setMonth(mesAux.getMonth() + 1);
+		mes = mesAux.getTime();
 
 		result = new ModelAndView("event/list");
 		result.addObject("events", events);
 		result.addObject("principal", principal);
+		result.addObject("hoy", hoy);
+		result.addObject("mes", mes);
 		result.addObject("requestURI", "event/listRecently.do");
 
 		return result;
