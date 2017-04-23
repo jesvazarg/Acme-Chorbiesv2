@@ -271,12 +271,12 @@ public class ChorbiService {
 	}
 
 	//----------------- Dashboard 2.0 -----------------------------------
-	public Double[] minMaxAvgStarsPerChorbi() {
-		final Double[] arrayMin = this.chorbiRepository.minStarsPerChorbi();
-		final Double[] arrayMax = this.chorbiRepository.maxStarsPerChorbi();
+	public String[] minMaxAvgStarsPerChorbi() {
+		final Integer[] arrayMin = this.chorbiRepository.minStarsPerChorbi();
+		final Integer[] arrayMax = this.chorbiRepository.maxStarsPerChorbi();
 		final Double avg = this.chorbiRepository.avgStarsPerChorbi();
-		final Double[] result = {
-			arrayMin[0], arrayMax[0], avg
+		final String[] result = {
+			arrayMin[0].toString(), arrayMax[0].toString(), avg.toString()
 		};
 		return result;
 	}
