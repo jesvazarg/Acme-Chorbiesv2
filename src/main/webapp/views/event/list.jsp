@@ -28,7 +28,7 @@
 	<jstl:if test="${event.moment.time > hoy}">
 		<jstl:set var="style" value="font-weight:bold;text-shadow: 0.1em 0.1em 0.2em darkgrey"/>
 		<jstl:if test="${(event.moment.time > mes) or (!available)}">
-			<jstl:set var="style" value="${null}"/>
+			<jstl:set var="style" value="none"/>
 		</jstl:if>
 	</jstl:if>
 	
