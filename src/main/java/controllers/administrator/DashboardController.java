@@ -125,9 +125,8 @@ public class DashboardController extends AbstractController {
 
 		//Level B ----------------------------------------------------
 		//B1
-		//		final Double[] minMaxAvgStarsPerChorbi = this.chorbiService.minMaxAvgStarsPerChorbi();
-		//		result.addObject("minMaxAvgStarsPerChorbi", minMaxAvgStarsPerChorbi);
-		//		result.addObject("requestURIminMaxAvgStarsPerChorbi", "dashboard/administrator/list2.do");
+		final String[] minMaxAvgStarsPerChorbi = this.chorbiService.minMaxAvgStarsPerChorbi();
+		result.addObject("minMaxAvgStarsPerChorbi", minMaxAvgStarsPerChorbi);
 
 		//B2
 		final Collection<Chorbi> chorbiesSortedByAvgNumberOfStars = this.chorbiService.chorbiesSortedByAvgNumberOfStars();

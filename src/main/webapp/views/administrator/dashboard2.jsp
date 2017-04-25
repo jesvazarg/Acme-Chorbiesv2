@@ -51,11 +51,11 @@
 			</li>
 			<li>
 				<b><spring:message code="admin.dashboard.avg"/>:</b>
-				<jstl:out value="${minMaxAvgStarsPerChorbi[1]}"/>
+				<jstl:out value="${minMaxAvgStarsPerChorbi[2]}"/>
 			</li>
 			<li>
 				<b><spring:message code="admin.dashboard.max"/>:</b>
-				<jstl:out value="${minMaxAvgStarsPerChorbi[2]}"/>
+				<jstl:out value="${minMaxAvgStarsPerChorbi[1]}"/>
 			</li>
 		</ul>
 

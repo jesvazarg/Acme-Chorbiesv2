@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
@@ -272,11 +273,11 @@ public class ChorbiService {
 
 	//----------------- Dashboard 2.0 -----------------------------------
 	public String[] minMaxAvgStarsPerChorbi() {
-		final Integer[] arrayMin = this.chorbiRepository.minStarsPerChorbi();
-		final Integer[] arrayMax = this.chorbiRepository.maxStarsPerChorbi();
+		final List<Long> arrayMin = this.chorbiRepository.minStarsPerChorbi();
+		final List<Long> arrayMax = this.chorbiRepository.maxStarsPerChorbi();
 		final Double avg = this.chorbiRepository.avgStarsPerChorbi();
 		final String[] result = {
-			arrayMin[0].toString(), arrayMax[0].toString(), avg.toString()
+			arrayMin.get(0).toString(), arrayMax.get(0).toString(), avg.toString()
 		};
 		return result;
 	}

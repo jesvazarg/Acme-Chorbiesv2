@@ -2,6 +2,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -92,10 +93,10 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	//B1: The minimum, the maximum, and the average number of stars per chorbi.
 	@Query("select sum(s.stars) from Sense s group by s.recipient order by sum(s.stars) ASC")
-	Integer[] minStarsPerChorbi();
+	List<Long> minStarsPerChorbi();
 
 	@Query("select sum(s.stars) from Sense s group by s.recipient order by sum(s.stars) DESC")
-	Integer[] maxStarsPerChorbi();
+	List<Long> maxStarsPerChorbi();
 
 	@Query("select sum(s.stars)/(select count(c1) from Chorbi c1)*1.0 from Sense s")
 	Double avgStarsPerChorbi();
