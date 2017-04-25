@@ -101,6 +101,7 @@
 		<security:intercept-url pattern="/event/manager/delete.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/chirp/broadcast.do" access="hasRole('MANAGER')" /> 
 		
 		<!-- CHORBI, MANAGER and ADMINISTRATOR -->
 		

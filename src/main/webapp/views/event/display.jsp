@@ -39,6 +39,14 @@
 			</li>
 		</security:authorize>
 		
+		<security:authorize access="hasRole('MANAGER')">
+			<li>
+				<div>
+					<acme:button code="chirp.broadcast" url="chirp/broadcast.do?eventId=${event.id}"/>
+				</div>
+		</li>
+		</security:authorize>
+		
 	</ul>
 	
 	<security:authorize access="hasAnyRole('ADMIN','CHORBI','MANAGER')">

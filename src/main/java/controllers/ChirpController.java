@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.ChirpService;
 import services.ChorbiService;
+import services.EventService;
 import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Event;
 
 @Controller
 @RequestMapping("/chirp")
@@ -34,6 +36,9 @@ public class ChirpController extends AbstractController {
 
 	@Autowired
 	private ActorService	actorService;
+
+	@Autowired
+	private EventService	eventService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -201,6 +206,35 @@ public class ChirpController extends AbstractController {
 		return result;
 	}
 
+	// Broadcast ----------------------------------------------------------------
+	@RequestMapping(value = "/broadcast", method = RequestMethod.GET)
+	public ModelAndView broadcast(@RequestParam final int eventId) {
+		ModelAndView result;
+		//final Chorbi recipient = this.chorbiService.findByPrincipal();
+		final Event event = this.eventService.findOne(eventId);
+
+		final Chirp chirp = this.chirpService.broadcast(event);
+		result = this.createEditModelAndView(chirp);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/broadcast", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveBroadcast(@Valid final Chirp Chirp, final BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors())
+			result = this.createEditModelAndView(Chirp);
+		else
+			try {
+				this.chirpService.saveBroadcast(Chirp);
+				result = new ModelAndView("redirect:../chirp/listOut.do");
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(Chirp, "chirp.commit.error");
+			}
+
+		return result;
+	}
+
 	//Ancillary methods---------------------------------------------------------
 
 	//Create --------------------------------------------------------------------
@@ -211,12 +245,12 @@ public class ChirpController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Chirp chirp, final String message) {
 		ModelAndView result;
-		Chorbi chorbi;
+		//Actor chorbi;
 		Collection<Chorbi> recipients;
 
-		chorbi = this.chorbiService.findByPrincipal();
+		//chorbi = this.chorbiService.findByPrincipal();
 		recipients = this.chorbiService.findAll();
-		recipients.remove(chorbi);
+		//recipients.remove(chorbi);
 
 		result = new ModelAndView("chirp/create");
 		result.addObject("chirp", chirp);
