@@ -20,6 +20,7 @@ import security.UserAccount;
 import domain.Chirp;
 import domain.Chorbi;
 import domain.Coordinate;
+import domain.Event;
 import domain.Sense;
 import forms.CreateChorbiForm;
 
@@ -67,6 +68,7 @@ public class ChorbiService {
 		Collection<Sense> reciveSenses;
 		Collection<Chirp> sentChirps;
 		Collection<Chirp> reciveChirps;
+		Collection<Event> events;
 
 		userAccount = new UserAccount();
 		authority = new Authority();
@@ -74,6 +76,7 @@ public class ChorbiService {
 		reciveSenses = new ArrayList<Sense>();
 		sentChirps = new ArrayList<Chirp>();
 		reciveChirps = new ArrayList<Chirp>();
+		events = new ArrayList<Event>();
 
 		authority.setAuthority(Authority.CHORBI);
 		userAccount.addAuthority(authority);
@@ -84,6 +87,7 @@ public class ChorbiService {
 		result.setReciveSenses(reciveSenses);
 		result.setSentChirps(sentChirps);
 		result.setReciveChirps(reciveChirps);
+		result.setEvents(events);
 		result.setAmount(0.0);
 
 		return result;
