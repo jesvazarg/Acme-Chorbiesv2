@@ -95,10 +95,19 @@ public class EventService {
 	public void delete(final Event event) {
 		Assert.notNull(event);
 		Manager principal;
+		Collection<Chorbi> chorbies;
+		Collection<Event> events;
 
 		principal = this.managerService.findByPrincipal();
 		Assert.notNull(principal);
 		Assert.isTrue(event.getManager().getId() == principal.getId());
+
+		chorbies = event.getChorbies();
+		for (final Chorbi c : chorbies) {
+			events = c.getEvents();
+			events.remove(event);
+			this.chorbiService.save(c);
+		}
 
 		//Aquí va el envio de los chirps a todos lso chorbies registrados
 

@@ -2,6 +2,7 @@
 package services;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,31 +33,27 @@ public class SenseTest extends AbstractTest {
 	// FUNCTIONAL REQUIREMENTS
 	// Like another chorbi; a like may be cancelled at any time.
 
-	//
+	// Like a un chorbi
 	@Test
-	public void driverCreateAndDeleteSense() {
+	public void driverCreateSense() {
 		final Object testingData[][] = {
 			{
-				"chorbi1", "Hola holita vecinito", 132, null
+				"chorbi1", 0, "Hola holita vecinito", 278, null
 			}, {
-				"chorbi2", null, 132, null
+				"chorbi2", 1, null, 278, null
 			}, {
-				"chorbi1", null, 127, IllegalArgumentException.class
+				"chorbi1", 2, null, 273, IllegalArgumentException.class
 			}, {
-				"chorbi1", null, 128, IllegalArgumentException.class
+				"chorbi1", 3, null, 274, IllegalArgumentException.class
+			}, {
+				"chorbi3", 4, null, 273, ConstraintViolationException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.createAndDeleteSense((String) testingData[i][0], (String) testingData[i][1], (Integer) testingData[i][2], (Class<?>) testingData[i][3], "create");
-
-		testingData[0][2] = 128;
-		testingData[1][2] = 130;
-		testingData[3][2] = 131;
-		for (int i = 0; i < testingData.length; i++)
-			this.createAndDeleteSense((String) testingData[i][0], (String) testingData[i][1], (Integer) testingData[i][2], (Class<?>) testingData[i][3], "delete");
+			this.createSense((String) testingData[i][0], (Integer) testingData[i][1], (String) testingData[i][2], (Integer) testingData[i][3], (Class<?>) testingData[i][4]);
 	}
-	protected void createAndDeleteSense(final String sender, final String comment, final Integer recipient, final Class<?> expected, final String createOrDelete) {
+	protected void createSense(final String sender, final Integer stars, final String comment, final Integer recipient, final Class<?> expected) {
 
 		Class<?> caught = null;
 		Chorbi chorbi = null;
@@ -66,14 +63,51 @@ public class SenseTest extends AbstractTest {
 			this.authenticate(sender);
 			chorbi = this.chorbiService.findOne(recipient);
 
-			if (createOrDelete.equals("create")) {
-				sense = this.senseService.create(chorbi);
-				sense.setComment(comment);
-				this.senseService.save(sense);
-			} else if (createOrDelete.equals("delete")) {
-				sense = this.senseService.findSense(this.chorbiService.findByPrincipal(), chorbi);
-				this.senseService.delete(sense);
+			sense = this.senseService.create(chorbi);
+			sense.setStars(stars);
+			sense.setComment(comment);
+			this.senseService.save(sense);
+
+			this.senseService.findAll();
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+		this.checkExceptions(expected, caught);
+	}
+
+	// Disike a un chorbi
+	@Test
+	public void driverDeleteSense() {
+		final Object testingData[][] = {
+			{
+				"chorbi1", 274, null
+			}, {
+				"chorbi2", 276, null
+			}, {
+				"chorbi1", 273, IllegalArgumentException.class
+			}, {
+				"chorbi1", 277, IllegalArgumentException.class
+			}, {
+				"manager1", 273, IllegalArgumentException.class
 			}
+		};
+
+		for (int i = 0; i < testingData.length - 1; i++)
+			this.deleteSense((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+	protected void deleteSense(final String sender, final Integer recipient, final Class<?> expected) {
+
+		Class<?> caught = null;
+		Chorbi chorbi = null;
+		Sense sense = null;
+
+		try {
+			this.authenticate(sender);
+			chorbi = this.chorbiService.findOne(recipient);
+
+			sense = this.senseService.findSense(this.chorbiService.findByPrincipal(), chorbi);
+			this.senseService.delete(sense);
 
 			this.unauthenticate();
 		} catch (final Throwable oops) {
