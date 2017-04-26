@@ -143,6 +143,7 @@ public class SenseService {
 	 */
 	public Double[] minAvgMaxOfSenses() {
 		final Double[] result = this.senseRepository.minAvgMaxOfSenses();
+		result[1] = Math.round(result[1] * 100) / 100.0;
 		return result;
 	}
 

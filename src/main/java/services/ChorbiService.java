@@ -239,7 +239,8 @@ public class ChorbiService {
 
 	//C4: The ratios of chorbies who search for activities, friendship, and love.
 	public Double ratioPerChorbiAndSearchTemplateRelationship() {
-		final Double result = this.chorbiRepository.ratioPerChorbiAndSearchTemplateRelationship();
+		Double result = this.chorbiRepository.ratioPerChorbiAndSearchTemplateRelationship();
+		result = Math.round(result * 100) / 100.0;
 		return result;
 	}
 
@@ -250,7 +251,9 @@ public class ChorbiService {
 	}
 
 	public Double[] minMaxAvgReciveChirps() {
-		return this.chorbiRepository.minMaxAvgReciveChirps();
+		final Double[] result = this.chorbiRepository.minMaxAvgReciveChirps();
+		result[1] = Math.round(result[1] * 100) / 100.0;
+		return result;
 	}
 
 	public Collection<Chorbi> findChorbiMoreReciveChirps() {
@@ -266,12 +269,14 @@ public class ChorbiService {
 		final Double res2 = this.chorbiRepository.numberChorbiesWithInvalidCreditMonth();
 		final Double res3 = this.chorbiRepository.numberChorbiesWithInvalidCreditYear();
 		final Integer totalChorbies = this.chorbiRepository.findAll().size();
-		final Double result = (res3 / totalChorbies) + (res2 / totalChorbies) + res1;
+		Double result = (res3 / totalChorbies) + (res2 / totalChorbies) + res1;
+		result = Math.round(result * 100) / 100.0;
 		return result;
 	}
 
 	public Double[] minMaxAvgAgeOfChorbi2() {
 		final Double[] result = this.chorbiRepository.minMaxAvgAgeOfChorbi2();
+		result[1] = Math.round(result[1] * 100) / 100.0;
 		return result;
 	}
 
@@ -279,7 +284,8 @@ public class ChorbiService {
 	public String[] minMaxAvgStarsPerChorbi() {
 		final List<Long> arrayMin = this.chorbiRepository.minStarsPerChorbi();
 		final List<Long> arrayMax = this.chorbiRepository.maxStarsPerChorbi();
-		final Double avg = this.chorbiRepository.avgStarsPerChorbi();
+		Double avg = this.chorbiRepository.avgStarsPerChorbi();
+		avg = Math.round(avg * 100) / 100.0;
 		final String[] result = {
 			arrayMin.get(0).toString(), arrayMax.get(0).toString(), avg.toString()
 		};

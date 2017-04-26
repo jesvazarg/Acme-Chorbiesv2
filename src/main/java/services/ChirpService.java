@@ -26,9 +26,6 @@ public class ChirpService {
 	private ChirpRepository	chirpRepository;
 
 	@Autowired
-	private ChorbiService	chorbiService;
-
-	@Autowired
 	private ActorService	actorService;
 
 	@Autowired
@@ -255,6 +252,7 @@ public class ChirpService {
 
 	public Double[] minAvgMaxChirpsSent() {
 		final Double[] result = this.chirpRepository.minAvgMaxChirpsSent();
+		result[1] = Math.round(result[1] * 100) / 100.0;
 		return result;
 	}
 
