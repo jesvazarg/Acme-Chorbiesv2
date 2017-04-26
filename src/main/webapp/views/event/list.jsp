@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table name="${events}" id="event" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
+<display:table name="${events}" id="event" class="displaytag" pagesize="5" requestURI="${requestURI}">
 	
 	<jstl:set var="available" value="${false}"/>
 		<jstl:if test="${event.seats > event.chorbies.size()}">
@@ -35,15 +35,7 @@
 	<acme:column code="event.title" property="title" sortable="true" style="${style}"/>
 	<acme:column code="event.moment" property="moment" format="{0,date,dd-MM-yyyy HH:mm}" sortable="true" style="${style}"/>
 	<acme:column code="event.description" property="description" sortable="false" style="${style}"/>
-	<spring:message code="event.seatsAvailable" var="seatsAvailableHeader" />
-	<display:column title="${seatsAvailableHeader}" sortable="true" style="${style}">
-		<jstl:if test="${available}">
-			<jstl:out value="${event.seats - event.chorbies.size()}"/>
-		</jstl:if>
-		<jstl:if test="${!available}">
-			<spring:message code="event.soldOut" />
-		</jstl:if>
-	</display:column>
+	<acme:column code="event.availableSeats" property="availableSeats" sortable="true" style="${style}"/>
 	
 	<spring:message code="event.display" var="displayHeader" />
 	<display:column title="${displayHeader}" >
@@ -78,6 +70,9 @@
 					<jstl:if test="${!isRegisted}">
 						<jstl:if test="${available}">
 							<a href="event/chorbi/register.do?eventId=${event.id}"><spring:message code="event.register"/></a>
+						</jstl:if>
+						<jstl:if test="${!available}">
+							<spring:message code="event.soldOut" />
 						</jstl:if>
 					</jstl:if>
 				</jstl:if>

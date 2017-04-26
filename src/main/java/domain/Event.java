@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -47,7 +46,6 @@ public class Event extends DomainEntity {
 	}
 
 	@NotNull
-	@Future
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -81,6 +79,13 @@ public class Event extends DomainEntity {
 	}
 	public void setSeats(final Integer seats) {
 		this.seats = seats;
+	}
+
+	public Integer getAvailableSeats() {
+		return this.seats - this.chorbies.size();
+	}
+	public void setAvailableSeats(final Integer availableSeats) {
+
 	}
 
 

@@ -378,7 +378,7 @@
 	
 	<bean id="event2" class="domain.Event">
 		<property name="title" value="Maraton de Sevilla" />
-		<property name="moment" value="02/25/2018 10:00" />
+		<property name="moment" value="02/25/2017 10:00" />
 		<property name="description" value="Este año todos correran con tacones o zancos." />
 		<property name="picture" value="https://www.clubrunning.es/cartel/cartel_b86cfff512.png" />
 		<property name="seats" value="250" />

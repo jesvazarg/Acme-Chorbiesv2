@@ -79,6 +79,10 @@ public class EventService {
 		Assert.notNull(event);
 		Event result;
 		Manager principal;
+		Date hoy;
+
+		hoy = Calendar.getInstance().getTime();
+		Assert.isTrue(event.getMoment().after(hoy));
 
 		principal = this.managerService.findByPrincipal();
 		Assert.notNull(principal);
@@ -86,6 +90,8 @@ public class EventService {
 		this.creditCardService.checkCreditCard(principal.getCreditCard());
 
 		//Aquí va el cobro del fee al manager logeado
+
+		//Aquí va el envio de los chirps a todos los chorbies registrados
 
 		result = this.eventRepository.save(event);
 
@@ -109,7 +115,7 @@ public class EventService {
 			this.chorbiService.save(c);
 		}
 
-		//Aquí va el envio de los chirps a todos lso chorbies registrados
+		//Aquí va el envio de los chirps a todos los chorbies registrados
 
 		this.eventRepository.delete(event);
 	}

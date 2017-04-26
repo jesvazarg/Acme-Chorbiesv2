@@ -28,6 +28,7 @@ public class EventTest extends AbstractTest {
 
 
 	// Tests ------------------------------------------------------------------
+	// An actor who is authenticated as a manager must be able to:
 	// Manage the events that he or she organises, which includes listing, registering, modifying, and deleting them.
 	// In order to register a new event, he must have registered a valid credit card that must not expire in less than one day.
 	// Every time he or she registers an event, the system will simulate that he or she's charged a 1.00 euro fee.
@@ -37,17 +38,17 @@ public class EventTest extends AbstractTest {
 	public void driverCreateEvent() {
 		final Object testingData[][] = {
 			{
-				"manager1", "Fiesta!!", "01/01/2018", "Es una fiesta", "http://image.com", 10, null
+				"manager1", "Fiesta!!", "01/01/2018 00:00", "Es una fiesta", "http://image.com", 10, null
 			}, {
-				"manager2", "Excursion!!", "03/06/2017", "A la universidad", "http://image.com", 40, null
+				"manager2", "Excursion!!", "03/06/2017 08:00", "A la universidad", "http://image.com", 40, null
 			}, {
-				"chorbi1", "Prueba", "21/11/2017", "pruebecita", "http://image.com", 2, IllegalArgumentException.class
+				"chorbi1", "Prueba", "21/11/2017 00:00", "pruebecita", "http://image.com", 2, IllegalArgumentException.class
 			}, {
-				"manager3", "", "15/10/2017", "", "http://image.com", 8, ConstraintViolationException.class
+				"manager3", "", "15/10/2017 00:00", "", "http://image.com", 8, ConstraintViolationException.class
 			}, {
-				"manager1", "FUERA!!", "15/10/2017", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
+				"manager1", "FUERA!!", "15/10/2017 00:00", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
 			}, {
-				"manager2", "Examen!!", "05/03/2016", "Junio de 2016", "http://image.com", 25, ConstraintViolationException.class
+				"manager2", "Examen!!", "05/03/2016 10:30", "Junio de 2016", "http://image.com", 25, IllegalArgumentException.class
 			}
 		};
 
@@ -59,6 +60,7 @@ public class EventTest extends AbstractTest {
 		Class<?> caught = null;
 		Event event = null;
 		String[] date = null;
+		String[] time = null;
 		final Calendar calendar = Calendar.getInstance();
 
 		try {
@@ -66,12 +68,16 @@ public class EventTest extends AbstractTest {
 
 			event = this.eventService.create();
 			event.setTitle(title);
-			date = moment.split("/");
-			calendar.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+			date = moment.split(" ");
+			time = date[1].split(":");
+			date = date[0].split("/");
+			calendar.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), Integer.parseInt(time[0]), Integer.parseInt(time[1]));
 			event.setMoment(calendar.getTime());
 			event.setDescription(description);
 			event.setPicture(picture);
 			event.setSeats(seats);
+
+			// Comprobar que se ha cobrado el leru
 
 			this.eventService.save(event);
 			this.eventService.findAll();
@@ -88,17 +94,17 @@ public class EventTest extends AbstractTest {
 	public void driverEditEvent() {
 		final Object testingData[][] = {
 			{
-				"manager1", 297, "Fiesta!!", "01/01/2018", "Es una fiesta", "http://image.com", 10, null
+				"manager1", 297, "Fiesta!!", "01/01/2018 00:00", "Es una fiesta", "http://image.com", 10, null
 			}, {
-				"manager2", 300, "Excursion!!", "03/06/2017", "A la universidad", "http://image.com", 40, null
+				"manager2", 300, "Excursion!!", "03/06/2017 08:00", "A la universidad", "http://image.com", 40, null
 			}, {
-				"manager3", 298, "Prueba", "21/11/2017", "pruebecita", "http://image.com", 2, IllegalArgumentException.class
+				"manager3", 298, "Prueba", "21/11/2017 00:00", "pruebecita", "http://image.com", 2, IllegalArgumentException.class
 			}, {
-				"manager1", 299, "", "15/10/2017", "", "http://image.com", 8, ConstraintViolationException.class
+				"manager1", 299, "", "15/10/2017 00:00", "", "http://image.com", 8, ConstraintViolationException.class
 			}, {
-				"manager2", 300, "FUERA!!", "15/10/2017", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
+				"manager2", 300, "FUERA!!", "15/10/2017 00:00", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
 			}, {
-				"manager1", 297, "Examen!!", "05/03/2016", "Junio de 2016", "http://image.com", 25, ConstraintViolationException.class
+				"manager1", 297, "Examen!!", "05/03/2016 10:30", "Junio de 2016", "http://image.com", 25, IllegalArgumentException.class
 			}
 		};
 
@@ -110,6 +116,7 @@ public class EventTest extends AbstractTest {
 		Class<?> caught = null;
 		Event event = null;
 		String[] date = null;
+		String[] time = null;
 		final Calendar calendar = Calendar.getInstance();
 
 		try {
@@ -117,8 +124,10 @@ public class EventTest extends AbstractTest {
 
 			event = this.eventService.findOne(eventId);
 			event.setTitle(title);
-			date = moment.split("/");
-			calendar.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]));
+			date = moment.split(" ");
+			time = date[1].split(":");
+			date = date[0].split("/");
+			calendar.set(Integer.parseInt(date[2]), Integer.parseInt(date[1]), Integer.parseInt(date[0]), Integer.parseInt(time[0]), Integer.parseInt(time[1]));
 			event.setMoment(calendar.getTime());
 			event.setDescription(description);
 			event.setPicture(picture);
@@ -180,21 +189,33 @@ public class EventTest extends AbstractTest {
 	public void driverRegisterEvent() {
 		final Object testingData[][] = {
 			{
-				null
+				"chorbi1", 300, null
+			}, {
+				"chorbi4", 297, null
+			}, {
+				"chorbi1", 297, IllegalArgumentException.class
+			}, {
+				"chorbi2", 299, IllegalArgumentException.class
+			}, {
+				"chorbi3", 298, IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.registerEvent((Class<?>) testingData[i][2]);
+			this.registerEvent((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	protected void registerEvent(final Class<?> expected) {
+	protected void registerEvent(final String chorbi, final Integer eventId, final Class<?> expected) {
 
 		Class<?> caught = null;
+		Event event;
 
 		try {
-			//this.authenticate(manager);
+			this.authenticate(chorbi);
 
-			//this.unauthenticate();
+			event = this.eventService.findOne(eventId);
+			this.eventService.registerChorbiToEvent(event);
+
+			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
@@ -206,21 +227,31 @@ public class EventTest extends AbstractTest {
 	public void driverUnregisterEvent() {
 		final Object testingData[][] = {
 			{
-				null
+				"chorbi2", 297, null
+			}, {
+				"chorbi1", 299, null
+			}, {
+				"chorbi4", 298, IllegalArgumentException.class
+			}, {
+				"chorbi3", 299, IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.unregisterEvent((Class<?>) testingData[i][2]);
+			this.unregisterEvent((String) testingData[i][0], (Integer) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	protected void unregisterEvent(final Class<?> expected) {
+	protected void unregisterEvent(final String chorbi, final Integer eventId, final Class<?> expected) {
 
 		Class<?> caught = null;
+		Event event;
 
 		try {
-			//this.authenticate(manager);
+			this.authenticate(chorbi);
 
-			//this.unauthenticate();
+			event = this.eventService.findOne(eventId);
+			this.eventService.unregisterChorbiToEvent(event);
+
+			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
