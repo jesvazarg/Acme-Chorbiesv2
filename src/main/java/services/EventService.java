@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.EventRepository;
+import domain.Chirp;
 import domain.Chorbi;
 import domain.Event;
 import domain.Manager;
@@ -33,6 +34,9 @@ public class EventService {
 
 	@Autowired
 	private ChorbiService		chorbiService;
+
+	@Autowired
+	private ChirpService		chirpService;
 
 
 	// Constructors------------------------------------------------------------
@@ -116,6 +120,13 @@ public class EventService {
 		}
 
 		//Aquí va el envio de los chirps a todos los chorbies registrados
+
+		final Chirp chirp1 = this.chirpService.broadcast(event);
+		final String subject = "Eliminado el evento " + event.getTitle();
+		chirp1.setSubject(subject);
+		final String text = "El evento " + event.getTitle() + "ha sido eliminado" + "/" + "The event " + event.getTitle() + "has been deleted";
+		chirp1.setText(text);
+		this.chirpService.save(chirp1);
 
 		this.eventRepository.delete(event);
 	}
