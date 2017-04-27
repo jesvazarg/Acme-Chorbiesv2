@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import security.Authority;
 import services.ActorService;
 import services.ChorbiService;
+import services.CreditCardService;
 import services.SenseService;
 import domain.Actor;
 import domain.Chorbi;
@@ -34,13 +35,16 @@ public class ProfileController extends AbstractController {
 	// Services ---------------------------------------------------------------	
 
 	@Autowired
-	private ActorService	actorService;
+	private ActorService		actorService;
 
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChorbiService		chorbiService;
 
 	@Autowired
-	private SenseService	senseService;
+	private CreditCardService	creditCardService;
+
+	@Autowired
+	private SenseService		senseService;
 
 
 	// Constructor ---------------------------------------------------------------
@@ -57,6 +61,8 @@ public class ProfileController extends AbstractController {
 		Boolean isAdmin = false;
 		Boolean isManager = false;
 		Boolean isChorbi = false;
+		Chorbi chorbi;
+		Boolean haveCreditCard = null;
 		final Boolean sameActor = true;
 		Collection<Sense> likeThem;
 		String account = "";
@@ -77,7 +83,11 @@ public class ProfileController extends AbstractController {
 			account = "chorbi";
 
 		if (isChorbi == true) {
-			final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
+			chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
+			if (chorbi.getCreditCard() == null)
+				haveCreditCard = false;
+			else
+				haveCreditCard = this.creditCardService.checkCreditCardBoolean(chorbi.getCreditCard());
 			likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
 			result.addObject("description", chorbi.getDescription());
 			result.addObject("likeThem", likeThem);
@@ -88,17 +98,20 @@ public class ProfileController extends AbstractController {
 		result.addObject("account", account);
 		result.addObject("isAdmin", isAdmin);
 		result.addObject("sameActor", sameActor);
+		result.addObject("haveCreditCard", haveCreditCard);
 		result.addObject("requestURI", "profile/display");
 
 		return result;
 	}
-
 	@RequestMapping(value = "/display", method = RequestMethod.GET)
 	public ModelAndView display(final int actorId) {
 		ModelAndView result;
 		Actor actor;
+		Actor principal;
 		final Boolean isAdmin = false;
 		Boolean sameActor = false;
+		Chorbi chorbi;
+		Boolean haveCreditCard = null;
 		Collection<Sense> likeThem = new ArrayList<Sense>();
 		String maskPhone = null;
 		String maskEmail = null;
@@ -106,9 +119,16 @@ public class ProfileController extends AbstractController {
 		String account = "";
 
 		actor = this.actorService.findOne(actorId);
+		principal = this.actorService.findByPrincipal();
 
 		if (this.actorService.checkAuthority(actor, Authority.CHORBI)) {
-			final Chorbi chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
+			chorbi = this.chorbiService.findByUserAccount(actor.getUserAccount());
+
+			if (this.actorService.checkAuthority(principal, Authority.CHORBI))
+				if (principal.getCreditCard() == null)
+					haveCreditCard = false;
+				else
+					haveCreditCard = this.creditCardService.checkCreditCardBoolean(principal.getCreditCard());
 			likeThem = this.senseService.filterSensesNotBanned(chorbi.getReciveSenses());
 			maskPhone = actor.maskEmailAndPhone(chorbi.getPhone());
 			maskEmail = actor.maskEmailAndPhone(chorbi.getEmail());
@@ -133,6 +153,7 @@ public class ProfileController extends AbstractController {
 		result.addObject("isAdmin", isAdmin);
 		result.addObject("sameActor", sameActor);
 		result.addObject("likeThem", likeThem);
+		result.addObject("haveCreditCard", haveCreditCard);
 		result.addObject("requestURI", "profile/display.do?actorId=" + actor.getId());
 
 		return result;

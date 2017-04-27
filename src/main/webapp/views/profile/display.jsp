@@ -107,23 +107,28 @@
 
 <security:authorize access="hasRole('CHORBI')">
 	<h2><spring:message code="profile.likeThem"/></h2>
-	<display:table name="${likeThem}" id="sense" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
-		<acme:column code="profile.name" property="sender.name" sortable="true"/>
-		<acme:column code="profile.surname" property="sender.surname" sortable="true"/>
-		<acme:column code="profile.relationship" property="sender.relationship" sortable="true"/>
-		<acme:column code="profile.birthDate" property="sender.birthDate" format="{0,date,dd-MM-yyyy}" sortable="true"/>
-		<acme:column code="profile.sense.stars" property="stars" sortable="true"/>
-		<spring:message code="profile.sense.comment" var="commentHeader" />
-		<display:column title="${commentHeader}">
-			<jstl:if test="${sense.comment != null}">
-				<jstl:out value="${sense.comment}"/>
-			</jstl:if>
-		</display:column>
-		<spring:message code="profile.profile" var="profileHeader" />
-		<display:column title="${profileHeader}">
-			<a href="profile/display.do?actorId=${sense.sender.id}"><spring:message code="profile.display"/></a>
-		</display:column>
-	</display:table>
+	<jstl:if test="${haveCreditCard}">
+		<display:table name="${likeThem}" id="sense" class="displaytag" pagesize="5" keepStatus="true" requestURI="${requestURI}">
+			<acme:column code="profile.name" property="sender.name" sortable="true"/>
+			<acme:column code="profile.surname" property="sender.surname" sortable="true"/>
+			<acme:column code="profile.relationship" property="sender.relationship" sortable="true"/>
+			<acme:column code="profile.birthDate" property="sender.birthDate" format="{0,date,dd-MM-yyyy}" sortable="true"/>
+			<acme:column code="profile.sense.stars" property="stars" sortable="true"/>
+			<spring:message code="profile.sense.comment" var="commentHeader" />
+			<display:column title="${commentHeader}">
+				<jstl:if test="${sense.comment != null}">
+					<jstl:out value="${sense.comment}"/>
+				</jstl:if>
+			</display:column>
+			<spring:message code="profile.profile" var="profileHeader" />
+			<display:column title="${profileHeader}">
+				<a href="profile/display.do?actorId=${sense.sender.id}"><spring:message code="profile.display"/></a>
+			</display:column>
+		</display:table>
+	</jstl:if>
+	<jstl:if test="${!haveCreditCard}">
+		<spring:message code="profile.askCreditCard" />
+	</jstl:if>
 </security:authorize>
 
 
