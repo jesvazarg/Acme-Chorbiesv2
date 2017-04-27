@@ -2,7 +2,9 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ConfigurationRepository;
+import domain.Chorbi;
 import domain.Configuration;
 
 @Service
@@ -23,6 +26,9 @@ public class ConfigurationService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ChorbiService			chorbiService;
 
 
 	// Supporting services ----------------------------------------------------
@@ -88,4 +94,46 @@ public class ConfigurationService {
 
 	}
 
+	public void cobrarAChorbies() {
+		Collection<Chorbi> chorbies;
+		chorbies = this.chorbiService.findAll();
+		final Configuration confAux = this.findConfiguration();
+		final Calendar fechaSistema = Calendar.getInstance();
+		final Calendar chorbiMoment = Calendar.getInstance();
+
+		for (final Chorbi chor : chorbies) {
+			final Date date = chor.getMoment();
+			chorbiMoment.setTime(date);
+
+			final Integer auxD1 = fechaSistema.get(Calendar.DAY_OF_MONTH);
+			final Integer auxD2 = chorbiMoment.get(Calendar.DAY_OF_MONTH);
+
+			final Integer auxM1 = fechaSistema.get(Calendar.MONTH);
+			final Integer auxM2 = chorbiMoment.get(Calendar.MONTH);
+
+			final Integer auxY1 = fechaSistema.get(Calendar.YEAR);
+			final Integer auxY2 = chorbiMoment.get(Calendar.YEAR);
+
+			if (auxY1 > auxY2) {
+				final Double am = chor.getAmount() + confAux.getFeeChorbi();
+				chor.setAmount(am);
+
+				//final Calendar cl = Calendar.getInstance();
+				//cl.set(Calendar.MILLISECOND, -10);
+				//chor.setMoment(cl.getTime());
+				this.chorbiService.save(chor);
+
+			} else if (auxY1.compareTo(auxY2) == 0)
+				if (auxM1.compareTo(auxM2) > 0 && auxD1.compareTo(auxD2) > 0) {
+					final Double am = chor.getAmount() + confAux.getFeeChorbi();
+					chor.setAmount(am);
+
+					//final Calendar cl = Calendar.getInstance();
+					//cl.set(Calendar.MILLISECOND, -10);
+					//chor.setMoment(cl.getTime());
+					this.chorbiService.save(chor);
+				}
+
+		}
+	}
 }

@@ -28,3 +28,6 @@
 	code="configuration.editConfiguration"/>
 </a>
 
+<a href="configuration/administrator/collect.do"><spring:message
+	code="configuration.collect"/>
+</a>

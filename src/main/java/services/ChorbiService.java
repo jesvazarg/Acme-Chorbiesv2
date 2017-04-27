@@ -99,6 +99,10 @@ public class ChorbiService {
 		Chorbi result;
 		Date nuevo;
 
+		final Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+		chorbi.setMoment(calendar.getTime());
+
 		nuevo = Calendar.getInstance().getTime();
 		nuevo.setYear(nuevo.getYear() - 18);
 		Assert.isTrue(chorbi.getBirthDate().before(nuevo));

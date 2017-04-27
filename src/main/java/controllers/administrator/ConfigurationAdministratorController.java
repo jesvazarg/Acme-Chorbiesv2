@@ -77,6 +77,24 @@ public class ConfigurationAdministratorController extends AbstractController {
 		return result;
 	}
 
+	// List -------------------------------------------------------------------		
+
+	@RequestMapping(value = "/collect", method = RequestMethod.GET)
+	public ModelAndView collect() {
+		ModelAndView result;
+		Configuration configuration;
+
+		this.configurationService.cobrarAChorbies();
+		configuration = this.configurationService.findConfiguration();
+
+		result = new ModelAndView("configuration/list");
+		result.addObject(configuration);
+
+		//result = new ModelAndView("redirect:..configuration/administrator/list.do");
+
+		return result;
+	}
+
 	// Ancillary methods ---------------------------------------------------------------		
 
 	private ModelAndView createEditModelAndView(final Configuration configuration) {

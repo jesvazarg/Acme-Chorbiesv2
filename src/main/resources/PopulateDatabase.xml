@@ -428,6 +428,7 @@
 		<property name="email" value="admin@gmail.com" />
 		<property name="phone" value="0000" />
 		<property name="userAccount" ref="userAccount1" />
+		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -451,6 +452,7 @@
 		<property name="vat" value="ES-SVQ" />
 		<property name="amount" value="0.0" />
 		<property name="creditCard" ref="creditCard4" />
+		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -479,6 +481,7 @@
 		<property name="vat" value="EU-SC" />
 		<property name="amount" value="1.0" />
 		<property name="creditCard" ref="creditCard5" />
+		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -506,6 +509,7 @@
 		<property name="vat" value="UE-NY" />
 		<property name="amount" value="2.0" />
 		<property name="creditCard" ref="creditCard6" />
+		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -540,6 +544,7 @@
 		<property name="coordinate" ref="coordinate1" />
 		<property name="userAccount" ref="userAccount2" />
 		<property name="searchTemplate" ref="searchTemplate1" />
+		<property name="moment" value="02/03/2017 12:00" />
 		<property name="giveSenses">
 			<list>
 				<ref bean = "sense2"/>
@@ -595,6 +600,7 @@
 		<property name="amount" value="0.0" />
 		<property name="coordinate" ref="coordinate2" />
 		<property name="userAccount" ref="userAccount3" />
+		<property name="moment" value="02/03/2017 12:00" />
 		<property name="giveSenses">
 			<list>
 				<ref bean = "sense1"/>
@@ -651,6 +657,7 @@
 		<property name="creditCard" ref="creditCard1" />
 		<property name="userAccount" ref="userAccount4" />
 		<property name="searchTemplate" ref="searchTemplate3" />
+		<property name="moment" value="02/03/2017 12:00" />
 		<property name="giveSenses">
 			<list>
 			</list>
@@ -689,6 +696,7 @@
 		<property name="coordinate" ref="coordinate4" />
 		<property name="creditCard" ref="creditCard2" />
 		<property name="userAccount" ref="userAccount5" />
+		<property name="moment" value="02/03/2017 12:00" />
 		<property name="giveSenses">
 			<list>
 			</list>
@@ -727,6 +735,7 @@
 		<property name="coordinate" ref="coordinate5" />
 		<property name="creditCard" ref="creditCard3" />
 		<property name="userAccount" ref="userAccount6" />
+		<property name="moment" value="02/03/2017 12:00" />
 		<property name="giveSenses">
 			<list>
 				<ref bean = "sense4"/>
@@ -766,6 +775,7 @@
 		<property name="coordinate" ref="coordinate6" />
 		<property name="userAccount" ref="userAccount7" />
 		<property name="searchTemplate" ref="searchTemplate2" />
+		<property name="moment" value="02/04/2017 12:00" />
 		<property name="giveSenses">
 			<list>
 			</list>

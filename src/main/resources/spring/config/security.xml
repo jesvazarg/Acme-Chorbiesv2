@@ -82,6 +82,7 @@
 		
 		<security:intercept-url pattern="/configuration/administrator/list.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/configuration/administrator/collect.do" access="hasRole('ADMIN')" /> 
 		
 		<security:intercept-url pattern="/chorbi/ban.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/chorbi/unban.do" access="hasRole('ADMIN')" />  
