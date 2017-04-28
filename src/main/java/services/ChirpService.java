@@ -155,7 +155,14 @@ public class ChirpService {
 		final Actor actor = this.actorService.findByPrincipal();
 		Assert.isTrue(chirp.getSender().equals(actor) || chirp.getRecipients().contains(actor));
 
-		this.chirpRepository.delete(chirp);
+		if (chirp.getRecipients().contains(actor) && chirp.getRecipients().size() > 1) {
+			Collection<Actor> recipientsAux = new HashSet<Actor>();
+			recipientsAux = chirp.getRecipients();
+			recipientsAux.remove(actor);
+			chirp.setRecipients(recipientsAux);
+			this.saveBroadcast(chirp);
+		} else
+			this.chirpRepository.delete(chirp);
 	}
 
 	public Chirp save(Chirp chirp) {
@@ -163,39 +170,39 @@ public class ChirpService {
 		Assert.isTrue(this.validatorURL(chirp.getAttachments()));
 		Assert.notNull(chirp.getId() != 0);
 
-		if (chirp.getRecipients().size() < 2) {
-			Chirp copy;
-			copy = new Chirp();
-			copy.setCopy(true);
-			copy.setAttachments(chirp.getAttachments());
-			copy.setMoment(chirp.getMoment());
-			copy.setRecipients(chirp.getRecipients());
-			copy.setSender(chirp.getSender());
-			copy.setSubject(chirp.getSubject());
-			copy.setText(chirp.getText());
-			System.out.println(copy);
-			chirp = this.chirpRepository.save(chirp);
-			this.chirpRepository.save(copy);
-		} else {
-			chirp = this.chirpRepository.save(chirp);
-			for (final Actor ac : chirp.getRecipients()) {
-				Chirp copy;
-				copy = new Chirp();
-				copy.setCopy(true);
-				copy.setAttachments(chirp.getAttachments());
-				copy.setMoment(chirp.getMoment());
-				final Collection<Actor> recipientsAux = new HashSet<Actor>();
-				//recipientsAux = copy.getRecipients();
-				final Actor actor = this.actorService.findByUserAccountId(ac.getUserAccount().getId());
-				recipientsAux.add(actor);
-				copy.setRecipients(recipientsAux);
-				copy.setSender(chirp.getSender());
-				copy.setSubject(chirp.getSubject());
-				copy.setText(chirp.getText());
-				System.out.println(copy + copy.getSubject() + copy.getText() + copy.getAttachments() + copy.getCopy() + copy.getRecipients() + copy.getSender());
-				this.chirpRepository.save(copy);
-			}
-		}
+		//if (chirp.getRecipients().size() < 2) {
+		Chirp copy;
+		copy = new Chirp();
+		copy.setCopy(true);
+		copy.setAttachments(chirp.getAttachments());
+		copy.setMoment(chirp.getMoment());
+		copy.setRecipients(chirp.getRecipients());
+		copy.setSender(chirp.getSender());
+		copy.setSubject(chirp.getSubject());
+		copy.setText(chirp.getText());
+		System.out.println(copy);
+		chirp = this.chirpRepository.save(chirp);
+		this.chirpRepository.save(copy);
+		//} else {
+		//	chirp = this.chirpRepository.save(chirp);
+		//	for (final Actor ac : chirp.getRecipients()) {
+		//		Chirp copy;
+		//		copy = new Chirp();
+		//		copy.setCopy(true);
+		//		copy.setAttachments(chirp.getAttachments());
+		//		copy.setMoment(chirp.getMoment());
+		//		final Collection<Actor> recipientsAux = new HashSet<Actor>();
+		//recipientsAux = copy.getRecipients();
+		//		final Actor actor = this.actorService.findByUserAccountId(ac.getUserAccount().getId());
+		//		recipientsAux.add(actor);
+		//		copy.setRecipients(recipientsAux);
+		//		copy.setSender(chirp.getSender());
+		//		copy.setSubject(chirp.getSubject());
+		//		copy.setText(chirp.getText());
+		//		System.out.println(copy + copy.getSubject() + copy.getText() + copy.getAttachments() + copy.getCopy() + copy.getRecipients() + copy.getSender());
+		//		this.chirpRepository.save(copy);
+		//	}
+		//}
 
 		return chirp;
 	}
@@ -204,25 +211,11 @@ public class ChirpService {
 		Assert.notNull(chirp);
 		Assert.isTrue(this.validatorURL(chirp.getAttachments()));
 		Assert.notNull(chirp.getId() != 0);
-
-		for (final Actor a : chirp.getRecipients()) {
-
-			Chirp copy;
-			copy = new Chirp();
-			copy.setCopy(true);
-			copy.setAttachments(chirp.getAttachments());
-			copy.setMoment(chirp.getMoment());
-			final Collection<Actor> recipientsAux = copy.getRecipients();
-			recipientsAux.add(a);
-			copy.setRecipients(recipientsAux);
-			copy.setSender(chirp.getSender());
-			copy.setSubject(chirp.getSubject());
-			copy.setText(chirp.getText());
-			this.chirpRepository.save(copy);
-
-		}
-		//chirp = this.chirpRepository.save(chirp);
-		return chirp;
+		Assert.notNull(chirp.getSubject());
+		Assert.notNull(chirp.getText());
+		//this.chirpRepository.save(chirp);
+		final Chirp chirp1 = this.chirpRepository.save(chirp);
+		return chirp1;
 	}
 
 	// Other business methods -------------------------------------------------

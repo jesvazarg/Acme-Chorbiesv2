@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.ActorService;
 import services.CreditCardService;
 import services.ManagerService;
 import domain.CreditCard;
@@ -24,8 +23,6 @@ import forms.CreateManagerForm;
 public class ManagerController extends AbstractController {
 
 	// Service ---------------------------------------------------------------
-	@Autowired
-	private ActorService		actorService;
 
 	@Autowired
 	private ManagerService		managerService;

@@ -83,17 +83,18 @@ public class ChirpController extends AbstractController {
 		ModelAndView result;
 		Chirp chirp;
 		Boolean isRecipient = false;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
 
 		chirp = this.chirpService.findOne(chirpId);
-		if (chirp.getRecipients().contains(chorbi))
-			isRecipient = true;
+		//if (chirp.getRecipients().contains(actor))
+		//isRecipient = true;
 		/* Seguridad */
-		if (!chirp.getRecipients().contains(chorbi) && !chirp.getSender().equals(chorbi))
+		if (!chirp.getRecipients().contains(actor) && !chirp.getSender().equals(actor))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
-			if (chirp.getRecipients().equals(chorbi))
+			if (chirp.getRecipients().equals(actor))
 				isRecipient = true;
 
 			result = new ModelAndView("chirp/display");
@@ -136,11 +137,11 @@ public class ChirpController extends AbstractController {
 	@RequestMapping(value = "/reply", method = RequestMethod.GET)
 	public ModelAndView reply(@RequestParam final int chirpId) {
 		ModelAndView result;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
 		final Chirp chirpRequest = this.chirpService.findOne(chirpId);
 
 		/* Seguridad */
-		if (!chirpRequest.getRecipients().contains(chorbi) && !chirpRequest.getSender().equals(chorbi))
+		if (!chirpRequest.getRecipients().contains(actor) && !chirpRequest.getSender().equals(actor))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
@@ -155,11 +156,11 @@ public class ChirpController extends AbstractController {
 	@RequestMapping(value = "/forward", method = RequestMethod.GET)
 	public ModelAndView forward(@RequestParam final int chirpId) {
 		ModelAndView result;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
 		final Chirp chirpRequest = this.chirpService.findOne(chirpId);
 
 		/* Seguridad */
-		if (!chirpRequest.getRecipients().contains(chorbi) && !chirpRequest.getSender().equals(chorbi))
+		if (!chirpRequest.getRecipients().contains(actor) && !chirpRequest.getSender().equals(actor))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
@@ -192,13 +193,14 @@ public class ChirpController extends AbstractController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Chirp chirp, final BindingResult binding) {
 		ModelAndView result;
-		final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Chirp chirpToDel = this.chirpService.findOne(chirp.getId());
+		final Actor actor = this.actorService.findByPrincipal();
 		/* Seguridad */
-		if (!chirp.getRecipients().contains(chorbi) && !chirp.getSender().equals(chorbi))
+		if (!chirp.getRecipients().contains(actor) && !chirp.getSender().equals(actor))
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		else
 			try {
-				this.chirpService.delete(chirp);
+				this.chirpService.delete(chirpToDel);
 				result = new ModelAndView("redirect:../chirp/listIn.do");
 			} catch (final Throwable oops) {
 				result = new ModelAndView("redirect:../chirp/listIn.do");

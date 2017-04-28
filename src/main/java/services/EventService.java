@@ -14,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.EventRepository;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Configuration;
 import domain.Event;
 import domain.Manager;
 
@@ -23,20 +24,23 @@ public class EventService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private EventRepository		eventRepository;
+	private EventRepository			eventRepository;
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private ManagerService		managerService;
+	private ManagerService			managerService;
 
 	@Autowired
-	private CreditCardService	creditCardService;
+	private CreditCardService		creditCardService;
 
 	@Autowired
-	private ChorbiService		chorbiService;
+	private ChorbiService			chorbiService;
 
 	@Autowired
-	private ChirpService		chirpService;
+	private ChirpService			chirpService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructors------------------------------------------------------------
@@ -95,8 +99,53 @@ public class EventService {
 
 		//Aquí va el cobro del fee al manager logeado
 
-		//Aquí va el envio de los chirps a todos los chorbies registrados
+		final Configuration confAux = this.configurationService.findConfiguration();
+		final Calendar fechaSistema = Calendar.getInstance();
+		final Calendar managerMoment = Calendar.getInstance();
 
+		final Date date = principal.getMoment();
+		managerMoment.setTime(date);
+
+		final Integer auxD1 = fechaSistema.get(Calendar.DAY_OF_MONTH);
+		final Integer auxD2 = managerMoment.get(Calendar.DAY_OF_MONTH);
+
+		final Integer auxM1 = fechaSistema.get(Calendar.MONTH);
+		final Integer auxM2 = managerMoment.get(Calendar.MONTH);
+
+		final Integer auxY1 = fechaSistema.get(Calendar.YEAR);
+		final Integer auxY2 = managerMoment.get(Calendar.YEAR);
+
+		if (auxY1 > auxY2) {
+			final Double am = principal.getAmount() + confAux.getFeeManager();
+			principal.setAmount(am);
+
+			final Calendar cl = Calendar.getInstance();
+			cl.setTime(principal.getMoment());
+			cl.add(Calendar.DAY_OF_YEAR, 30);
+			principal.setMoment(cl.getTime());
+			this.managerService.save(principal);
+
+		} else if (auxY1.compareTo(auxY2) == 0)
+			if (auxM1.compareTo(auxM2) > 0 && auxD1.compareTo(auxD2) > 0) {
+				final Double am = principal.getAmount() + confAux.getFeeManager();
+				principal.setAmount(am);
+
+				final Calendar cl = Calendar.getInstance();
+				cl.setTime(principal.getMoment());
+				cl.add(Calendar.DAY_OF_YEAR, 30);
+				principal.setMoment(cl.getTime());
+				this.managerService.save(principal);
+			}
+
+		//Aquí va el envio de los chirps a todos los chorbies registrados
+		if (event.getId() != 0) {
+			final Chirp chirp1 = this.chirpService.broadcast(event);
+			final String subject = "Modificado el evento " + event.getTitle();
+			chirp1.setSubject(subject);
+			final String text = "El evento " + event.getTitle() + "ha sido modificado" + "/" + "The event " + event.getTitle() + "has been modified";
+			chirp1.setText(text);
+			this.chirpService.save(chirp1);
+		}
 		result = this.eventRepository.save(event);
 
 		return result;

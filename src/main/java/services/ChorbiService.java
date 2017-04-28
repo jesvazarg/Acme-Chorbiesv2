@@ -90,6 +90,10 @@ public class ChorbiService {
 		result.setEvents(events);
 		result.setAmount(0.0);
 
+		final Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+		result.setMoment(calendar.getTime());
+
 		return result;
 	}
 
@@ -98,10 +102,6 @@ public class ChorbiService {
 		Assert.notNull(chorbi);
 		Chorbi result;
 		Date nuevo;
-
-		final Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.MILLISECOND, -10);
-		chorbi.setMoment(calendar.getTime());
 
 		nuevo = Calendar.getInstance().getTime();
 		nuevo.setYear(nuevo.getYear() - 18);

@@ -118,9 +118,10 @@ public class ConfigurationService {
 				final Double am = chor.getAmount() + confAux.getFeeChorbi();
 				chor.setAmount(am);
 
-				//final Calendar cl = Calendar.getInstance();
-				//cl.set(Calendar.MILLISECOND, -10);
-				//chor.setMoment(cl.getTime());
+				final Calendar cl = Calendar.getInstance();
+				cl.setTime(chor.getMoment());
+				cl.add(Calendar.DAY_OF_YEAR, 30);
+				chor.setMoment(cl.getTime());
 				this.chorbiService.save(chor);
 
 			} else if (auxY1.compareTo(auxY2) == 0)
@@ -128,12 +129,14 @@ public class ConfigurationService {
 					final Double am = chor.getAmount() + confAux.getFeeChorbi();
 					chor.setAmount(am);
 
-					//final Calendar cl = Calendar.getInstance();
-					//cl.set(Calendar.MILLISECOND, -10);
-					//chor.setMoment(cl.getTime());
+					final Calendar cl = Calendar.getInstance();
+					cl.setTime(chor.getMoment());
+					cl.add(Calendar.DAY_OF_YEAR, 30);
+					chor.setMoment(cl.getTime());
 					this.chorbiService.save(chor);
 				}
 
 		}
 	}
+
 }

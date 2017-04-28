@@ -30,8 +30,6 @@ public class ManagerService {
 	private ManagerRepository	managerRepository;
 
 	// Supporting services ----------------------------------------------------
-	@Autowired
-	private ActorService		actorService;
 
 	@Autowired
 	private CreditCardService	creditCardService;
