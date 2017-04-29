@@ -89,7 +89,6 @@ public class EventService {
 		Event result;
 		Manager principal;
 		Date hoy;
-		event.setAvailableSeats(event.getSeats() - event.getChorbies().size());
 
 		hoy = Calendar.getInstance().getTime();
 		Assert.isTrue(event.getMoment().after(hoy));
@@ -101,6 +100,7 @@ public class EventService {
 
 		//Aquí va el cobro del fee al manager logeado
 		if (event.getId() == 0) {
+			event.setAvailableSeats(event.getSeats() - event.getChorbies().size());
 			final Configuration confAux = this.configurationService.findConfiguration();
 			final Calendar fechaSistema = Calendar.getInstance();
 			final Calendar managerMoment = Calendar.getInstance();
@@ -142,6 +142,11 @@ public class EventService {
 
 		//Aquí va el envio de los chirps a todos los chorbies registrados
 		if (event.getId() != 0) {
+			if (event.getChorbies().size() > event.getSeats())
+				Assert.isTrue(false);
+			else
+				event.setAvailableSeats(event.getSeats() - event.getChorbies().size());
+
 			final Chirp chirp1 = this.chirpService.broadcast(event);
 			final String subject = "Modificado el evento " + event.getTitle();
 			chirp1.setSubject(subject);
