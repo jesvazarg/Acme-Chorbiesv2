@@ -35,8 +35,18 @@ public class Event extends DomainEntity {
 	private String	description;
 	private String	picture;
 	private Integer	seats;
+	private Integer	availableSeats;
 
 
+	@NotNull
+	@Min(0)
+	public Integer getAvailableSeats() {
+		return this.availableSeats;
+	}
+
+	public void setAvailableSeats(final Integer availableSeats) {
+		this.availableSeats = availableSeats;
+	}
 	@NotBlank
 	public String getTitle() {
 		return this.title;
@@ -79,13 +89,6 @@ public class Event extends DomainEntity {
 	}
 	public void setSeats(final Integer seats) {
 		this.seats = seats;
-	}
-
-	public Integer getAvailableSeats() {
-		return this.seats - this.chorbies.size();
-	}
-	public void setAvailableSeats(final Integer availableSeats) {
-
 	}
 
 

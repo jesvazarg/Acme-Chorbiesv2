@@ -77,6 +77,7 @@ public class EventService {
 		chorbies = new ArrayList<Chorbi>();
 
 		result = new Event();
+		result.setAvailableSeats(0);
 		result.setManager(principal);
 		result.setChorbies(chorbies);
 
@@ -88,6 +89,7 @@ public class EventService {
 		Event result;
 		Manager principal;
 		Date hoy;
+		event.setAvailableSeats(event.getSeats() - event.getChorbies().size());
 
 		hoy = Calendar.getInstance().getTime();
 		Assert.isTrue(event.getMoment().after(hoy));
@@ -206,6 +208,7 @@ public class EventService {
 		Assert.isTrue(!chorbies.contains(principal));
 		chorbies.add(principal);
 		event.setChorbies(chorbies);
+		event.setAvailableSeats(event.getAvailableSeats() - 1);
 		this.eventRepository.save(event);
 
 		return event;
@@ -233,6 +236,7 @@ public class EventService {
 		Assert.isTrue(chorbies.contains(principal));
 		chorbies.remove(principal);
 		event.setChorbies(chorbies);
+		event.setAvailableSeats(event.getAvailableSeats() + 1);
 		this.eventRepository.save(event);
 
 		return event;

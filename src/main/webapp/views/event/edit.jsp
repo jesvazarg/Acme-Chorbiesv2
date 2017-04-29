@@ -23,6 +23,7 @@
 	<form:hidden path="version" />
 	<form:hidden path="manager" />
 	<form:hidden path="chorbies" />
+ 	<form:hidden path="availableSeats" />
 	
 	<acme:input code="event.title" path="title" />
 	<acme:input code="event.moment" path="moment" />
