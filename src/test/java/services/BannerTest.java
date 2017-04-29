@@ -74,7 +74,7 @@ public class BannerTest extends AbstractTest {
 	public void driverBorrarBanner() {
 		final Object testingData[][] = {
 			{
-				"admin", 119, null
+				"admin", 257, null
 			}, {
 				"admin", 130, IllegalArgumentException.class
 			}
@@ -110,9 +110,9 @@ public class BannerTest extends AbstractTest {
 	public void driverEditarBanner() {
 		final Object testingData[][] = {
 			{
-				"admin", 118, "https://www.mozilla.org/media/img/firefox/firefox-256.e2c1fc556816.jpg", null
+				"admin", 257, "https://www.mozilla.org/media/img/firefox/firefox-256.e2c1fc556816.jpg", null
 			}, {
-				"admin", 118, "firefox", ConstraintViolationException.class
+				"admin", 257, "firefox", ConstraintViolationException.class
 			}
 		};
 
