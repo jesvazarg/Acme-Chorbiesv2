@@ -239,6 +239,26 @@ public class ChirpService {
 
 	}
 
+	public Collection<Chirp> findChirpsSentByManagerId(final int managerId) {
+
+		Collection<Chirp> result;
+
+		result = this.chirpRepository.findChirpsSentByManagerId(managerId);
+
+		return result;
+
+	}
+
+	public Collection<Chirp> findBroadcastsSentByManagerId(final int managerId) {
+
+		Collection<Chirp> result;
+
+		result = this.chirpRepository.findBroadcastsSentByManagerId(managerId);
+
+		return result;
+
+	}
+
 	//Devuelve true si la collection esta vacia o si las URLs contenidas en ellas son URLs validas
 	public Boolean validatorURL(final Collection<String> lista) {
 		Boolean res = false;

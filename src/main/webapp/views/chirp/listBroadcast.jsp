@@ -18,7 +18,7 @@
 	<acme:column code="chirp.text" property="text"/>
 	<acme:column code="chirp.moment" property="moment"/>
 	<acme:column code="chirp.sender" property="sender.name"/>
-	<acme:column code="chirp.recipients" property="recipients[0].name"/>
+
 	<display:column>
 		<a href="chirp/display.do?chirpId=${chirp.id}"><spring:message
 		code="chirp.display"/>

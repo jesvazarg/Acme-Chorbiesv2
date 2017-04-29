@@ -45,7 +45,7 @@ public class ManagerService {
 		Manager result;
 
 		result = this.managerRepository.findOne(managerId);
-		Assert.notNull(result);
+		//Assert.notNull(result);
 
 		return result;
 	}

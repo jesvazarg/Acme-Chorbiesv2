@@ -6,6 +6,8 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 
 <div>
 	<ul>
@@ -31,7 +33,14 @@
 		
 		<li>
 			<b><spring:message code="chirp.recipients" />:</b>
-			<jstl:out value="${chirp.recipients}" />
+			<c:choose>
+				<c:when test="${isManager==true && fn:length(chirp.recipients)>1}">
+					<jstl:out value="${fn:length(chirp.recipients)}" />
+				</c:when>
+				<c:otherwise>
+					<jstl:out value="${chirp.recipients[0].name}" />
+				</c:otherwise>
+			</c:choose>	
 		</li>
 		
 		<li>

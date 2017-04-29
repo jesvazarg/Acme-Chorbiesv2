@@ -31,6 +31,11 @@
 		<put-attribute name="body" value="/views/chirp/list.jsp" />
 	</definition>
 	
+	<definition name="chirp/listBroadcast" extends="master.page">	
+		<put-attribute name="title" value="List broadcasts" />
+		<put-attribute name="body" value="/views/chirp/listBroadcast.jsp" />
+	</definition>
+	
 	<definition name="chirp/forward" extends="master.page">	
 		<put-attribute name="title" value="Forward" />
 		<put-attribute name="body" value="/views/chirp/forward.jsp" />

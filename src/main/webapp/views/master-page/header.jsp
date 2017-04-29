@@ -76,6 +76,9 @@
 					<li class="arrow"></li>
 					<li><a href="chirp/listIn.do"><spring:message code="master.page.chirps.received" /></a></li>
 					<li><a href="chirp/listOut.do"><spring:message code="master.page.chirps.sent" /></a></li>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="chirp/listBroadcastSent.do"><spring:message code="master.page.chirps.listBroadcast" /></a></li>
+					</security:authorize>
 				</ul>
 			</li>
 			<li>

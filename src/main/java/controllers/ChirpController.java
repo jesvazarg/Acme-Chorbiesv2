@@ -17,10 +17,12 @@ import services.ActorService;
 import services.ChirpService;
 import services.ChorbiService;
 import services.EventService;
+import services.ManagerService;
 import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
 import domain.Event;
+import domain.Manager;
 
 @Controller
 @RequestMapping("/chirp")
@@ -33,6 +35,9 @@ public class ChirpController extends AbstractController {
 
 	@Autowired
 	private ChorbiService	chorbiService;
+
+	@Autowired
+	private ManagerService	managerService;
 
 	@Autowired
 	private ActorService	actorService;
@@ -54,7 +59,12 @@ public class ChirpController extends AbstractController {
 		Collection<Chirp> chirps;
 		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
 		final Actor actor = this.actorService.findByPrincipal();
-		chirps = this.chirpService.findChirpsSentByActorId(actor.getId());
+
+		final Manager manager = this.managerService.findOne(actor.getId());
+		if (manager != null)
+			chirps = this.chirpService.findChirpsSentByManagerId(actor.getId());
+		else
+			chirps = this.chirpService.findChirpsSentByActorId(actor.getId());
 
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);
@@ -68,13 +78,37 @@ public class ChirpController extends AbstractController {
 		Collection<Chirp> chirps;
 		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
 		final Actor actor = this.actorService.findByPrincipal();
+
 		chirps = this.chirpService.findChirpsReceivedByActorId(actor.getId());
 
 		result = new ModelAndView("chirp/list");
 		result.addObject("chirps", chirps);
+		//result.addObject("recipients", actor);
 		//result.addObject("recipients", chorbi);
 
 		return result;
+	}
+
+	@RequestMapping(value = "/listBroadcastSent", method = RequestMethod.GET)
+	public ModelAndView listBroadcastSent() {
+		ModelAndView result;
+		Collection<Chirp> chirps;
+		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
+		final Actor actor = this.actorService.findByPrincipal();
+		final Manager manager = this.managerService.findByUserAccount(actor.getUserAccount());
+		if (manager == null)
+			return result = new ModelAndView("redirect:../../welcome/index.do");
+		else {
+			chirps = this.chirpService.findBroadcastsSentByManagerId(actor.getId());
+
+			result = new ModelAndView("chirp/listBroadcast");
+			result.addObject("chirps", chirps);
+			final String broadcast = "Broadcast";
+			result.addObject("recipients", broadcast);
+
+			return result;
+		}
+
 	}
 
 	// Display ----------------------------------------------------------------
@@ -83,9 +117,12 @@ public class ChirpController extends AbstractController {
 		ModelAndView result;
 		Chirp chirp;
 		Boolean isRecipient = false;
+		Boolean isManager = false;
 		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
 		final Actor actor = this.actorService.findByPrincipal();
-
+		final Manager manager = this.managerService.findOne(actor.getId());
+		if (manager != null)
+			isManager = true;
 		chirp = this.chirpService.findOne(chirpId);
 		//if (chirp.getRecipients().contains(actor))
 		//isRecipient = true;
@@ -100,6 +137,7 @@ public class ChirpController extends AbstractController {
 			result = new ModelAndView("chirp/display");
 			result.addObject("chirp", chirp);
 			result.addObject("isRecipient", isRecipient);
+			result.addObject("isManager", isManager);
 		}
 		return result;
 	}
@@ -166,6 +204,7 @@ public class ChirpController extends AbstractController {
 		else {
 
 			final Chirp chirp = this.chirpService.forward(chirpRequest);
+			System.out.print(chirp.getId() + chirp.getSubject() + chirp.getText() + chirp.getSender() + chirp.getRecipients());
 			result = this.createEditModelAndViewForward(chirp);
 		}
 
@@ -269,12 +308,12 @@ public class ChirpController extends AbstractController {
 
 	protected ModelAndView createEditModelAndViewForward(final Chirp chirp, final String message) {
 		ModelAndView result;
-		Chorbi chorbi;
-		Collection<Chorbi> recipients;
+		Actor actor;
+		Collection<Actor> recipients;
 
-		chorbi = this.chorbiService.findByPrincipal();
-		recipients = this.chorbiService.findAll();
-		recipients.remove(chorbi);
+		actor = this.actorService.findByPrincipal();
+		recipients = this.actorService.findAll();
+		recipients.remove(actor);
 
 		result = new ModelAndView("chirp/forward");
 		result.addObject("chirp", chirp);
