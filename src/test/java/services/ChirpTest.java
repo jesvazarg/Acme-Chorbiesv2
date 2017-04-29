@@ -1,6 +1,9 @@
 
 package services;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 
@@ -11,8 +14,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
+import domain.Actor;
 import domain.Chirp;
-import domain.Chorbi;
+import domain.Event;
 
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -22,45 +26,48 @@ import domain.Chorbi;
 public class ChirpTest extends AbstractTest {
 
 	@Autowired
-	private ChorbiService	chorbiService;
+	private ChirpService	chirpService;
 
 	@Autowired
-	private ChirpService	chirpService;
+	private ActorService	actorService;
+
+	@Autowired
+	private EventService	eventService;
 
 
 	// Tests ------------------------------------------------------------------
 
 	// REQUISITOS FUNCIONALES
-	//Chirp to another chorbi.
+	//Chirp to another actor.
 	//Browse the list of chirps that he or she's got, and reply to any of them.
 	//Browse the list of chirps that he or she's sent, and re-send any of them.
 	//Erase any of the chirps that he or she's got or sent.
 
-	//En este primer driver se comprueba que un chorbi pueda enviar un chirp a otro chorbi
+	//En este primer driver se comprueba que un actor pueda enviar un chirp a otro actor
 
 	@Test
 	public void driverEnvioDeChirpAChorbi() {
 		final Object testingData[][] = {
 			{
-				"chorbi1", "Envio1", "text1", this.chorbiService.findOne(128), null
+				"chorbi1", "Envio1", "text1", this.actorService.findOne(274), null
 			}, {
-				"chorbi1", "Envio2", "text2", this.chorbiService.findOne(129), null
+				"chorbi1", "Envio2", "text2", this.actorService.findOne(270), null
 			}, {
-				"chorbi2", "Envio3", "text3", this.chorbiService.findOne(130), null
+				"manager2", "Envio3", "text3", this.actorService.findOne(276), null
 			}, {
-				"", "Envio4", "text4", this.chorbiService.findOne(128), IllegalArgumentException.class
+				"", "Envio4", "text4", this.actorService.findOne(274), IllegalArgumentException.class
 			}, {
-				"admin", "Envio1", "text1", this.chorbiService.findOne(128), IllegalArgumentException.class
+				"chorbi1", "Envio1", "", this.actorService.findOne(273), ConstraintViolationException.class
 			}, {
-				"chorbi1", "", "text1", this.chorbiService.findOne(128), ConstraintViolationException.class
+				"chorbi1", "", "text1", this.actorService.findOne(270), ConstraintViolationException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.envioDeChirpAChorbi((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Chorbi) testingData[i][3], (Class<?>) testingData[i][4]);
+			this.envioDeChirpAChorbi((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Actor) testingData[i][3], (Class<?>) testingData[i][4]);
 	}
 
-	protected void envioDeChirpAChorbi(final String sender, final String subject, final String text, final Chorbi recipient, final Class<?> expected) {
+	protected void envioDeChirpAChorbi(final String sender, final String subject, final String text, final Actor recipient, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
@@ -83,19 +90,19 @@ public class ChirpTest extends AbstractTest {
 
 	}
 
-	//En este driver se comprueba que un chorbi puede responder un determinado chirp.
+	//En este driver se comprueba que un actor puede responder un determinado actor.
 
 	@Test
 	public void driverRespuestaDeChirp() {
 		final Object testingData[][] = {
 			{
-				"chorbi1", "Envio1", "text1", 134, null
+				"chorbi1", "Envio1", "text1", 287, null
 			}, {
-				"chorbi1", "Envio4", "text4", 133, IllegalArgumentException.class
+				"manager1", "Envio4", "text4", 279, IllegalArgumentException.class
 			}, {
-				"admin", "Envio1", "text1", 134, IllegalArgumentException.class
+				"chorbi1", "Envio1", "", 287, ConstraintViolationException.class
 			}, {
-				"chorbi1", "", "text1", 134, ConstraintViolationException.class
+				"chorbi1", "Envio2", "text1", 280, IllegalArgumentException.class
 			}
 		};
 
@@ -127,29 +134,27 @@ public class ChirpTest extends AbstractTest {
 
 	}
 
-	//En este driver se comprueba que un chorbi puede reenviar un chirp.
+	//En este driver se comprueba que un actor puede reenviar un chirp.
 
 	@Test
 	public void driverReenvioDeChirpAChorbi() {
 		final Object testingData[][] = {
 			{
-				"chorbi1", "Envio1", "text1", this.chorbiService.findOne(130), 133, null
+				"chorbi1", "Envio1", "text1", this.actorService.findOne(277), 279, null
 			}, {
-				"chorbi1", "Envio2", "text2", this.chorbiService.findOne(131), 133, null
+				"chorbi2", "Envio2", "text2", this.actorService.findOne(273), 280, null
 			}, {
-				"chorbi1", "Envio4", "text4", this.chorbiService.findOne(130), 134, IllegalArgumentException.class
+				"chorbi1", "Envio4", "text4", this.actorService.findOne(276), 280, IllegalArgumentException.class
 			}, {
-				"admin", "Envio1", "text1", this.chorbiService.findOne(130), 133, IllegalArgumentException.class
-			}, {
-				"chorbi1", "", "text1", this.chorbiService.findOne(130), 133, ConstraintViolationException.class
+				"chorbi1", "", "text1", this.actorService.findOne(275), 279, ConstraintViolationException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.reenvioDeChirpAChorbi((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Chorbi) testingData[i][3], (int) testingData[i][4], (Class<?>) testingData[i][5]);
+			this.reenvioDeChirpAChorbi((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Actor) testingData[i][3], (int) testingData[i][4], (Class<?>) testingData[i][5]);
 	}
 
-	protected void reenvioDeChirpAChorbi(final String sender, final String subject, final String text, final Chorbi recipient, final int chirp, final Class<?> expected) {
+	protected void reenvioDeChirpAChorbi(final String sender, final String subject, final String text, final Actor recipient, final int chirp, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
@@ -160,7 +165,9 @@ public class ChirpTest extends AbstractTest {
 
 			aux2.setSubject(subject);
 			aux2.setText(text);
-			//aux2.setRecipient(recipient);
+			final Collection<Actor> recipientAux = new HashSet<Actor>();
+			recipientAux.add(recipient);
+			aux2.setRecipients(recipientAux);
 
 			this.chirpService.save(aux2);
 
@@ -174,19 +181,19 @@ public class ChirpTest extends AbstractTest {
 
 	}
 
-	//En este primer driver se comprueba que un chorbi puede borrar un chirp suyo.
+	//En este driver se comprueba que un actor puede borrar un chirp suyo.
 
 	@Test
 	public void driverBorrarhirp() {
 		final Object testingData[][] = {
 			{
-				"chorbi1", 133, null
+				"chorbi1", 279, null
 			}, {
-				"", 133, IllegalArgumentException.class
+				"", 279, IllegalArgumentException.class
 			}, {
-				"admin", 133, IllegalArgumentException.class
+				"admin", 280, IllegalArgumentException.class
 			}, {
-				"chorbi5", 133, IllegalArgumentException.class
+				"manager1", 281, IllegalArgumentException.class
 			}
 		};
 
@@ -204,6 +211,50 @@ public class ChirpTest extends AbstractTest {
 			this.chirpService.delete(aux);
 
 			//this.chirpService.findAll();
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	//En este driver se comprueba que un manager puede enviar un broadcast.
+
+	@Test
+	public void driverEnvioDeBroadcastAChorbi() {
+		final Object testingData[][] = {
+			{
+				"manager1", "broadcastTitle1", "text1", this.eventService.findOne(297), null
+			}, {
+				"", "broadcastTitle2", "text4", this.eventService.findOne(297), IllegalArgumentException.class
+			}, {
+				"manager1", "broadcastTitle3", "", this.eventService.findOne(297), ConstraintViolationException.class
+			}, {
+				"manager1", "broadcastTitle4", "text2", this.eventService.findOne(300), IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.envioDeBroadcastAChorbi((String) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (Event) testingData[i][3], (Class<?>) testingData[i][4]);
+	}
+
+	protected void envioDeBroadcastAChorbi(final String sender, final String subject, final String text, final Event event, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate(sender);
+
+			final Chirp chirp = this.chirpService.broadcast(event);
+
+			chirp.setSubject(subject);
+			chirp.setText(text);
+
+			this.chirpService.save(chirp);
+
+			this.chirpService.findAll();
 			this.unauthenticate();
 		} catch (final Throwable oops) {
 			caught = oops.getClass();

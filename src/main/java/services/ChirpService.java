@@ -14,7 +14,6 @@ import org.springframework.util.Assert;
 import repositories.ChirpRepository;
 import domain.Actor;
 import domain.Chirp;
-import domain.Chorbi;
 import domain.Event;
 
 @Service
@@ -83,7 +82,7 @@ public class ChirpService {
 		return result;
 	}
 
-	public Chirp create(final Chorbi recipient) {
+	public Chirp create(final Actor recipient) {
 		Chirp result;
 		//final Chorbi chorbi;
 
@@ -112,7 +111,7 @@ public class ChirpService {
 		Chirp result;
 		final Actor actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);
-		//Assert.isTrue(chirp.getSender().equals(actor));
+		Assert.isTrue(chirp.getSender().equals(actor) && chirp.getCopy() == false);
 		result = new Chirp();
 		result.setSubject(chirp.getSubject());
 		result.setText(chirp.getText());
@@ -125,7 +124,7 @@ public class ChirpService {
 
 	public Chirp reply(final Chirp chirp) {
 		Assert.notNull(chirp);
-		Assert.isTrue(chirp.getRecipients().contains(this.actorService.findByPrincipal()));
+		Assert.isTrue(chirp.getRecipients().contains(this.actorService.findByPrincipal()) && chirp.getCopy() == true);
 		final Chirp result = this.create();
 		final Collection<Actor> recipientsAux = result.getRecipients();
 		recipientsAux.add(chirp.getSender());
@@ -152,7 +151,7 @@ public class ChirpService {
 		Assert.notNull(chirp);
 		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
 		final Actor actor = this.actorService.findByPrincipal();
-		Assert.isTrue(chirp.getSender().equals(actor) || chirp.getRecipients().contains(actor));
+		Assert.isTrue((chirp.getSender().equals(actor) && chirp.getCopy() == false) || (chirp.getRecipients().contains(actor) && chirp.getCopy() == true));
 
 		if (chirp.getRecipients().contains(actor) && chirp.getRecipients().size() > 1) {
 			Collection<Actor> recipientsAux = new HashSet<Actor>();
@@ -179,7 +178,7 @@ public class ChirpService {
 		copy.setSender(chirp.getSender());
 		copy.setSubject(chirp.getSubject());
 		copy.setText(chirp.getText());
-		System.out.println(copy);
+		//System.out.println(copy);
 		chirp = this.chirpRepository.save(chirp);
 		this.chirpRepository.save(copy);
 		//} else {
