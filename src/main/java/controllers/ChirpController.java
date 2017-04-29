@@ -94,7 +94,7 @@ public class ChirpController extends AbstractController {
 			return result = new ModelAndView("redirect:../../welcome/index.do");
 		/*----*/
 		else {
-			if (chirp.getRecipients().equals(actor))
+			if (chirp.getRecipients().contains(actor))
 				isRecipient = true;
 
 			result = new ModelAndView("chirp/display");

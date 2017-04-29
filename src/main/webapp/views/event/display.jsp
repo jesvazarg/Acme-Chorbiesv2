@@ -40,11 +40,13 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MANAGER')">
+		<jstl:if test="${isManager==true}">
 			<li>
 				<div>
 					<acme:button code="chirp.broadcast" url="chirp/broadcast.do?eventId=${event.id}"/>
 				</div>
 		</li>
+		</jstl:if>
 		</security:authorize>
 		
 	</ul>

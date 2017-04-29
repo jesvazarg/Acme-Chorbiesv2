@@ -103,11 +103,16 @@ public class EventController extends AbstractController {
 	public ModelAndView display(final int eventId) {
 		ModelAndView result;
 		Event event;
+		Boolean isManager = false;
+		final Actor actor = this.actorService.findByPrincipal();
 
 		event = this.eventService.findOne(eventId);
 
+		if (event.getManager().equals(actor))
+			isManager = true;
 		result = new ModelAndView("event/display");
 		result.addObject("event", event);
+		result.addObject("isManager", isManager);
 		result.addObject("requestURI", "event/display.do");
 
 		return result;

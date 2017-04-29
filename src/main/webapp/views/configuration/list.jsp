@@ -23,11 +23,14 @@
 
 </display:table>
 
+<div>
+	<a href="configuration/administrator/edit.do"><spring:message
+		code="configuration.editConfiguration"/>
+	</a>
+</div>
 
-<a href="configuration/administrator/edit.do"><spring:message
-	code="configuration.editConfiguration"/>
-</a>
-
-<a href="configuration/administrator/collect.do"><spring:message
-	code="configuration.collect"/>
-</a>
+<div>
+	<a href="configuration/administrator/collect.do"><spring:message
+		code="configuration.collect"/>
+	</a>
+</div>

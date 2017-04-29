@@ -98,35 +98,24 @@ public class EventService {
 		this.creditCardService.checkCreditCard(principal.getCreditCard());
 
 		//Aquí va el cobro del fee al manager logeado
+		if (event.getId() == 0) {
+			final Configuration confAux = this.configurationService.findConfiguration();
+			final Calendar fechaSistema = Calendar.getInstance();
+			final Calendar managerMoment = Calendar.getInstance();
 
-		final Configuration confAux = this.configurationService.findConfiguration();
-		final Calendar fechaSistema = Calendar.getInstance();
-		final Calendar managerMoment = Calendar.getInstance();
+			final Date date = principal.getMoment();
+			managerMoment.setTime(date);
 
-		final Date date = principal.getMoment();
-		managerMoment.setTime(date);
+			final Integer auxD1 = fechaSistema.get(Calendar.DAY_OF_MONTH);
+			final Integer auxD2 = managerMoment.get(Calendar.DAY_OF_MONTH);
 
-		final Integer auxD1 = fechaSistema.get(Calendar.DAY_OF_MONTH);
-		final Integer auxD2 = managerMoment.get(Calendar.DAY_OF_MONTH);
+			final Integer auxM1 = fechaSistema.get(Calendar.MONTH);
+			final Integer auxM2 = managerMoment.get(Calendar.MONTH);
 
-		final Integer auxM1 = fechaSistema.get(Calendar.MONTH);
-		final Integer auxM2 = managerMoment.get(Calendar.MONTH);
+			final Integer auxY1 = fechaSistema.get(Calendar.YEAR);
+			final Integer auxY2 = managerMoment.get(Calendar.YEAR);
 
-		final Integer auxY1 = fechaSistema.get(Calendar.YEAR);
-		final Integer auxY2 = managerMoment.get(Calendar.YEAR);
-
-		if (auxY1 > auxY2) {
-			final Double am = principal.getAmount() + confAux.getFeeManager();
-			principal.setAmount(am);
-
-			final Calendar cl = Calendar.getInstance();
-			cl.setTime(principal.getMoment());
-			cl.add(Calendar.DAY_OF_YEAR, 30);
-			principal.setMoment(cl.getTime());
-			this.managerService.save(principal);
-
-		} else if (auxY1.compareTo(auxY2) == 0)
-			if (auxM1.compareTo(auxM2) > 0 && auxD1.compareTo(auxD2) > 0) {
+			if (auxY1 > auxY2) {
 				final Double am = principal.getAmount() + confAux.getFeeManager();
 				principal.setAmount(am);
 
@@ -135,7 +124,19 @@ public class EventService {
 				cl.add(Calendar.DAY_OF_YEAR, 30);
 				principal.setMoment(cl.getTime());
 				this.managerService.save(principal);
-			}
+
+			} else if (auxY1.compareTo(auxY2) == 0)
+				if (auxM1.compareTo(auxM2) > 0 && auxD1.compareTo(auxD2) > 0) {
+					final Double am = principal.getAmount() + confAux.getFeeManager();
+					principal.setAmount(am);
+
+					final Calendar cl = Calendar.getInstance();
+					cl.setTime(principal.getMoment());
+					cl.add(Calendar.DAY_OF_YEAR, 30);
+					principal.setMoment(cl.getTime());
+					this.managerService.save(principal);
+				}
+		}
 
 		//Aquí va el envio de los chirps a todos los chorbies registrados
 		if (event.getId() != 0) {

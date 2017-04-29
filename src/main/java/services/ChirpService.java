@@ -110,10 +110,9 @@ public class ChirpService {
 	public Chirp forward(final Chirp chirp) {
 		Assert.notNull(chirp);
 		Chirp result;
-		//final Chorbi chorbi = this.chorbiService.findByPrincipal();
 		final Actor actor = this.actorService.findByPrincipal();
 		Assert.notNull(actor);
-		Assert.isTrue(chirp.getSender().equals(actor));
+		//Assert.isTrue(chirp.getSender().equals(actor));
 		result = new Chirp();
 		result.setSubject(chirp.getSubject());
 		result.setText(chirp.getText());
