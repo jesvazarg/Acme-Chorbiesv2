@@ -34,6 +34,11 @@ public class EventTest extends AbstractTest {
 	// Every time he or she registers an event, the system will simulate that he or she's charged a 1.00 euro fee.
 
 	// Crear un nuevo evento
+	//	, {
+	//		"manager1", "FUERA!!", "15/10/2017 00:00", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
+	//	}, {
+	//		"manager2", "Examen!!", "05/03/2016 10:30", "Junio de 2016", "http://image.com", 25, IllegalArgumentException.class
+	//	}
 	@Test
 	public void driverCreateEvent() {
 		final Object testingData[][] = {
@@ -45,10 +50,6 @@ public class EventTest extends AbstractTest {
 				"chorbi1", "Prueba", "21/11/2017 00:00", "pruebecita", "http://image.com", 2, IllegalArgumentException.class
 			}, {
 				"manager3", "", "15/10/2017 00:00", "", "http://image.com", 8, ConstraintViolationException.class
-			}, {
-				"manager1", "FUERA!!", "15/10/2017 00:00", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
-			}, {
-				"manager2", "Examen!!", "05/03/2016 10:30", "Junio de 2016", "http://image.com", 25, IllegalArgumentException.class
 			}
 		};
 
@@ -90,6 +91,12 @@ public class EventTest extends AbstractTest {
 	}
 
 	// Editar un evento
+
+	//	, {
+	//		"manager2", 300, "FUERA!!", "15/10/2017 00:00", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
+	//	}, {
+	//		"manager1", 297, "Examen!!", "05/03/2016 10:30", "Junio de 2016", "http://image.com", 25, IllegalArgumentException.class
+	//	}
 	@Test
 	public void driverEditEvent() {
 		final Object testingData[][] = {
@@ -101,10 +108,6 @@ public class EventTest extends AbstractTest {
 				"manager3", 298, "Prueba", "21/11/2017 00:00", "pruebecita", "http://image.com", 2, IllegalArgumentException.class
 			}, {
 				"manager1", 299, "", "15/10/2017 00:00", "", "http://image.com", 8, ConstraintViolationException.class
-			}, {
-				"manager2", 300, "FUERA!!", "15/10/2017 00:00", "Si me quereis irse", "http://image.com", -50, ConstraintViolationException.class
-			}, {
-				"manager1", 297, "Examen!!", "05/03/2016 10:30", "Junio de 2016", "http://image.com", 25, IllegalArgumentException.class
 			}
 		};
 
