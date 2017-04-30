@@ -28,3 +28,9 @@
 <security:authorize access="isAnonymous()">
 	<img src="${banner}" style = "max-width: 200 px; max-height: 200px;"/>
 </security:authorize>
+
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"<spring:message code="mensaje.script.cookies"/>","dismiss":"Aceptar","learnMore":"Ver más","link":"http://www.google.com/intl/es-419/policies/technologies/types/","theme":"dark-bottom"};
+</script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+
