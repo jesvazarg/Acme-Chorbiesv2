@@ -66,13 +66,8 @@ public class CreditCardService {
 		Assert.notNull(creditCard);
 		CreditCard result;
 		Actor principal;
-		Calendar calendar;
 
 		this.checkCreditCard(creditCard);
-
-		calendar = Calendar.getInstance();
-		calendar.set(Calendar.MILLISECOND, -10);
-		creditCard.setMoment(calendar.getTime());
 
 		result = this.creditCardRepository.save(creditCard);
 
@@ -87,13 +82,8 @@ public class CreditCardService {
 	public CreditCard saveRegister(final CreditCard creditCard) {
 		Assert.notNull(creditCard);
 		CreditCard result;
-		Calendar calendar;
 
 		this.checkCreditCard(creditCard);
-
-		calendar = Calendar.getInstance();
-		calendar.set(Calendar.MILLISECOND, -10);
-		creditCard.setMoment(calendar.getTime());
 
 		result = this.creditCardRepository.save(creditCard);
 

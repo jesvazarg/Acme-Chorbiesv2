@@ -1,24 +1,18 @@
 
 package domain;
 
-import java.util.Date;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -40,20 +34,8 @@ public class CreditCard extends DomainEntity {
 	private Integer	expirationMonth;
 	private Integer	expirationYear;
 	private Integer	cvv;
-	private Date	moment;
 
 
-	@Past
-	@NotNull
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
-	public Date getMoment() {
-		return this.moment;
-	}
-
-	public void setMoment(final Date moment) {
-		this.moment = moment;
-	}
 	@NotBlank
 	public String getHolderName() {
 		return this.holderName;

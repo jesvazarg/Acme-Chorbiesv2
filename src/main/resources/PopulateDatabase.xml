@@ -230,7 +230,6 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2019" /> 
 		<property name="cvv" value="356" /> 
-		<property name="moment" value="02/04/2017 12:00" />
 	</bean>
 	<bean id="creditCard2" class="domain.CreditCard">
 		<property name="holderName" value="Enrique Pastor" /> 
@@ -239,7 +238,6 @@
 		<property name="expirationMonth" value="3" /> 
 		<property name="expirationYear" value="2020" /> 
 		<property name="cvv" value="425" /> 
-		<property name="moment" value="01/10/2017 12:00" />
 	</bean>
 	<bean id="creditCard3" class="domain.CreditCard">
 		<property name="holderName" value="Antonio Recio" /> 
@@ -248,7 +246,6 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
-		<property name="moment" value="04/16/2017 12:00" />
 	</bean>
 	
 	<bean id="creditCard4" class="domain.CreditCard">
@@ -258,7 +255,6 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
-		<property name="moment" value="04/17/2017 12:00" />
 	</bean>
 	
 	<bean id="creditCard5" class="domain.CreditCard">
@@ -268,7 +264,6 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
-		<property name="moment" value="04/18/2017 12:00" />
 	</bean>
 	
 	<bean id="creditCard6" class="domain.CreditCard">
@@ -278,7 +273,6 @@
 		<property name="expirationMonth" value="8" /> 
 		<property name="expirationYear" value="2030" /> 
 		<property name="cvv" value="678" /> 
-		<property name="moment" value="02/21/2017 12:00" />
 	</bean>
 	
 	<!-- Sense -->
