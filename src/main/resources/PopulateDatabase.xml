@@ -426,7 +426,6 @@
 		<property name="email" value="admin@gmail.com" />
 		<property name="phone" value="0000" />
 		<property name="userAccount" ref="userAccount1" />
-		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -450,7 +449,6 @@
 		<property name="vat" value="ES-SVQ" />
 		<property name="amount" value="0.0" />
 		<property name="creditCard" ref="creditCard4" />
-		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -479,7 +477,6 @@
 		<property name="vat" value="EU-SC" />
 		<property name="amount" value="1.0" />
 		<property name="creditCard" ref="creditCard5" />
-		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 
@@ -507,7 +504,6 @@
 		<property name="vat" value="UE-NY" />
 		<property name="amount" value="2.0" />
 		<property name="creditCard" ref="creditCard6" />
-		<property name="moment" value="02/04/2017 12:00" />
 		<property name="sentChirps">
 			<list>
 

@@ -102,42 +102,12 @@ public class EventService {
 		if (event.getId() == 0) {
 			event.setAvailableSeats(event.getSeats() - event.getChorbies().size());
 			final Configuration confAux = this.configurationService.findConfiguration();
-			final Calendar fechaSistema = Calendar.getInstance();
-			final Calendar managerMoment = Calendar.getInstance();
 
-			final Date date = principal.getMoment();
-			managerMoment.setTime(date);
+			final Double am = principal.getAmount() + confAux.getFeeManager();
+			principal.setAmount(am);
 
-			final Integer auxD1 = fechaSistema.get(Calendar.DAY_OF_MONTH);
-			final Integer auxD2 = managerMoment.get(Calendar.DAY_OF_MONTH);
+			this.managerService.save(principal);
 
-			final Integer auxM1 = fechaSistema.get(Calendar.MONTH);
-			final Integer auxM2 = managerMoment.get(Calendar.MONTH);
-
-			final Integer auxY1 = fechaSistema.get(Calendar.YEAR);
-			final Integer auxY2 = managerMoment.get(Calendar.YEAR);
-
-			if (auxY1 > auxY2) {
-				final Double am = principal.getAmount() + confAux.getFeeManager();
-				principal.setAmount(am);
-
-				final Calendar cl = Calendar.getInstance();
-				cl.setTime(principal.getMoment());
-				cl.add(Calendar.DAY_OF_YEAR, 30);
-				principal.setMoment(cl.getTime());
-				this.managerService.save(principal);
-
-			} else if (auxY1.compareTo(auxY2) == 0)
-				if (auxM1.compareTo(auxM2) > 0 && auxD1.compareTo(auxD2) > 0) {
-					final Double am = principal.getAmount() + confAux.getFeeManager();
-					principal.setAmount(am);
-
-					final Calendar cl = Calendar.getInstance();
-					cl.setTime(principal.getMoment());
-					cl.add(Calendar.DAY_OF_YEAR, 30);
-					principal.setMoment(cl.getTime());
-					this.managerService.save(principal);
-				}
 		}
 
 		//Aquí va el envio de los chirps a todos los chorbies registrados

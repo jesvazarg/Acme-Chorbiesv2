@@ -43,18 +43,17 @@ public class Chorbi extends Actor {
 	private Date		birthDate;
 	private String		genre;
 	private Coordinate	coordinate;
-	private Double amount;
-	
-	
+	private Double		amount;
+	private Date		moment;
 
 
 	@Min(0)
 	@NotNull
 	public Double getAmount() {
-		return amount;
+		return this.amount;
 	}
-	
-	public void setAmount(Double amount) {
+
+	public void setAmount(final Double amount) {
 		this.amount = amount;
 	}
 	@NotBlank
@@ -108,6 +107,18 @@ public class Chorbi extends Actor {
 	}
 	public void setCoordinate(final Coordinate coordinate) {
 		this.coordinate = coordinate;
+	}
+
+	@Past
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	public Date getMoment() {
+		return this.moment;
+	}
+
+	public void setMoment(final Date moment) {
+		this.moment = moment;
 	}
 
 
