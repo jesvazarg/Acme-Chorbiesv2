@@ -160,4 +160,136 @@ public class AdministratorTest extends AbstractTest {
 
 	}
 
+	// REQUISITOS FUNCIONALES
+	// Change the fee of chorbies. 
+
+	//En este test comprobaremos el caso de uso en el cual el administrador
+	//cambia el fee que se le cobra mensualmente a los chorbies
+
+	@Test
+	public void driverCambiarFeeChorbies() {
+		final Object testingData[][] = {
+			{
+				"admin", 3.0, null
+			}, {
+				"admin", 4.0, null
+			}, {
+				"", 5.0, IllegalArgumentException.class
+			}, {
+				"chorbi4", 4.0, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.cambiarFeeChorbies((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	protected void cambiarFeeChorbies(final String user, final Double feeChorbies, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate(user);
+
+			final Configuration configuration = this.configurationService.findConfiguration();
+			configuration.setFeeChorbi(feeChorbies);
+			this.configurationService.save(configuration);
+
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	// REQUISITOS FUNCIONALES
+	// Change the fee of managers. 
+
+	//En este test comprobaremos el caso de uso en el cual el administrador
+	//cambia el fee que se le cobra  a los managers
+
+	@Test
+	public void driverCambiarFeeManagers() {
+		final Object testingData[][] = {
+			{
+				"admin", 3.0, null
+			}, {
+				"admin", 4.0, null
+			}, {
+				"", 5.0, IllegalArgumentException.class
+			}, {
+				"chorbi4", 4.0, IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.cambiarFeeManagers((String) testingData[i][0], (Double) testingData[i][1], (Class<?>) testingData[i][2]);
+	}
+
+	protected void cambiarFeeManagers(final String user, final Double feeManagers, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate(user);
+
+			final Configuration configuration = this.configurationService.findConfiguration();
+			configuration.setFeeManager(feeManagers);
+			this.configurationService.save(configuration);
+
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	// REQUISITOS FUNCIONALES
+	// Collect fees of chorbies. 
+
+	//En este test comprobaremos el caso de uso en el cual el administrador
+	//cobra el fee  a los chorbies
+
+	@Test
+	public void driverCobrarFeeChorbies() {
+		final Object testingData[][] = {
+			{
+				"admin", null
+			}, {
+				"admin", null
+			}, {
+				"", IllegalArgumentException.class
+			}, {
+				"chorbi4", IllegalArgumentException.class
+			}
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.cobrarFeeChorbies((String) testingData[i][0], (Class<?>) testingData[i][1]);
+	}
+
+	protected void cobrarFeeChorbies(final String user, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate(user);
+			//Assert.isTrue(chorbiService.findOne(chorbiId))
+			this.configurationService.cobrarAChorbies();
+
+			//this.configurationService.save(configuration);
+
+			this.unauthenticate();
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
 }

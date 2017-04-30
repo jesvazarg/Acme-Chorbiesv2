@@ -96,6 +96,7 @@ public class ConfigurationService {
 
 	public void cobrarAChorbies() {
 		Collection<Chorbi> chorbies;
+		Assert.notNull(this.administratorService.findByPrincipal());
 		chorbies = this.chorbiService.findAll();
 		final Configuration confAux = this.findConfiguration();
 		final Calendar fechaSistema = Calendar.getInstance();

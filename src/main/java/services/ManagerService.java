@@ -84,6 +84,10 @@ public class ManagerService {
 		result.setEvents(events);
 		result.setAmount(amount);
 
+		final Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MILLISECOND, -10);
+		result.setMoment(calendar.getTime());
+
 		return result;
 	}
 
