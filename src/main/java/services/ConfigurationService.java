@@ -126,7 +126,7 @@ public class ConfigurationService {
 				this.chorbiService.save(chor);
 
 			} else if (auxY1.compareTo(auxY2) == 0)
-				if (auxM1.compareTo(auxM2) > 0 && auxD1.compareTo(auxD2) > 0) {
+				if (auxM1.compareTo(auxM2) > 0 && (auxD1.compareTo(auxD2) > 0 || auxD1.compareTo(auxD2) == 0)) {
 					final Double am = chor.getAmount() + confAux.getFeeChorbi();
 					chor.setAmount(am);
 
