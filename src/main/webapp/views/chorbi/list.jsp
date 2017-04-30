@@ -68,12 +68,6 @@
 			</jstl:choose>
 		</display:column>
 		
-		<spring:message code="sense.comment" var="commentHeader" />
-		<display:column title="${commentHeader}">
-			<jstl:if test="${haveLike==true}">
-				<a href="sense/chorbi/comment.do?chorbiId=${chorbi.id}"><spring:message code="sense.comment"/></a>
-			</jstl:if>
-		</display:column>
 	</security:authorize>
 	
 </display:table>
