@@ -22,7 +22,7 @@ import domain.Event;
 import domain.Manager;
 
 @Controller
-@RequestMapping("/event/manager")
+@RequestMapping("/event/managerUser")
 public class EventManagerController extends AbstractController {
 
 	// Service ---------------------------------------------------------------		
@@ -62,7 +62,7 @@ public class EventManagerController extends AbstractController {
 		result.addObject("principal", principal);
 		result.addObject("hoy", hoy);
 		result.addObject("mes", mes);
-		result.addObject("requestURI", "event/manager/list.do");
+		result.addObject("requestURI", "event/managerUser/list.do");
 
 		return result;
 	}
@@ -140,7 +140,7 @@ public class EventManagerController extends AbstractController {
 
 		result = new ModelAndView("event/edit");
 		result.addObject("event", event);
-		result.addObject("requestURI", "event/manager/edit.do");
+		result.addObject("requestURI", "event/managerUser/edit.do");
 		result.addObject("message", message);
 
 		return result;
