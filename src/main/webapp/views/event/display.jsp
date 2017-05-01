@@ -7,6 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div>
 	<ul>
@@ -40,7 +41,7 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('MANAGER')">
-		<jstl:if test="${isManager==true}">
+		<jstl:if test="${isManager==true && fn:length(event.chorbies)>0}">
 			<li>
 				<div>
 					<acme:button code="chirp.broadcast" url="chirp/broadcast.do?eventId=${event.id}"/>

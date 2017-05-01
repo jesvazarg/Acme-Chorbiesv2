@@ -254,6 +254,9 @@ public class ChirpController extends AbstractController {
 		//final Chorbi recipient = this.chorbiService.findByPrincipal();
 		final Event event = this.eventService.findOne(eventId);
 
+		if (event.getChorbies().size() < 1 || !event.getManager().equals(this.actorService.findByPrincipal()))
+			return result = new ModelAndView("redirect:../../welcome/index.do");
+
 		final Chirp chirp = this.chirpService.broadcast(event);
 		result = this.createEditModelAndView(chirp);
 
