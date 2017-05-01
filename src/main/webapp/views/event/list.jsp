@@ -48,7 +48,7 @@
 			<spring:message code="event.edit" var="editHeader" />
 			<display:column title="${editHeader}" >
 				<jstl:if test="${event.manager.id == principal.id}">
-					<a href="event/manager/edit.do?eventId=${event.id}"><spring:message code="event.edit"/></a>
+					<a href="event/managerUser/edit.do?eventId=${event.id}"><spring:message code="event.edit"/></a>
 				</jstl:if>
 			</display:column>
 		</security:authorize>

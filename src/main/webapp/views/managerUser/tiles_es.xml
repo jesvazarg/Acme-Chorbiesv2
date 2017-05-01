@@ -16,19 +16,19 @@
       
 <tiles-definitions>
 
-	<definition name="manager/list" extends="master.page">	
+	<definition name="managerUser/list" extends="master.page">	
 		<put-attribute name="title" value="Lista de gerentes" />
-		<put-attribute name="body" value="/views/manager/list.jsp" />
+		<put-attribute name="body" value="/views/managerUser/list.jsp" />
 	</definition>
 	
-	<definition name="manager/create" extends="master.page">	
+	<definition name="managerUser/create" extends="master.page">	
 		<put-attribute name="title" value="Crear gerente" />
-		<put-attribute name="body" value="/views/manager/edit.jsp" />
+		<put-attribute name="body" value="/views/managerUser/edit.jsp" />
 	</definition>
 	
-	<definition name="manager/edit" extends="master.page">	
+	<definition name="managerUser/edit" extends="master.page">	
 		<put-attribute name="title" value="Editar gerente" />
-		<put-attribute name="body" value="/views/manager/edit.jsp" />
+		<put-attribute name="body" value="/views/managerUser/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

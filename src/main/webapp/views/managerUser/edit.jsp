@@ -38,7 +38,7 @@
 		<acme:input code="creditCard.cvv" path="cvv" type="number" min="100" max="999" />
 	
 	
-	<jstl:if test="${requestURI == 'manager/create.do'}">
+	<jstl:if test="${requestURI == 'managerUser/create.do'}">
 		<br/>
 		<form:checkbox path="isAgree"/>
 		<form:label path="isAgree">

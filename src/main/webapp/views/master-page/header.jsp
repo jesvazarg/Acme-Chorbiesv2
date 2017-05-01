@@ -43,8 +43,8 @@
 						<li><a href="event/chorbi/list.do"><spring:message code="master.page.events.listChorbi" /></a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
-						<li><a href="event/manager/list.do"><spring:message code="master.page.events.listManager" /></a></li>
-						<li><a href="event/manager/create.do"><spring:message code="master.page.events.create" /></a></li>
+						<li><a href="event/managerUser/list.do"><spring:message code="master.page.events.listManager" /></a></li>
+						<li><a href="event/managerUser/create.do"><spring:message code="master.page.events.create" /></a></li>
 					</security:authorize>
 				</ul>
 			</li>
@@ -61,7 +61,7 @@
 			<ul>
 				<li class="arrow"></li>
 				<li><a  href="chorbi/create.do"><spring:message code="master.page.chorbi.create" /></a></li>
-				<li><a  href="manager/create.do"><spring:message code="master.page.manager.create" /></a></li>
+				<li><a  href="managerUser/create.do"><spring:message code="master.page.manager.create" /></a></li>
 			</ul>
 		</li>
 		<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
@@ -96,7 +96,7 @@
 							<li><a href="chorbi/edit.do"><spring:message code="master.page.chorbi.edit" /></a></li>
 						</security:authorize>
 						<security:authorize access="hasRole('MANAGER')">
-							<li><a href="manager/edit.do"><spring:message code="master.page.chorbi.edit" /></a></li>
+							<li><a href="managerUser/edit.do"><spring:message code="master.page.chorbi.edit" /></a></li>
 						</security:authorize>				
 					</security:authorize>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>

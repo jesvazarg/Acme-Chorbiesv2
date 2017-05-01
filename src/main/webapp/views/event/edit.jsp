@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form method="post" action="event/manager/edit.do" modelAttribute="event" >
+<form:form method="post" action="event/managerUser/edit.do" modelAttribute="event" >
 	
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -35,5 +35,5 @@
 	<jstl:if test="${event.id != 0}">
 		<acme:submit name="delete" code="event.delete" />
 	</jstl:if>
-	<acme:cancel url="event/manager/list.do" code="event.cancel" />
+	<acme:cancel url="event/managerUser/list.do" code="event.cancel" />
 </form:form>
