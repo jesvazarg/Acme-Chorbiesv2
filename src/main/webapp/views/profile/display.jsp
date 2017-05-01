@@ -89,12 +89,14 @@
 	
 </div>
 
-<security:authorize access="hasAnyRole('CHORBI', 'MANAGER')">
+<security:authorize access="hasAnyRole('CHORBI', 'MANAGER','ADMIN')">
 	<jstl:if test="${sameActor==false}">
 	<div>
 		<acme:button code="chirp.create" url="chirp/create.do?chorbieId=${profile.id}"/>
 	</div>
 	</jstl:if>
+</security:authorize>
+<security:authorize access="hasAnyRole('CHORBI', 'MANAGER')">
 	<jstl:if test="${sameActor==true}">
 		<jstl:if test="${profile.creditCard != null}">
 			<acme:button code="profile.creditCard.display" url="creditCard/actor/display.do"/>

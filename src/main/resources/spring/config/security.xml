@@ -110,16 +110,17 @@
 		<security:intercept-url pattern="/chorbi/list.do" access="hasAnyRole('ADMIN','CHORBI','MANAGER')" />
 		<security:intercept-url pattern="/profile/myProfile.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" />
 		<security:intercept-url pattern="/profile/display.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" />
+		<security:intercept-url pattern="/chirp/create.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" /> 
+		<security:intercept-url pattern="/chirp/listIn.do" access="isAuthenticated()" /> 
+		<security:intercept-url pattern="/chirp/listOut.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" /> 
+		<security:intercept-url pattern="/chirp/display.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" /> 
+		<security:intercept-url pattern="/chirp/reply.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" /> 
+		<security:intercept-url pattern="/chirp/forward.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" /> 
+		<security:intercept-url pattern="/chirp/delete.do" access="hasAnyRole('ADMIN','CHORBI', 'MANAGER')" /> 
 		
 		<!-- isAuthenticated -->   
 	
-		<security:intercept-url pattern="/chirp/create.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/chirp/listIn.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/chirp/listOut.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/chirp/display.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/chirp/reply.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/chirp/forward.do" access="isAuthenticated()" /> 
-		<security:intercept-url pattern="/chirp/delete.do" access="isAuthenticated()" /> 
+		
 		
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
