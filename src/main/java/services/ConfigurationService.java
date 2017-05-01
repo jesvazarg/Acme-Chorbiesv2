@@ -126,7 +126,16 @@ public class ConfigurationService {
 				this.chorbiService.save(chor);
 
 			} else if (auxY1.compareTo(auxY2) == 0)
-				if (auxM1.compareTo(auxM2) > 0 && (auxD1.compareTo(auxD2) > 0 || auxD1.compareTo(auxD2) == 0)) {
+				if (auxM1 - auxM2 >= 2) {
+					final Double am = chor.getAmount() + confAux.getFeeChorbi();
+					chor.setAmount(am);
+
+					final Calendar cl = Calendar.getInstance();
+					cl.setTime(chor.getMoment());
+					cl.add(Calendar.DAY_OF_YEAR, 30);
+					chor.setMoment(cl.getTime());
+					this.chorbiService.save(chor);
+				} else if (auxM1.compareTo(auxM2) > 0 && (auxD1.compareTo(auxD2) > 0 || auxD1.compareTo(auxD2) == 0)) {
 					final Double am = chor.getAmount() + confAux.getFeeChorbi();
 					chor.setAmount(am);
 
