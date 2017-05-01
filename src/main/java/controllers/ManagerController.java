@@ -19,7 +19,7 @@ import domain.Manager;
 import forms.CreateManagerForm;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/managerUser")
 public class ManagerController extends AbstractController {
 
 	// Service ---------------------------------------------------------------
@@ -46,7 +46,7 @@ public class ManagerController extends AbstractController {
 
 		result = new ModelAndView("chorbi/list");
 		result.addObject("managers", managers);
-		result.addObject("requestURI", "manager/list.do");
+		result.addObject("requestURI", "managerUser/list.do");
 
 		return result;
 	}
@@ -140,9 +140,9 @@ public class ManagerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final CreateManagerForm createManagerForm, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("manager/create");
+		result = new ModelAndView("managerUser/create");
 		result.addObject("createManagerForm", createManagerForm);
-		result.addObject("requestURI", "manager/create.do");
+		result.addObject("requestURI", "managerUser/create.do");
 		result.addObject("message", message);
 
 		return result;
@@ -159,9 +159,9 @@ public class ManagerController extends AbstractController {
 	protected ModelAndView editionEditModelAndView(final CreateManagerForm createManagerForm, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("manager/edit");
+		result = new ModelAndView("managerUser/edit");
 		result.addObject("createManagerForm", createManagerForm);
-		result.addObject("requestURI", "manager/edit.do");
+		result.addObject("requestURI", "managerUser/edit.do");
 		result.addObject("message", message);
 
 		return result;
