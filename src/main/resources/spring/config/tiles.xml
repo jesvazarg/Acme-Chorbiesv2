@@ -33,7 +33,7 @@
 		<value>/views/profile/tiles.xml</value>
 		<value>/views/sense/tiles.xml</value>
 		<value>/views/searchTemplate/tiles.xml</value>
-		<value>/views/manager/tiles.xml</value>
+		<value>/views/managerUser/tiles.xml</value>
 	</util:list>
 
 </beans>

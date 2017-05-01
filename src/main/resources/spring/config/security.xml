@@ -43,7 +43,7 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/chorbi/create.do" access="permitAll" /> 
-		<security:intercept-url pattern="/manager/create.do" access="permitAll" /> 
+		<security:intercept-url pattern="/managerUser/create.do" access="permitAll" /> 
 		
 		<security:intercept-url pattern="/event/list.do" access="permitAll" />
 		<security:intercept-url pattern="/event/listRecently.do" access="permitAll" />
@@ -97,11 +97,11 @@
 		
 		<!-- MANAGER -->
 		
-		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/event/manager/delete.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/event/manager/list.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/manager/edit.do" access="hasRole('MANAGER')" /> 
+		<security:intercept-url pattern="/event/managerUser/create.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/managerUser/edit.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/managerUser/delete.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/managerUser/list.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/managerUser/edit.do" access="hasRole('MANAGER')" /> 
 		<security:intercept-url pattern="/chirp/broadcast.do" access="hasRole('MANAGER')" /> 
 		<security:intercept-url pattern="/chirp/listBroadcastSent.do" access="hasRole('MANAGER')" /> 
 		
