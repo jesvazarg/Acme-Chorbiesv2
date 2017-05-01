@@ -117,10 +117,10 @@ public class BannerTest extends AbstractTest {
 		};
 
 		for (int i = 0; i < testingData.length; i++)
-			this.borrarBanner((String) testingData[i][0], (int) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+			this.editarBanner((String) testingData[i][0], (int) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
 
-	protected void borrarBanner(final String user, final int bannerId, final String picture, final Class<?> expected) {
+	protected void editarBanner(final String user, final int bannerId, final String picture, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
