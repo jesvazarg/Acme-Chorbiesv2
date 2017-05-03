@@ -289,7 +289,13 @@ public class ChorbiService {
 		final List<Long> arrayMin = this.chorbiRepository.minStarsPerChorbi();
 		final List<Long> arrayMax = this.chorbiRepository.maxStarsPerChorbi();
 		Double avg = this.chorbiRepository.avgStarsPerChorbi();
+		if (avg == null)
+			avg = 0.0;
 		avg = Math.round(avg * 100) / 100.0;
+		if (arrayMin.isEmpty())
+			arrayMin.add((long) 0);
+		if (arrayMax.isEmpty())
+			arrayMax.add((long) 0);
 		final String[] result = {
 			arrayMin.get(0).toString(), arrayMax.get(0).toString(), avg.toString()
 		};
