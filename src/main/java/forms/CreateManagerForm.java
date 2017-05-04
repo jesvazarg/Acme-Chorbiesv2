@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 public class CreateManagerForm {
 
@@ -32,6 +34,7 @@ public class CreateManagerForm {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getHolderName() {
 		return this.holderName;
 	}
@@ -40,6 +43,7 @@ public class CreateManagerForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getBrandName() {
 		return this.brandName;
 	}
@@ -49,6 +53,7 @@ public class CreateManagerForm {
 
 	@CreditCardNumber
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getNumber() {
 		return this.number;
 	}
@@ -84,6 +89,7 @@ public class CreateManagerForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getCompany() {
 		return this.company;
 	}
@@ -93,6 +99,7 @@ public class CreateManagerForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getVat() {
 		return this.vat;
 	}
@@ -103,6 +110,7 @@ public class CreateManagerForm {
 
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getUsername() {
 		return this.username;
 	}
@@ -113,6 +121,7 @@ public class CreateManagerForm {
 
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPassword() {
 		return this.password;
 	}
@@ -123,6 +132,7 @@ public class CreateManagerForm {
 
 	@NotBlank
 	@Size(min = 5, max = 32)
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getConfirmPassword() {
 		return this.confirmPassword;
 	}
@@ -132,6 +142,7 @@ public class CreateManagerForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getName() {
 		return this.name;
 	}
@@ -141,6 +152,7 @@ public class CreateManagerForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getSurname() {
 		return this.surname;
 	}
@@ -151,6 +163,7 @@ public class CreateManagerForm {
 
 	@NotBlank
 	@Email
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getEmail() {
 		return this.email;
 	}
@@ -161,6 +174,7 @@ public class CreateManagerForm {
 
 	@NotBlank
 	@Pattern(regexp = "(\\+\\d{1,3} )?(\\(\\d{1,3}\\) )?(\\w{4,})")
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getPhone() {
 		return this.phone;
 	}

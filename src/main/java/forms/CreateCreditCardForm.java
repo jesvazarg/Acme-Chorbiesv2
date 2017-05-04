@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.SafeHtml;
+import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 public class CreateCreditCardForm {
 
@@ -19,6 +21,7 @@ public class CreateCreditCardForm {
 
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getHolderName() {
 		return this.holderName;
 	}
@@ -27,6 +30,7 @@ public class CreateCreditCardForm {
 	}
 
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getBrandName() {
 		return this.brandName;
 	}
@@ -36,6 +40,7 @@ public class CreateCreditCardForm {
 
 	@CreditCardNumber
 	@NotBlank
+	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getNumber() {
 		return this.number;
 	}
