@@ -49,6 +49,7 @@ public class SearchTemplateController extends AbstractController {
 		searchTemplate = chorbi.getSearchTemplate();
 
 		result = new ModelAndView("searchTemplate/display");
+		result.addObject("principal", chorbi);
 		result.addObject("searchTemplate", searchTemplate);
 
 		return result;

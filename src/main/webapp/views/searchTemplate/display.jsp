@@ -66,3 +66,7 @@
 		<a href="searchTemplate/chorbi/findBySearchTemplate.do?searchTemplateId=${searchTemplate.id }"><spring:message code="searchTemplate.searchChorbies" /></a>
 	</jstl:if>
 </div>
+
+<jstl:if test="${principal.creditCard==null}">
+	<h2><spring:message code="searchTemplate.keyword.no.creditCard"/></h2>
+</jstl:if>
