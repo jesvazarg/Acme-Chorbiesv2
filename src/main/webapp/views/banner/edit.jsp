@@ -26,10 +26,11 @@
 	<acme:input code="banner.picture" path="picture" />
 		
 	<acme:submit name="save" code="banner.save" />
-	<jstl:if test="${banner.id!=0 }">
-		<acme:submit name="delete" code="banner.delete" />
+	<jstl:if test="${banner.id != 0}">
+		<input type="submit" name="delete"
+			value="<spring:message code="banner.delete" />"
+			onclick="return confirm('<spring:message code="banner.confirm.delete" />')" />&nbsp;
 	</jstl:if>
-	
 	<acme:cancel url="banner/administrator/list.do" code="banner.cancel" />
 	
 </form:form>
