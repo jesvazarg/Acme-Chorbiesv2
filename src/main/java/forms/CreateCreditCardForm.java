@@ -40,6 +40,7 @@ public class CreateCreditCardForm {
 
 	@CreditCardNumber
 	@NotBlank
+	@Min(1)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	public String getNumber() {
 		return this.number;

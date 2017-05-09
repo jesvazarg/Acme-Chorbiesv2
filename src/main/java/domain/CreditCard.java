@@ -54,6 +54,7 @@ public class CreditCard extends DomainEntity {
 
 	@CreditCardNumber
 	@NotBlank
+	@Min(1)
 	public String getNumber() {
 		return this.number;
 	}
