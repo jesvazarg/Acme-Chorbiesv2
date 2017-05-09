@@ -73,6 +73,12 @@
 		<br/>
 	</jstl:if>
 	
+	<jstl:if test="${createChorbiForm.isAgree==false }">
+		<p><span class="message"><spring:message code="isAgree.false" /></span></p>
+	</jstl:if>
+	
 	<acme:submit name="save" code="chorbi.save" />
 	<acme:cancel url="" code="chorbi.cancel" />
+	
+
 </form:form>

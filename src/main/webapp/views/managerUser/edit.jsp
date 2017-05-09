@@ -48,6 +48,12 @@
 		<br/>
 	</jstl:if>
 	
+	<jstl:if test="${createManagerForm.isAgree==false }">
+		<p><span class="message"><spring:message code="isAgree.false" /></span></p>
+	</jstl:if>
+	
 	<acme:submit name="save" code="manager.save" />
 	<acme:cancel url="" code="manager.cancel" />
+	
+	
 </form:form>
